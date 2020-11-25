@@ -1,0 +1,38 @@
+/*Auteur : Killian Good */
+/*Date : 10.09.2019 */
+/*Description : css de ma page d'accueil */
+body {
+	background-image:url("../../userContent/img/accueil.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	color: black;
+	background-attachment: fixed;
+	margin: 0;
+  }
+  
+
+/* lien vers le site  */
+  
+.lien {
+	text-align:center;
+	margin: 10%;
+    text-decoration: none;
+}
+
+/* href sur ma page de ski */
+ a {
+	border: 5px solid black;
+	border-radius: 12px;
+	padding: 35px;
+	font-family: FreeMono, monospace;
+	text-decoration: none;
+	border-style: double
+ }
+ 
+ /* décoration de text  */
+a:hover { 
+
+	text-decoration: underline;
+	color: black;
+}
+
