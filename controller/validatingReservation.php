@@ -28,6 +28,7 @@ if (array_key_exists($sResDate, $_POST) && preg_match($dDateRegex, $_POST[$sResD
     $date = $_POST[$sResDate];
     $table = $_POST[$sResTable];
     $hour = $_POST[$sResHour];
+
     if ($database->reservationExistsAt($date, $table, $hour) < 0) {
         $database->addReservation($date, $table, $hour, $_POST[$sResMeal], $database->getIdUser($_SESSION['username']));
         echo 'reservation added';

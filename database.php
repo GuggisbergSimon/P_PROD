@@ -22,7 +22,7 @@ class Database
     public function __construct()
     {
         try {
-            $this->connector = new PDO('mysql:host=' . $this->serverName . ';dbname=book;charset=utf8', $this->username, $this->password);
+            $this->connector = new PDO('mysql:host=' . $this->serverName . ';dbname=bd_p_prod;charset=utf8', $this->username, $this->password);
         } catch (PDOException $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -82,8 +82,11 @@ class Database
         return $results;
     }
 
-    function getIdUser($username) {
-        $results = $this->querySimpleExecute("select idUser from t_user where $username = useUsername");
+    function getIdUser($username)
+    {
+        $results = $this->querySimpleExecute("select * from t_user");
+        //  where $username = 'useUsername'
+        echo $username;
         return $results = $this->formatData($results)[0];
     }
 
@@ -125,8 +128,7 @@ class Database
      */
     function reservationExistsAt($date, $table, $hour): int
     {
-        $results = $this->readTable($table);
-
+        $results = $this->readTable('t_reservation');
         foreach ($results as $result) {
             if (($result['resDate'] == $date) && ($result['resTable'] == $table) && ($result['resHour'] == $hour)) {
                 return (int)$result['idReservation'];
@@ -168,7 +170,7 @@ class Database
      */
     function addUser($username, $firstName, $lastName, $email, $password, $role): int
     {
-        $password = password_hash($password,PASSWORD_BCRYPT);
+        $password = password_hash($password, PASSWORD_BCRYPT);
         return $this->addData('t_user', ['useUsername', 'useFirstName', 'useLastName', 'useEmail', 'usePassword', 'useRole'], [$username, $firstName, $lastName, $email, $password, $role]);
     }
 
