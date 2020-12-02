@@ -82,6 +82,11 @@ class Database
         return $results;
     }
 
+    function getIdUser($username) {
+        $results = $this->querySimpleExecute("select idUser from t_user where $username = useUsername");
+        return $results = $this->formatData($results)[0];
+    }
+
 #region ExistsAt functions
 
     /**
@@ -113,8 +118,7 @@ class Database
     }
 
     /**
-     * TODO choose date format
-     * @param $date
+     * @param $date yyyy-mm-dd
      * @param string $table
      * @param int $hour
      * @return int
@@ -154,23 +158,22 @@ class Database
     }
 
     /**
-     * TODO hash password
      * @param string $username
      * @param string $firstName
      * @param string $lastName
      * @param string $email
-     * @param string $password hashed
+     * @param string $password not hashed
      * @param int $role
      * @return int
      */
     function addUser($username, $firstName, $lastName, $email, $password, $role): int
     {
+        $password = password_hash($password,PASSWORD_BCRYPT);
         return $this->addData('t_user', ['useUsername', 'useFirstName', 'useLastName', 'useEmail', 'usePassword', 'useRole'], [$username, $firstName, $lastName, $email, $password, $role]);
     }
 
     /**
-     * TODO choose date format
-     * @param $date
+     * @param $date yyyy-mm-dd
      * @param int $table
      * @param int $hour
      * @param int $meal
