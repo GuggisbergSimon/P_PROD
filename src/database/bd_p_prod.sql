@@ -7,6 +7,9 @@
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
+CREATE DATABASE bd_p_prod;
+USE bd_p_prod;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -29,8 +32,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `t_reservation` (
   `idReservation` int(11) NOT NULL,
   `resDate` date NOT NULL,
-  `resHeure` tinyint(1) NOT NULL,
-  `resPlat` tinyint(1) NOT NULL,
+  `resHour` tinyint(1) NOT NULL,
+  `resMeal` tinyint(1) NOT NULL,
   `resTable` tinyint(1) NOT NULL,
   `fkUser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
