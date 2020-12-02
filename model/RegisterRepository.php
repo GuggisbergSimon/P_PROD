@@ -17,7 +17,7 @@ class RegisterRepository implements Entity {
         // SQL stuff
         try
         {
-            $this->bdd = new PDO('mysql:host=localhost;dbname=bdwebprojet;charset=utf8', 'root', 'root');
+            $this->bdd = new PDO('mysql:host=localhost;dbname=bd_p_prod;charset=utf8', 'root', 'root');
         }
         catch (Exception $e)
         {
@@ -61,9 +61,51 @@ class RegisterRepository implements Entity {
 
     public function login($username) {
 
-        $userList = $this->bdd->query("SELECT * FROM t_user WHERE usePseudo = '$username'");
+        $userList = $this->bdd->query("SELECT * FROM t_user WHERE useUsername = '$username'");
 
         return $userList;
+    }
+
+    public function accountLoginVerification() {
+
+        if(array_key_exists('password', $_POST)){
+            if(password_verify($_POST['password'], $compte[0]['usePassword'])){
+                if($_POST['password'] && $_POST['username']){
+                    echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES CONNECTES</h1>';
+                    $_SESSION['username'] = $compte[0]['usePseudo'];
+                    $_SESSION['connected'] = true;
+                }
+                else{
+        
+                    $_SESSION['loginError'] = true;
+        
+                    header("Location: index.php?controller=login&action=index");
+                }
+            
+                /*
+                echo $compte[0]['usePseudo'];
+            
+                $_SESSION['username'] = $compte[0]['usePseudo'];
+                var_dump($_SESSION);
+                echo $_SESSION['username'];
+            
+                */
+            }
+            else{
+                $_SESSION['loginError'] = true;
+        
+                header("Location: index.php?controller=login&action=index");
+            }
+        }
+        else{
+            if(array_key_exists('username', $_POST)){
+                header("Location: index.php?controller=login&action=index");
+            }
+            else{
+                header("Location: index.php?controller=home&action=index");
+            }
+        }
+        
     }
 
     public function accountCreation() {
