@@ -1,5 +1,7 @@
 <?php
-include_once 'database.php';
+include_once '../database.php';
+
+session_start();
 
 $database = new Database();
 $sResDate = 'resDate';
@@ -14,7 +16,9 @@ $aMeals = array(
     5 => 'Vegetarian'
 );
 
-$dDateRegex = '^[0-9]{4}-[0-9]{2}-[0-9]{2}$';
+$dDateRegex = '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/';
+
+var_dump($_POST);
 
 if (array_key_exists($sResDate, $_POST) && preg_match($dDateRegex, $_POST[$sResDate])
     && array_key_exists($sResTable, $_POST) && $_POST[$sResTable] > 0 && $_POST[$sResTable] < 19
