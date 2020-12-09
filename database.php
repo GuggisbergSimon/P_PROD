@@ -13,9 +13,6 @@ include_once 'config.ini.php';
 class Database
 {
     private $connector;
-    private $serverName = 'localhost';
-    private $username = 'root';
-    private $password = 'root';
 
     /**
      * Database constructor.
