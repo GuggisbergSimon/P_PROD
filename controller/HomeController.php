@@ -46,7 +46,7 @@ class HomeController extends Controller {
 
         if(array_key_exists('login', $_POST)){
             if($_POST['login'] == true){
-                include_once 'model/RegisterRepository.php';
+                include_once 'model/Database.php';
 
                 $registerRepository = new RegisterRepository();
                 
@@ -70,6 +70,8 @@ class HomeController extends Controller {
                             }
                         }
                         else{
+
+                            //TODO: A CHECK
                             $_SESSION['loginError'] = true;
                     
                             //header("Location: index.php?controller=login&action=index");
