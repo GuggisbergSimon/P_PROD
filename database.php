@@ -5,6 +5,7 @@
  * Date : 25.11.2020
  * Description : Database class interacting with data on MySQL server
  */
+include_once 'config.ini.php';
 
 /**
  * Class Database
@@ -21,8 +22,15 @@ class Database
      */
     public function __construct()
     {
+        $host = $GLOBALS['database']['host'];
+        $port = $GLOBALS['database']['port'];
+        $dbname = $GLOBALS['database']['dbname'];
+        $charset = $GLOBALS['database']['charset'];
+        $username = $GLOBALS['database']['username'];
+        $password = $GLOBALS['database']['password'];
+
         try {
-            $this->connector = new PDO('mysql:host=' . $this->serverName . ';dbname=bd_p_prod;charset=utf8', $this->username, $this->password);
+            $this->connector = new PDO('mysql:host=' . $host . ';port=' . $port . ';dbname=' . $dbname . ';charset=' . $charset, $username, $password);
         } catch (PDOException $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -77,7 +85,14 @@ class Database
      */
     function readTable(string $tableName): array
     {
-        $results = $this->querySimpleExecute('select * from ' . $tableName);
+        $results = $this->querySimpleExecute('select * from ' . $tableName . ' order by resHour ASC, resTable ASC, resMeal ASC');
+        $results = $this->formatData($results);
+        return $results;
+    }
+
+    function readReservationPerDay(string $day)
+    {
+        $results = $this->querySimpleExecute('select * from t_reservation where resDate=' . $day);
         $results = $this->formatData($results);
         return $results;
     }
@@ -85,9 +100,12 @@ class Database
     function getIdUser($username)
     {
         $results = $this->querySimpleExecute("select * from t_user");
-        //  where $username = 'useUsername'
-        echo $username;
         return $results = $this->formatData($results)[0];
+    }
+
+    function deleteUser($username)
+    {
+        $this->querySimpleExecute('delete from t_user where useUsername = ' . $username);
     }
 
 #region ExistsAt functions
