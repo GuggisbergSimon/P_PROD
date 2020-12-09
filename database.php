@@ -5,6 +5,7 @@
  * Date : 25.11.2020
  * Description : Database class interacting with data on MySQL server
  */
+include_once 'config.ini.php';
 
 /**
  * Class Database
@@ -21,8 +22,15 @@ class Database
      */
     public function __construct()
     {
+        $host = $GLOBALS['database']['host'];
+        $port = $GLOBALS['database']['port'];
+        $dbname = $GLOBALS['database']['dbname'];
+        $charset = $GLOBALS['database']['charset'];
+        $username = $GLOBALS['database']['username'];
+        $password = $GLOBALS['database']['password'];
+
         try {
-            $this->connector = new PDO('mysql:host=' . $this->serverName . ';dbname=bd_p_prod;charset=utf8', $this->username, $this->password);
+            $this->connector = new PDO('mysql:host=' . $host . ';port=' . $port . ';dbname=' . $dbname . ';charset=' . $charset, $username, $password);
         } catch (PDOException $e) {
             die('Erreur : ' . $e->getMessage());
         }
