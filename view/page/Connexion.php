@@ -1,5 +1,21 @@
 <form action="index.php?controller=home&action=Connexion" class="my-5" method="post">
     <div class="container">
+    <?php
+
+if($_SESSION['loginError']){
+echo '								
+  <div class="text-danger mb-5">
+  <h4>' .
+
+      "nom d'utilisateur ou mot de passe erroné"
+      .
+  '</h4>
+</div>';
+
+$_SESSION['loginError'] = false;
+}
+
+?>
        <div class="form-group">
        <label for="NomUser">Nom d'utilisateur</label>
        <input type="text" class="form-control" id="NomUser" aria-describedby="AideNomUser" name="username">
@@ -21,7 +37,7 @@
 
 
 <?php
-if(array_key_exists('username', $_POST)){
+if(array_key_exists('username', $_SESSION)){
     echo $_SESSION['username'];
 }
 ?>

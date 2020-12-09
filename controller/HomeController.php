@@ -20,7 +20,7 @@ class HomeController extends Controller {
             $action = $_GET['action'] . "Action"; // listAction
         }
         else{
-            $action = 'ConnexionAction'; // listAction
+            $action = 'AccueilAction'; // listAction
         }
 
         
@@ -28,7 +28,7 @@ class HomeController extends Controller {
             return call_user_func(array($this, $action));
         }
         else{
-            return call_user_func(array($this, "ConnexionAction"));
+            return call_user_func(array($this, "AccueilAction"));
         }
 
         //return call_user_func(array($this, $action));
@@ -40,51 +40,108 @@ class HomeController extends Controller {
      * @return string
      */
     private function ConnexionAction() {
-        var_dump($_POST);
+        //var_dump($_POST);
         $view = file_get_contents('view/page/Connexion.php');
         $compte;
-if(array_key_exists('login', $_POST)){
-    if($_POST['login'] == true){
-        include_once 'model/RegisterRepository.php';
 
-        $registerRepository = new RegisterRepository();
-        
-        $compte = $registerRepository->login($_POST['username'])->fetchAll();
-    }
-    
-    if(array_key_exists('password', $_POST)){
-        if($_POST['password'] == $compte[0]['usePassword']){
-            if($_POST['password'] && $_POST['username']){
-                echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES CONNECTES</h1>';
-                $_SESSION['username'] = $compte[0]['useUsername'];
-                $_SESSION['connected'] = true;
+        if(array_key_exists('login', $_POST)){
+            if($_POST['login'] == true){
+                include_once 'model/RegisterRepository.php';
+
+                $registerRepository = new RegisterRepository();
+                
+                if(array_key_exists('username', $_POST) && $_POST['username'] != ""){
+
+                    $compte = $registerRepository->login($_POST['username'])->fetchAll();
+
+                    if(array_key_exists('password', $_POST) && $_POST['password'] != ""){
+                        if($compte[0]['usePassword'] != array() && $_POST['password'] == $compte[0]['usePassword']){
+                            if($_POST['password'] && $_POST['username']){
+                                echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES CONNECTES</h1>';
+                                $_SESSION['username'] = $compte[0]['useUsername'];
+                                $_SESSION['connected'] = true;
+                            }
+                            else{
+                    
+                                $_SESSION['loginError'] = true;
+                    
+                                //header("Location: index.php?controller=login&action=index");
+                                echo "erreur 1";
+                            }
+                        }
+                        else{
+                            $_SESSION['loginError'] = true;
+                    
+                            //header("Location: index.php?controller=login&action=index");
+                            echo "erreur 2";
+                        }
+                    }   
+                    else{
+                        $_SESSION['loginError'] = true;
+
+                        echo "erreur 3";
+                    }
+                }
+                else{
+                    $_SESSION['loginError'] = true;
+
+                    echo "erreur 4";
+                }
+
+            }
+        }
+            
+            /*
+            if(array_key_exists('password', $_POST)){
+                if($_POST['password'] == $compte[0]['usePassword']){
+                    if($_POST['password'] && $_POST['username']){
+                        echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES CONNECTES</h1>';
+                        $_SESSION['username'] = $compte[0]['useUsername'];
+                        $_SESSION['connected'] = true;
+                    }
+                    else{
+            
+                        $_SESSION['loginError'] = true;
+            
+                        //header("Location: index.php?controller=login&action=index");
+                        echo "erreur 1";
+                    }
+                }
+                else{
+                    $_SESSION['loginError'] = true;
+            
+                    //header("Location: index.php?controller=login&action=index");
+                    echo "erreur 2";
+                }
             }
             else{
-    
-                $_SESSION['loginError'] = true;
-    
-                //header("Location: index.php?controller=login&action=index");
-                echo "erreur 1";
+                if(array_key_exists('username', $_POST)){
+                    //header("Location: index.php?controller=login&action=index");
+                    echo "erreur 3";
+                }
+                else{
+                    //header("Location: index.php?controller=home&action=index");
+                    echo "erreur 4";
+                }
             }
-        }
-        else{
-            $_SESSION['loginError'] = true;
-    
-            //header("Location: index.php?controller=login&action=index");
-            echo "erreur 2";
-        }
+        }*/
+
+            ob_start();
+            eval('?>' . $view);
+            $content = ob_get_clean();
+
+            return $content;
     }
-    else{
-        if(array_key_exists('username', $_POST)){
-            //header("Location: index.php?controller=login&action=index");
-            echo "erreur 3";
-        }
-        else{
-            //header("Location: index.php?controller=home&action=index");
-            echo "erreur 4";
-        }
-    }
-}
+
+    /**
+     * Display Contact Action
+     *
+     * @return string
+     */
+    private function AccueilAction() {
+
+        $view = file_get_contents('view/page/Accueil.php');
+
 
         ob_start();
         eval('?>' . $view);
@@ -93,7 +150,7 @@ if(array_key_exists('login', $_POST)){
         return $content;
     }
 
-    /**
+        /**
      * Display Contact Action
      *
      * @return string
@@ -101,6 +158,23 @@ if(array_key_exists('login', $_POST)){
     private function AproposAction() {
 
         $view = file_get_contents('view/page/Apropos.php');
+
+
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        return $content;
+    }
+
+            /**
+     * Display Contact Action
+     *
+     * @return string
+     */
+    private function OptionAction() {
+
+        $view = file_get_contents('view/page/Option.php');
 
 
         ob_start();
