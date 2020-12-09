@@ -82,7 +82,8 @@ class Database
         return $results;
     }
 
-    function readReservationPerDay(string $day) {
+    function readReservationPerDay(string $day)
+    {
         $results = $this->querySimpleExecute('select * from t_reservation where resDate=' . $day);
         $results = $this->formatData($results);
         return $results;
@@ -91,9 +92,12 @@ class Database
     function getIdUser($username)
     {
         $results = $this->querySimpleExecute("select * from t_user");
-        // where $username = 'useUsername'
-        echo $username;
         return $results = $this->formatData($results)[0];
+    }
+
+    function deleteUser($username)
+    {
+        $this->querySimpleExecute('delete from t_user where useUsername = ' . $username);
     }
 
 #region ExistsAt functions
