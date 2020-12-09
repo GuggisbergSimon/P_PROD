@@ -25,21 +25,11 @@
   color: White;
 }
 
-h5 {
+h4 {
 	text-align: center;
 }	
 
 #active
 {
 	background-color: #1ABB00;;
-}
-.footer {
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: White;
-  color: Black;
-  text-align: center;
-  font-size: 17px;
-  position: fixed-bottom;
 }
