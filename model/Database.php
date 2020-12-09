@@ -22,7 +22,7 @@ class Database
     public function __construct()
     {
         try {
-            $this->connector = new PDO('mysql:host=' . $this->serverName . ';dbname=book;charset=utf8', $this->username, $this->password);
+            $this->connector = new PDO('mysql:host=' . $this->serverName . ';dbname=bd_p_prod;charset=utf8', $this->username, $this->password);
         } catch (PDOException $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -190,7 +190,7 @@ class Database
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
         $insertUser = "INSERT INTO t_user (useUsername, usePassword) VALUES ('" . $username . "' , '" . $passwordHash . "')";
 
-        if ($this->bdd->query($insertUser) == TRUE) {
+        if ($this->connector->query($insertUser) == TRUE) {
             echo "New record created successfully";
         } 
         else {  
@@ -200,7 +200,7 @@ class Database
 
     public function login($username) {
 
-        $userList = $this->bdd->query("SELECT * FROM t_user WHERE useUsername = '$username'");
+        $userList = $this->connector->query("SELECT * FROM t_user WHERE useUsername = '$username'");
 
         return $userList;
     }

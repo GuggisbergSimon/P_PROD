@@ -48,7 +48,7 @@ class HomeController extends Controller {
             if($_POST['login'] == true){
                 include_once 'model/Database.php';
 
-                $registerRepository = new RegisterRepository();
+                $registerRepository = new Database();
                 
                 if(array_key_exists('username', $_POST) && $_POST['username'] != ""){
 
@@ -149,9 +149,9 @@ class HomeController extends Controller {
         if(array_key_exists('register', $_POST)){
 
             if($_POST['register'] == true){
-                include_once 'model/RegisterRepository.php';
+                include_once 'model/Database.php';
 
-                $registerRepository = new RegisterRepository();
+                $registerRepository = new Database();
                 
                 if(array_key_exists('username', $_POST) && $_POST['username'] != ""){
 
