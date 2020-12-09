@@ -77,7 +77,13 @@ class Database
      */
     function readTable(string $tableName): array
     {
-        $results = $this->querySimpleExecute('select * from ' . $tableName);
+        $results = $this->querySimpleExecute('select * from ' . $tableName . ' order by resHour ASC, resTable ASC, resMeal ASC');
+        $results = $this->formatData($results);
+        return $results;
+    }
+
+    function readReservationPerDay(string $day) {
+        $results = $this->querySimpleExecute('select * from t_reservation where resDate=' . $day);
         $results = $this->formatData($results);
         return $results;
     }
@@ -85,7 +91,7 @@ class Database
     function getIdUser($username)
     {
         $results = $this->querySimpleExecute("select * from t_user");
-        //  where $username = 'useUsername'
+        // where $username = 'useUsername'
         echo $username;
         return $results = $this->formatData($results)[0];
     }

@@ -5,6 +5,7 @@ $_SESSION['username'] = 'toto';
 
 echo '
 <body>
+<a href="displayDay.php?day=09-12-2020">Test Display Day</a>
     <form action="validatingReservation.php" method="post">
         <p>
             <label>Date de la réservation : </label>
