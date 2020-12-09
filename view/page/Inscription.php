@@ -1,8 +1,8 @@
-<form action="index.php?controller=home&action=Connexion" class="my-5" method="post">
+<form action="index.php?controller=home&action=Register" class="my-5" method="post">
     <div class="container">
     <?php
 
-if(array_key_exists('loginError', $_SESSION) && $_SESSION['loginError']){
+if(array_key_exists('registerError', $_SESSION) && $_SESSION['registerError']){
 echo '								
   <div class="text-danger mb-5">
   <h4>' .
@@ -12,7 +12,7 @@ echo '
   '</h4>
 </div>';
 
-$_SESSION['loginError'] = false;
+$_SESSION['registerError'] = false;
 }
 
 ?>
@@ -25,13 +25,9 @@ $_SESSION['loginError'] = false;
        <label for="MotDePasse">Mot de passe</label>
        <input type="password" class="form-control" id="MotDePasse" name="password">
      </div>
-     <div class="form-group form-check">
-       <input type="checkbox" class="form-check-input" id="exampleCheck1">
-       <label class="form-check-label" for="exampleCheck1">Rester connecté</label>
-     </div>
-     <button type="submit" class="btn btn-primary">Connexion</button>
+     <button type="submit" class="btn btn-primary">Inscription</button>
     </div>
-    <input type="hidden" id="loginCheck" name="login" value="1">
+    <input type="hidden" id="loginCheck" name="register" value="1">
 </form>
 
 
