@@ -9,6 +9,7 @@
 		<div class="topnav">
 			<a id="active"  href="index.php?controller=home&action=Accueil">Accueil</a>
 			<a href="index.php?controller=home&action=Connexion">Connexion</a>
+			<a href="index.php?controller=home&action=Register">Inscription(temp)</a>
 			<a href="index.php?controller=home&action=Apropos">À propos</a>
 			<a href="index.php?controller=home&action=Commande">Commande(RESERVER CUISINE)</a>
 			<a href="index.php?controller=home&action=Option">Option(RESERVER ADMIN)</a>

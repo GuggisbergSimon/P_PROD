@@ -49,7 +49,7 @@ class RegisterRepository implements Entity {
     public function register($username, $password) {
 
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        $insertUser = "INSERT INTO t_user (usePseudo, usePassword, useDate) VALUES ('" . $username . "' , '" . $passwordHash . "', CURDATE())";
+        $insertUser = "INSERT INTO t_user (useUsername, usePassword) VALUES ('" . $username . "' , '" . $passwordHash . "')";
 
         if ($this->bdd->query($insertUser) == TRUE) {
             echo "New record created successfully";

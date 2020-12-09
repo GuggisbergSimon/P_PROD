@@ -55,7 +55,7 @@ class HomeController extends Controller {
                     $compte = $registerRepository->login($_POST['username'])->fetchAll();
 
                     if(array_key_exists('password', $_POST) && $_POST['password'] != ""){
-                        if($compte[0]['usePassword'] != array() && $_POST['password'] == $compte[0]['usePassword']){
+                        if($compte[0]['usePassword'] != array() && password_verify($_POST['password'], $compte[0]['usePassword'])){
                             if($_POST['password'] && $_POST['username']){
                                 echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES CONNECTES</h1>';
                                 $_SESSION['username'] = $compte[0]['useUsername'];
@@ -131,6 +131,63 @@ class HomeController extends Controller {
             $content = ob_get_clean();
 
             return $content;
+    }
+
+        /**
+     * Display Contact Action
+     *
+     * @return string
+     */
+    private function RegisterAction() {
+
+        var_dump($_POST);
+        $view = file_get_contents('view/page/Inscription.php');
+        $compte;
+
+        if(array_key_exists('register', $_POST)){
+
+            if($_POST['register'] == true){
+                include_once 'model/RegisterRepository.php';
+
+                $registerRepository = new RegisterRepository();
+                
+                if(array_key_exists('username', $_POST) && $_POST['username'] != ""){
+
+                    if(array_key_exists('password', $_POST) && $_POST['password'] != ""){
+                        if($_POST['password'] && $_POST['username']){
+                            $compte = $registerRepository->register($_POST['username'], $_POST['password']);
+                            echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES INSCRIS </h1>';
+                            $_SESSION['username'] = $compte[0]['useUsername'];
+                            //$_SESSION['connected'] = true;
+                        }
+                        else{
+                
+                            $_SESSION['registerError'] = true;
+                
+                            //header("Location: index.php?controller=login&action=index");
+                            echo "erreur 1";
+                        }
+                    }   
+                    else{
+                        $_SESSION['registerError'] = true;
+
+                        echo "erreur 3";
+                    }
+                }
+                else{
+                    $_SESSION['registerError'] = true;
+
+                    echo "erreur 4";
+                }
+
+            }
+        }
+
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        return $content;
     }
 
     /**
