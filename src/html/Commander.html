@@ -2,7 +2,7 @@
 <!--ETML
 	Auteur : Anthony Höhn
 	Date : 11.11.2019
-	Description : Page commander de connexion-->
+	Description : Page commander du site-->
 <html>
 <head>
 	<!-- police que le site de l'ETML utilise pour la barre de nav.-->
@@ -23,18 +23,54 @@
 	<p>Ecole technique - Ecole des métiers - Lausanne</p>
 </div>
 
-
 <!-- header du site avec le bouteau Accueil, connexion, à propos, commande, option-->
 <div class="topnav">
 	<a href="Accueil.html">Accueil</a>
-	<a href="commander.html">Commander</a>
-	<a id="active" href="connexion.html">Connexion</a>
+	<a id="active" href="commander.html">Commander</a>
+	<a href="Connexion.html">Connexion</a>
 	<a href="Contact.html">Contact</a>
 	<a href="Apropos.html">À propos</a>
 </div>
 
-<h4>Insérer le formulaire PHP </h4>
-</body>
+
+
+<p>
+<div class="Date">
+	<label for="resDate">Date de la réservation :</label>
+	<input type="date" name="resDate" id="resDate" />
+</div>
+</p>
+
+<p>
+<div class="Table">
+	<label for="resTable">Numéro de table :</label>
+	<input type="number" name="resTable" min="1" max="18" value="1">
+</div>
+</p>
+
+<p>
+<div class="Heure">
+	<label for="resHour">Heure de la réservation : (première periode)</label>
+	<input type="time" id="resHour" name="resHour"
+		   min="11:20" max="13:50" required>
+</div>
+</p>
+
+<p>
+<div class="Reserver"
+<label for="resMeal">Choisir un Plat :</label>
+<select id="resMeal" name="resMeal">
+	<option value="resMeal1">Menu du jour 1</option>
+	<option value="resMeal2">Menu du jour 2</option>
+	<option value="resMeal3">Menu pâtes</option>
+	<option value="resMeal4">Menu burger</option>
+	<option value="resMeal5">Menu Végetarien</option>
+</select>
+<input type="submit" value="Envoyer">
+</div>
+</p>
+
+</label><br><br>
 <footer>
 	<!-- footer -->
 	<div class="footer">
