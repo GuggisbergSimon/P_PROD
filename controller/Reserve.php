@@ -1,8 +1,5 @@
 <?php
 
-session_start();
-$_SESSION['username'] = 'toto';
-
 echo '
 <body>
 <a href="displayDay.php?day=09-12-2020">Test Display Day</a>

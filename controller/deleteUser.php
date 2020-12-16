@@ -1,6 +1,6 @@
 <?php
 
-include_once '../database.php';
+include_once '../model/Database.php';
 
 if (key_exists('username', $_SESSION)) {
     $database = new Database();

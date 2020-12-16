@@ -89,7 +89,7 @@ class Database
 
     function readReservationPerDay(string $day)
     {
-        $results = $this->querySimpleExecute('select * from t_reservation where resDate=' . $day);
+        $results = $this->querySimpleExecute("select * from t_reservation where resDate between '$day 00:00:00' and '$day 23:59:59'");
         $results = $this->formatData($results);
         return $results;
     }
@@ -97,7 +97,7 @@ class Database
     function getIdUser($username)
     {
         $results = $this->querySimpleExecute("select * from t_user");
-        return $results = $this->formatData($results)[0];
+        return $results = $this->formatData($results)[0]['idUser'];
     }
 
     function deleteUser($username)
@@ -199,7 +199,7 @@ class Database
      */
     function addReservation($date, $table, $hour, $meal, $userId): int
     {
-        return $this->addData('t_reservation', ['resDate', 'resTable', 'resHeure', 'resPlat', 'fkUserId'], [$date, $table, $hour, $meal, $userId]);
+        return $this->addData('t_reservation', ['resDate', 'resTable', 'resHour', 'resMeal', 'fkUser'], [$date, $table, $hour, $meal, $userId]);
     }
 
 #endregion
