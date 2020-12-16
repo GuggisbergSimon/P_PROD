@@ -1,4 +1,4 @@
-<form action="o" method="post">
+<form action="index.php?controller=home&action=ValidateReservation" method="post">
     <p>
         <label>Date de la réservation : </label>
         <input type="date" name="resDate">
