@@ -23,6 +23,12 @@ class HomeController extends Controller
             $action = 'AccueilAction'; // listAction
         }
 
+        if(!array_key_exists('role', $_SESSION)) $_SESSION['role'] = 0;
+
+        if($_GET['action'] == 'Option' && $_SESSION['role'] < 50){
+            $action = 'AccueilAction'; // listAction
+            $_GET['action'] = 'Accueil';
+        }
 
         if (method_exists(get_class($this), $action)) {
             return call_user_func(array($this, $action));
@@ -61,6 +67,7 @@ class HomeController extends Controller
                                 $_SESSION['username'] = $compte[0]['useUsername'];
                                 $_SESSION['role'] = $compte[0]['useRole'];
                                 $_SESSION['connected'] = true;
+                                $_SESSION['loginError'] = null;
                                 header("Location: index.php?controller=home&action=Accueil");
                             } else {
 

@@ -73,7 +73,7 @@ class MainController {
 
             $content = $currentPage->display();
 
-            //var_dump($_POST);   
+            //var_dump($_POST);  
             if(array_key_exists('disconnect', $_POST) && $_POST['disconnect']){
                     $_SESSION = array();
             }
