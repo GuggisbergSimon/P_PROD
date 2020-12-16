@@ -17,6 +17,13 @@ if($_SESSION == array()){
 	<title>ETML - Restaurant</title>
 	<link href="resources/css/style.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-	<?php if(array_key_exists('role', $_SESSION) && $_SESSION['role'] >= 50) echo '<style>.topnav { background-color: blue; </style>'; ?>
+	<?php 
+	if(array_key_exists('role', $_SESSION) && $_SESSION['role'] >= 50){
+		echo '<style>';
+		echo '.topnav { background-color: blue; }'; 
+		echo '#active { background-color: cyan; }';
+		echo '</style>';
+	}
+	?>
 </head>
 <body>

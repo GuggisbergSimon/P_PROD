@@ -1,3 +1,7 @@
+
+<a href="index.php?controller=home&action=Register"><h1 class="mt-3 text-center" >Inscrivez-vous !</h1></a>
+<h1 class="mt-3 text-center" >Connexion</h1>
+
 <form action="index.php?controller=home&action=Connexion" class="my-5" method="post">
     <div class="container">
     <?php
