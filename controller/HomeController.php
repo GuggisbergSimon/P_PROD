@@ -3,7 +3,7 @@
  * ETML
  * Auteur : Cindy Hardegger
  * Date: 22.01.2019
- * Controler pour gérer les pages classiques
+ * Controller pour gérer les pages classiques
  */
 
 class HomeController extends Controller {
@@ -15,7 +15,6 @@ class HomeController extends Controller {
      */
     public function display() {
 
-        
         if(array_key_exists('action', $_GET)){
             $action = $_GET['action'] . "Action"; // listAction
         }
@@ -48,7 +47,7 @@ class HomeController extends Controller {
             if($_POST['login'] == true){
                 include_once 'model/Database.php';
 
-                $registerRepository = new RegisterRepository();
+                $registerRepository = new Database();
                 
                 if(array_key_exists('username', $_POST) && $_POST['username'] != ""){
 
@@ -142,16 +141,16 @@ class HomeController extends Controller {
      */
     private function RegisterAction() {
 
-        var_dump($_POST);
+        //var_dump($_POST);
         $view = file_get_contents('view/page/Inscription.php');
         $compte;
 
         if(array_key_exists('register', $_POST)){
 
             if($_POST['register'] == true){
-                include_once 'model/RegisterRepository.php';
+                include_once 'model/Database.php';
 
-                $registerRepository = new RegisterRepository();
+                $registerRepository = new Database();
                 
                 if(array_key_exists('username', $_POST) && $_POST['username'] != ""){
 
@@ -200,8 +199,30 @@ class HomeController extends Controller {
     private function AccueilAction() {
 
         $view = file_get_contents('view/page/Accueil.php');
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
 
+        return $content;
+    }
 
+    /**
+     * @return false|string$
+     */
+    private function ValidateReservationAction() {
+        $view = file_get_contents('controller/validatingReservation.php');
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        return $content;
+    }
+
+    /**
+     * @return false|string$
+     */
+    private function DisplayDayAction() {
+        $view = file_get_contents('controller/displayDay.php');
         ob_start();
         eval('?>' . $view);
         $content = ob_get_clean();
@@ -217,8 +238,6 @@ class HomeController extends Controller {
     private function AproposAction() {
 
         $view = file_get_contents('view/page/Apropos.php');
-
-
         ob_start();
         eval('?>' . $view);
         $content = ob_get_clean();
@@ -260,9 +279,9 @@ class HomeController extends Controller {
         return $content;
     }
 
-    private function CommandeAction() {
+    private function CommanderAction() {
 
-        $view = file_get_contents('view/page/Commande.php');
+        $view = file_get_contents('view/page/Commander.php');
 
 
         ob_start();

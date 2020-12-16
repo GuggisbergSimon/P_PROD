@@ -34,6 +34,6 @@ $_SESSION['registerError'] = false;
 
 <?php
 if(array_key_exists('username', $_SESSION)){
-    echo $_SESSION['username'];
+    //echo $_SESSION['username'];
 }
 ?>

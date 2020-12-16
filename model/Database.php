@@ -5,6 +5,7 @@
  * Date : 25.11.2020
  * Description : Database class interacting with data on MySQL server
  */
+include_once 'config.ini.php';
 
 /**
  * Class Database
@@ -12,17 +13,21 @@
 class Database
 {
     private $connector;
-    private $serverName = 'localhost';
-    private $username = 'root';
-    private $password = 'root';
 
     /**
      * Database constructor.
      */
     public function __construct()
     {
+        $host = $GLOBALS['database']['host'];
+        $port = $GLOBALS['database']['port'];
+        $dbname = $GLOBALS['database']['dbname'];
+        $charset = $GLOBALS['database']['charset'];
+        $username = $GLOBALS['database']['username'];
+        $password = $GLOBALS['database']['password'];
+
         try {
-            $this->connector = new PDO('mysql:host=' . $this->serverName . ';dbname=book;charset=utf8', $this->username, $this->password);
+            $this->connector = new PDO('mysql:host=' . $host . ';port=' . $port . ';dbname=' . $dbname . ';charset=' . $charset, $username, $password);
         } catch (PDOException $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -77,14 +82,27 @@ class Database
      */
     function readTable(string $tableName): array
     {
-        $results = $this->querySimpleExecute('select * from ' . $tableName);
+        $results = $this->querySimpleExecute('select * from ' . $tableName . ' order by resHour ASC, resTable ASC, resMeal ASC');
         $results = $this->formatData($results);
         return $results;
     }
 
-    function getIdUser($username) {
-        $results = $this->querySimpleExecute("select idUser from t_user where $username = useUsername");
-        return $results = $this->formatData($results)[0];
+    function readReservationPerDay(string $day)
+    {
+        $results = $this->querySimpleExecute("select * from t_reservation where resDate between '$day 00:00:00' and '$day 23:59:59'");
+        $results = $this->formatData($results);
+        return $results;
+    }
+
+    function getIdUser($username)
+    {
+        $results = $this->querySimpleExecute("select * from t_user");
+        return $results = $this->formatData($results)[0]['idUser'];
+    }
+
+    function deleteUser($username)
+    {
+        $this->querySimpleExecute('delete from t_user where useUsername = ' . $username);
     }
 
 #region ExistsAt functions
@@ -125,8 +143,7 @@ class Database
      */
     function reservationExistsAt($date, $table, $hour): int
     {
-        $results = $this->readTable($table);
-
+        $results = $this->readTable('t_reservation');
         foreach ($results as $result) {
             if (($result['resDate'] == $date) && ($result['resTable'] == $table) && ($result['resHour'] == $hour)) {
                 return (int)$result['idReservation'];
@@ -168,7 +185,7 @@ class Database
      */
     function addUser($username, $firstName, $lastName, $email, $password, $role): int
     {
-        $password = password_hash($password,PASSWORD_BCRYPT);
+        $password = password_hash($password, PASSWORD_BCRYPT);
         return $this->addData('t_user', ['useUsername', 'useFirstName', 'useLastName', 'useEmail', 'usePassword', 'useRole'], [$username, $firstName, $lastName, $email, $password, $role]);
     }
 
@@ -182,29 +199,26 @@ class Database
      */
     function addReservation($date, $table, $hour, $meal, $userId): int
     {
-        return $this->addData('t_reservation', ['resDate', 'resTable', 'resHeure', 'resPlat', 'fkUserId'], [$date, $table, $hour, $meal, $userId]);
-    }
-
-    public function register($username, $password) {
-
-        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        $insertUser = "INSERT INTO t_user (useUsername, usePassword) VALUES ('" . $username . "' , '" . $passwordHash . "')";
-
-        if ($this->bdd->query($insertUser) == TRUE) {
-            echo "New record created successfully";
-        } 
-        else {  
-            echo "Error: " . $insertUser . "<br>";
-        }
-    }
-
-    public function login($username) {
-
-        $userList = $this->bdd->query("SELECT * FROM t_user WHERE useUsername = '$username'");
-
-        return $userList;
+        return $this->addData('t_reservation', ['resDate', 'resTable', 'resHour', 'resMeal', 'fkUser'], [$date, $table, $hour, $meal, $userId]);
     }
 
 #endregion
 
+    public function register($username, $password)
+    {
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+        $insertUser = "INSERT INTO t_user (useUsername, usePassword) VALUES ('" . $username . "' , '" . $passwordHash . "')";
+
+        if ($this->connector->query($insertUser) == TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $insertUser . "<br>";
+        }
+    }
+
+    public function login($username)
+    {
+        $userList = $this->connector->query("SELECT * FROM t_user WHERE useUsername = '$username'");
+        return $userList;
+    }
 }
