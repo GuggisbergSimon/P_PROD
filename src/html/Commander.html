@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--ETML
+	Auteur : Anthony Höhn
+	Date : 11.11.2019
+	Description : Page commander du site-->
+<html>
+<head>
+    <!-- police que le site de l'ETML utilise pour la barre de nav.-->
+    <link href='https://fonts.googleapis.com/css?family=Exo:500,600' rel='stylesheet' type='text/css'>
+    <!-- Logo Etml onglet page internet -->
+    <meta charset="UTF-8">
+    <title>ETML - Restaurant</title>
+    <link href="../../ressource/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <style>
+
+    </style>
+</head>
+<body>
+<!--header-->
+<div class="toptop">
+    <a href="https://www.etml.ch" target="_blank">ETML</a>
+    <p>Ecole technique - Ecole des métiers - Lausanne</p>
+</div>
+
+<!-- header du site avec le bouteau Accueil, connexion, à propos, commande, option-->
+<div class="topnav">
+    <a href="Accueil.html">Accueil</a>
+    <a id="active" href="Commander.html">Commander</a>
+    <a href="Connexion.html">Connexion</a>
+    <a href="Contact.html">Contact</a>
+    <a href="Apropos.html">À propos</a>
+</div>
+
+
+<p>
+<div class="Date">
+    <label for="resDate">Date de la réservation :</label>
+    <input type="date" name="resDate" id="resDate"/>
+</div>
+</p>
+
+<p>
+<div class="Table">
+    <label>Numéro de table :</label>
+    <input type="number" name="resTable" min="1" max="18" value="1">
+</div>
+</p>
+
+<p>
+<div class="Heure">
+    <label for="resHour">Heure de la réservation : (première periode)</label>
+    <input type="time" id="resHour" name="resHour"
+           min="11:20" max="13:50" required>
+</div>
+</p>
+
+<p>
+<div class="Reserver">
+    <label for="resMeal">Choisir un Plat :</label>
+    <select id="resMeal" name="resMeal">
+        <option value="resMeal1">Menu du jour 1</option>
+        <option value="resMeal2">Menu du jour 2</option>
+        <option value="resMeal3">Menu pâtes</option>
+        <option value="resMeal4">Menu burger</option>
+        <option value="resMeal5">Menu Végetarien</option>
+    </select>
+    <input type="submit" value="Envoyer">
+</div>
+</p>
+
+</label><br><br>
+<footer>
+    <!-- footer -->
+    <div class="footer">
+        <p>Killian Good, Anthony Höhn, Julien Cartier, Simon Guggisberg, Adrian Barreira © 2020 @ Ecole technique des
+            métiers de Lausanne</p>
+    </div>
+</footer>
+</body>
+</html>
