@@ -1,3 +1,4 @@
+<h2 class="mt-3 text-center" >Inscription</h2>
 <form action="index.php?controller=home&action=Register" class="my-5" method="post">
     <div class="container">
     <?php

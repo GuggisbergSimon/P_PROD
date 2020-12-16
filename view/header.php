@@ -7,12 +7,31 @@
 		
 		<!-- header du site avec le bouteau Accueil, connexion, à propos, commande, option-->
 		<div class="topnav">
-			<a id="active"  href="index.php?controller=home&action=Accueil">Accueil</a>
-			<a href="index.php?controller=home&action=Commander">Commander</a>
-			<a href="index.php?controller=home&action=Connexion">Connexion</a>
-			<a href="index.php?controller=home&action=Contact">Contact</a>
-			<a href="index.php?controller=home&action=Apropos">À propos</a>
-			<?php if(array_key_exists('role', $_SESSION) && $_SESSION['role'] >= 50) echo '<a href="index.php?controller=home&action=Option">Administation</a>';?>
+			<a href="index.php?controller=home&action=Accueil" <?php if($_GET['action'] == 'Accueil') echo 'id="active"'; ?>>Accueil</a>
+			<a href="index.php?controller=home&action=Commander" <?php if($_GET['action'] == 'Commander') echo 'id="active"'; ?> >Commander</a>
+			<?php 
+			if(array_key_exists('username', $_SESSION)){
+				echo '<a href="index.php?controller=home&action=Disconnect">Déconnexion</a>';
+			}
+			else{
+				echo '<a href="index.php?controller=home&action=Connexion"';
+				if($_GET['action'] == 'Connexion' || $_GET['action'] == 'Register'){
+					echo 'id="active"';
+				} 
+				echo '>Connexion</a>';
+			}
+			?>
+			<a href="index.php?controller=home&action=Contact" <?php if($_GET['action'] == 'Contact') echo 'id="active"'; ?>>Contact</a>
+			<a href="index.php?controller=home&action=Apropos" <?php if($_GET['action'] == 'Apropos') echo 'id="active"'; ?>>À propos</a>
+			<?php 
+			if(array_key_exists('role', $_SESSION) && $_SESSION['role'] >= 50){
+				echo '<a href="index.php?controller=home&action=Option"';
+				if($_GET['action'] == 'Option'){
+					echo 'id="active"';
+				} 
+				echo '>Administation</a>';
+			}
+			?>
 		</div>	
 
 		<?php

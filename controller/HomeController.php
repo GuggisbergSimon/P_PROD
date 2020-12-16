@@ -62,6 +62,7 @@ class HomeController extends Controller
                                 $_SESSION['role'] = $compte[0]['useRole'];
                                 $_SESSION['connected'] = true;
                                 $_SESSION['loginError'] = null;
+                                header("Location: index.php?controller=home&action=Accueil");
                             } else {
 
                                 $_SESSION['loginError'] = true;
@@ -180,6 +181,25 @@ class HomeController extends Controller
             }
         }
 
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        return $content;
+    }
+
+        /**
+     * Display Contact Action
+     *
+     * @return string
+     */
+    private function DisconnectAction()
+    {
+
+        //unset($_SESSION['username']);
+        $_SESSION = array();
+
+        $view = file_get_contents('view/page/Accueil.php');
         ob_start();
         eval('?>' . $view);
         $content = ob_get_clean();
