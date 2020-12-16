@@ -82,14 +82,14 @@ class Database
      */
     function readTable(string $tableName): array
     {
-        $results = $this->querySimpleExecute('select * from ' . $tableName . ' order by resHour ASC, resTable ASC, resMeal ASC');
+        $results = $this->querySimpleExecute('select * from ' . $tableName);
         $results = $this->formatData($results);
         return $results;
     }
 
     function readReservationPerDay(string $day)
     {
-        $results = $this->querySimpleExecute("select * from t_reservation where resDate between '$day 00:00:00' and '$day 23:59:59'");
+        $results = $this->querySimpleExecute("select * from t_reservation where resDate between '$day 00:00:00' and '$day 23:59:59' order by resHour ASC, resTable ASC, resMeal ASC");
         $results = $this->formatData($results);
         return $results;
     }

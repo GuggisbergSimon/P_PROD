@@ -24,11 +24,11 @@ class RegisterRepository implements Entity {
                 die('Erreur : ' . $e->getMessage());
         }
     }
-    
+
     /**
      * Récupérer tous les clients
      *
-     * @return array
+     * @return false|PDOStatement
      */
     public function findAll() {
 
