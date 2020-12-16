@@ -249,8 +249,22 @@ class HomeController extends Controller
      *
      * @return string
      */
-    private function OptionAction()
-    {
+    private function ContactAction() {
+
+        $view = file_get_contents('view/page/Contact.php');
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        return $content;
+    }
+
+            /**
+     * Display Contact Action
+     *
+     * @return string
+     */
+    private function OptionAction() {
 
         $view = file_get_contents('view/page/Option.php');
 

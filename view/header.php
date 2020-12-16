@@ -1,21 +1,22 @@
 		<!--header-->
 		<div class="toptop">
-		<a href="https://www.etml.ch">ETML</a>
-		<p>Ecole technique - Ecole des métiers - Lausanne</p>
+			<a href="https://www.etml.ch" target="_blank">ETML</a>
+			<p>Ecole technique - Ecole des métiers - Lausanne</p>
 		</div>
 		
 		
 		<!-- header du site avec le bouteau Accueil, connexion, à propos, commande, option-->
 		<div class="topnav">
 			<a id="active"  href="index.php?controller=home&action=Accueil">Accueil</a>
+			<a href="index.php?controller=home&action=Commander">Commander</a>
 			<a href="index.php?controller=home&action=Connexion">Connexion</a>
-			<a href="index.php?controller=home&action=Register">Inscription(temp)</a>
+			<a href="index.php?controller=home&action=Contact">Contact</a>
 			<a href="index.php?controller=home&action=Apropos">À propos</a>
-			<a href="index.php?controller=home&action=Commander">Commander(RESERVER CUISINE)</a>
-			<a href="index.php?controller=home&action=Option">Option(RESERVER ADMIN)</a>
+			<?php if(array_key_exists('role', $_SESSION) && $_SESSION['role'] >= 50) echo '<a href="index.php?controller=home&action=Option">Administation</a>';?>
 		</div>	
 
 		<?php
+		/*
 			if(isset($_SESSION['username'])){
 				echo 
 				'<div class="btn-group float-right">
@@ -35,7 +36,7 @@
 			}   
 			else{
 				echo '<a class="btn btn-outline-success my-2 mr-5 my-sm-0 px-4 float-right" href="index.php?controller=home&action=Connexion"> Connexion </a>';
-			}
+			}*/
 		?>
 
 <!--

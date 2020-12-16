@@ -9,14 +9,14 @@ if($_SESSION == array()){
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- police que le site de l'ETML utilise pour la barre de nav.-->
+	<link href='https://fonts.googleapis.com/css?family=Exo:500,600' rel='stylesheet' type='text/css'>
 	<!-- Logo Etml onglet page internet -->
-	<link rel="icon" type="image/png" sizes="16x16" href="https://valentinkaelin.ch/img/etml.jpg">
+	<link rel="icon" type="image/png" sizes="16x16" src="../../userContent/logoOnlet.png">
 	<meta charset="UTF-8">
-	<title>Commande plat végetarien ETML</title>
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-	<link href="resources/css/AccueilCSS.css" rel="stylesheet" type="text/css" />
-	
+	<title>ETML - Restaurant</title>
+	<link href="resources/css/style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<?php if(array_key_exists('role', $_SESSION) && $_SESSION['role'] >= 50) echo '<style>.topnav { background-color: blue; </style>'; ?>
 </head>
 <body>
