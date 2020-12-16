@@ -6,8 +6,4 @@ for ($i = 0; $i < 5; $i++) {
     echo '<a href="index.php?controller=home&action=DisplayDay&day=' . $week_day . '">' . date('D', strtotime($week_day)) . '</a>';
 }
 $week_end = date('d-m-Y', strtotime('+'.(6-$day).' days'));
-
-//TODO remove the 3 next lines, they are for test purposes only
 ?>
-<br>
-<a href="index.php?controller=home&action=DisplayDay&day=2020-12-09">DayTest</a>

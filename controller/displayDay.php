@@ -9,3 +9,4 @@ if (key_exists('day', $_GET) && key_exists('role', $_SESSION) && $_SESSION['role
         var_dump($reservation);
     }
 }
+echo '<a href="index.php?controller=home&action=Option">Retour en arrière</a>';

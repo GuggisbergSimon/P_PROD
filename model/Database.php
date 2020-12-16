@@ -165,8 +165,6 @@ class Database
      */
     function addData($table, $columns, $values): int
     {
-        echo "added new entry to $table " . var_dump($columns) . " " . var_dump($values);
-
         $id = 'id' . ucfirst(substr($table, 2, strlen($table)));
         $this->querySimpleExecute('insert into ' . $table . ' ' . $this->mergeStrings($columns, '') . ' values ' . $this->mergeStrings($values, '\''));
         $results = $this->querySimpleExecute("select max($id) from " . $table);
