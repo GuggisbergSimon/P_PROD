@@ -96,8 +96,13 @@ class Database
 
     function getIdUser($username)
     {
-        $results = $this->querySimpleExecute("select * from t_user");
+        $results = $this->querySimpleExecute("select * from t_user where useUsername='". $username . "'");
         return $results = $this->formatData($results)[0]['idUser'];
+    }
+
+    function getUser($userId) {
+        $results = $this->querySimpleExecute("select useUsername from t_user where idUser=$userId");
+        return $results = $this->formatData($results)[0]['useUsername'];
     }
 
     function deleteUser($username)
@@ -165,8 +170,6 @@ class Database
      */
     function addData($table, $columns, $values): int
     {
-        echo "added new entry to $table " . var_dump($columns) . " " . var_dump($values);
-
         $id = 'id' . ucfirst(substr($table, 2, strlen($table)));
         $this->querySimpleExecute('insert into ' . $table . ' ' . $this->mergeStrings($columns, '') . ' values ' . $this->mergeStrings($values, '\''));
         $results = $this->querySimpleExecute("select max($id) from " . $table);
