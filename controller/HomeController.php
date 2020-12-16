@@ -61,6 +61,7 @@ class HomeController extends Controller
                                 $_SESSION['username'] = $compte[0]['useUsername'];
                                 $_SESSION['role'] = $compte[0]['useRole'];
                                 $_SESSION['connected'] = true;
+                                $_SESSION['loginError'] = null;
                             } else {
 
                                 $_SESSION['loginError'] = true;
