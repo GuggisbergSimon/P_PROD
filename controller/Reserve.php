@@ -2,7 +2,6 @@
 
 echo '
 <body>
-<a href="displayDay.php?day=09-12-2020">Test Display Day</a>
 <a onclick="return confirm(\'Êtes vous sûr de vouloir supprimer cet utilisateur ? \');" href="deleteTeacher.php">Supprimer utilisateur</a>
     <form action="validatingReservation.php" method="post">
         <p>

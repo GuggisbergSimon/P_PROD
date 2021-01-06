@@ -16,12 +16,12 @@ page connexion : retravailler
 WIP - cacher commander si vue admin
 WIP - slideshow page accueil
 pas de vérification de compte
-WIP - manque d'informations lors d'inscription (nom, prénom, etc) - updater SQL aussi
-WIP - manque de feedbacks sur formulaire (raison d'erreurs)
+DONE - manque d'informations lors d'inscription (nom, prénom, etc) - updater SQL aussi
+DONE - manque de feedbacks sur formulaire (raison d'erreurs)
 vue admin : changer numéro de pat par le type (enum)
-vue admin faire calendrier plus joli : mettre toutes les infos directes là dedans
-quand inscription, envoyez un mail
-Police ETML ne s'affiche pas
+vue admin faire calendrier plus joli
+DONE - calendrier : mettre toutes les infos directes là dedans
+WIP - quand inscription, envoyez un mail
+Police ETML ne s'affiche pas selon navigateur/ordinateur
 couleurs vue admin à changer par qchose de visible (pas fluo)
 changer de semaine en mode admin
-ajouter features décrits plus hauts/souhaitées par client

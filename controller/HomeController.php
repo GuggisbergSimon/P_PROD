@@ -257,20 +257,6 @@ class HomeController extends Controller
     }
 
     /**
-     * @return false|string$
-     */
-    private
-    function DisplayDayAction()
-    {
-        $view = file_get_contents('controller/displayDay.php');
-        ob_start();
-        eval('?>' . $view);
-        $content = ob_get_clean();
-
-        return $content;
-    }
-
-    /**
      * Display Contact Action
      *
      * @return string
