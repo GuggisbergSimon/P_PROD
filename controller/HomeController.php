@@ -23,9 +23,9 @@ class HomeController extends Controller
             $action = 'AccueilAction'; // listAction
         }
 
-        if(!array_key_exists('role', $_SESSION)) $_SESSION['role'] = 0;
+        if (!array_key_exists('role', $_SESSION)) $_SESSION['role'] = 0;
 
-        if($_GET['action'] == 'Option' && $_SESSION['role'] < 50){
+        if ($_GET['action'] == 'Option' && $_SESSION['role'] < 50) {
             $action = 'AccueilAction'; // listAction
             $_GET['action'] = 'Accueil';
         }
@@ -107,7 +107,7 @@ class HomeController extends Controller
                     $_SESSION['connected'] = true;
                 }
                 else{
-        
+
                     $_SESSION['loginError'] = true;
 
                     //header("Location: index.php?controller=login&action=index");
@@ -159,31 +159,47 @@ class HomeController extends Controller
                 $registerRepository = new Database();
 
                 if (array_key_exists('username', $_POST) && $_POST['username'] != "") {
+                    if (array_key_exists('password', $_POST) && $_POST['password'] != "" && array_key_exists('confPassword', $_POST) && $_POST['confPassword'] == $_POST['password']) {
+                        if (array_key_exists('email', $_POST) && $_POST['email'] != "") {
+                            if (array_key_exists('firstName', $_POST) && $_POST['firstName'] != "") {
+                                if (array_key_exists('lastName', $_POST) && $_POST['lastName'] != "") {
+                                    if ($_POST['password'] && $_POST['username'] && ($registerRepository->userExistsAt($_POST['username']) < 0)) {
+                                        $compte = $registerRepository->register($_POST['username'], $_POST['password'], $_POST['email'], $_POST['firstName'], $_POST['lastName']);
+                                        echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES INSCRIS </h1>';
+                                        $_SESSION['username'] = $compte[0]['useUsername'];
+                                        //$_SESSION['connected'] = true;
+                                    } else {
 
-                    if (array_key_exists('password', $_POST) && $_POST['password'] != "") {
-                        if ($_POST['password'] && $_POST['username'] && ($registerRepository->userExistsAt($_POST['username']) < 0)) {
-                            $compte = $registerRepository->register($_POST['username'], $_POST['password']);
-                            echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES INSCRIS </h1>';
-                            $_SESSION['username'] = $compte[0]['useUsername'];
-                            //$_SESSION['connected'] = true;
+                                        $_SESSION['registerError'] = true;
+
+                                        //header("Location: index.php?controller=login&action=index");
+                                        echo "Nom d'utilisateur déjà présent, veuillez en sélectionner un autre.";
+                                    }
+                                } else {
+                                    $_SESSION['registerError'] = true;
+
+                                    echo "Veuillez remplir le champ Nom.";
+                                }
+                            } else {
+                                $_SESSION['registerError'] = true;
+
+                                echo "Veuillez remplir le champ Prénom.";
+                            }
                         } else {
-
                             $_SESSION['registerError'] = true;
 
-                            //header("Location: index.php?controller=login&action=index");
-                            echo "erreur 1";
+                            echo "Veuillez remplir le champ Email.";
                         }
                     } else {
                         $_SESSION['registerError'] = true;
 
-                        echo "erreur 3";
+                        echo "Mots de passe incorrects, veuillez l'entrer à nouveau.";
                     }
                 } else {
                     $_SESSION['registerError'] = true;
 
-                    echo "erreur 4";
+                    echo "Veuillez entrez un nom d'utilisateur.";
                 }
-
             }
         }
 
@@ -192,14 +208,16 @@ class HomeController extends Controller
         $content = ob_get_clean();
 
         return $content;
+
     }
 
-        /**
+    /**
      * Display Contact Action
      *
      * @return string
      */
-    private function DisconnectAction()
+    private
+    function DisconnectAction()
     {
 
         //unset($_SESSION['username']);
@@ -213,7 +231,8 @@ class HomeController extends Controller
      *
      * @return string
      */
-    private function AccueilAction()
+    private
+    function AccueilAction()
     {
 
         $view = file_get_contents('view/page/Accueil.php');
@@ -227,7 +246,8 @@ class HomeController extends Controller
     /**
      * @return false|string$
      */
-    private function ValidateReservationAction()
+    private
+    function ValidateReservationAction()
     {
         $view = file_get_contents('controller/validatingReservation.php');
         ob_start();
@@ -240,7 +260,8 @@ class HomeController extends Controller
     /**
      * @return false|string$
      */
-    private function DisplayDayAction()
+    private
+    function DisplayDayAction()
     {
         $view = file_get_contents('controller/displayDay.php');
         ob_start();
@@ -255,7 +276,8 @@ class HomeController extends Controller
      *
      * @return string
      */
-    private function AproposAction()
+    private
+    function AproposAction()
     {
 
         $view = file_get_contents('view/page/Apropos.php');
@@ -271,7 +293,9 @@ class HomeController extends Controller
      *
      * @return string
      */
-    private function ContactAction() {
+    private
+    function ContactAction()
+    {
 
         $view = file_get_contents('view/page/Contact.php');
         ob_start();
@@ -281,12 +305,14 @@ class HomeController extends Controller
         return $content;
     }
 
-            /**
+    /**
      * Display Contact Action
      *
      * @return string
      */
-    private function OptionAction() {
+    private
+    function OptionAction()
+    {
 
         $view = file_get_contents('view/page/Option.php');
 
@@ -303,7 +329,8 @@ class HomeController extends Controller
      *
      * @return string
      */
-    private function ParametreAction()
+    private
+    function ParametreAction()
     {
 
         $view = file_get_contents('view/page/Parametre.php');
@@ -316,7 +343,8 @@ class HomeController extends Controller
         return $content;
     }
 
-    private function CommanderAction()
+    private
+    function CommanderAction()
     {
 
         $view = file_get_contents('view/page/Commander.php');
