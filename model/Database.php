@@ -202,6 +202,9 @@ class Database
      */
     function addReservation($date, $table, $hour, $meal, $userId): int
     {
+        mail ( 'simon.guggisberg@eduvaud.ch' , 'réservation de l\'utilisateur : ' . $userId , $date . ' ' . $table . ' ' . $hour . ' ' . $meal . ' ' . $userId . ' ' ,
+        'From: adrian.barreira@eduvaud.ch');
+
         return $this->addData('t_reservation', ['resDate', 'resTable', 'resHour', 'resMeal', 'fkUser'], [$date, $table, $hour, $meal, $userId]);
     }
 
