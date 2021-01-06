@@ -212,7 +212,7 @@ class Database
      */
     function addReservation($date, $table, $hour, $meal, $userId): int
     {
-        $this->sendMail($date, $table, $hour, $meal, $userId);
+        //$this->sendMail($date, $table, $hour, $meal, $userId);
 
         return $this->addData('t_reservation', ['resDate', 'resTable', 'resHour', 'resMeal', 'fkUser'], [$date, $table, $hour, $meal, $userId]);
     }
@@ -258,11 +258,11 @@ class Database
             $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
             //note we use &eacute and &agrave to write html special characters
-            
+
             //Recipients
             $mail->setFrom('caf&eacuteteriatestABR@outlook.com');
             $mail->addAddress('simon.guggisberg@eduvaud.ch');     // Add a recipient
-
+            $mail->FromName = 'caf&eacuteteriatestABR@outlook.com';
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $user = $this->getUser($userId);
