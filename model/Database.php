@@ -1,4 +1,14 @@
 <?php
+ use PHPMailer\PHPMailer\PHPMailer;
+ use PHPMailer\PHPMailer\SMTP;
+ use PHPMailer\PHPMailer\Exception;
+
+ // Load Composer's autoloader
+ require 'vendor/autoload.php';
+ require 'vendor/phpmailer/phpmailer/src/Exception.php';
+ require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+ require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+
 
 /**
  * Authors : Adrian Barreira & Simon Guggisberg
@@ -202,8 +212,7 @@ class Database
      */
     function addReservation($date, $table, $hour, $meal, $userId): int
     {
-        mail ( 'simon.guggisberg@eduvaud.ch' , 'réservation de l\'utilisateur : ' . $userId , $date . ' ' . $table . ' ' . $hour . ' ' . $meal . ' ' . $userId . ' ' ,
-        'From: adrian.barreira@eduvaud.ch');
+        $this->sendMail($date, $table, $hour, $meal, $userId);
 
         return $this->addData('t_reservation', ['resDate', 'resTable', 'resHour', 'resMeal', 'fkUser'], [$date, $table, $hour, $meal, $userId]);
     }
@@ -231,5 +240,41 @@ class Database
             return $results[0];
         }
         return -1;
+    }
+
+    public function sendMail($date, $table, $hour, $meal, $userId){
+        // Instantiation and passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'smtp.office365.com';                    // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'cafeteriatestABR@outlook.com';                     // SMTP username
+            $mail->Password   = '.Etml-*123';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
+            //note we use &eacute and &agrave to write html special characters
+            
+            //Recipients
+            $mail->setFrom('caf&eacuteteriatestABR@outlook.com');
+            $mail->addAddress('simon.guggisberg@eduvaud.ch');     // Add a recipient
+
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $user = $this->getUser($userId);
+            $mail->Subject = 'reservation de l\'utilisateur : ' . $user;
+            $mail->Body = $user . ' a r&eacuteserv&eacute un menu v&eacuteg&eacutetarien pour le ' . $date . /*$table . ' ' . $meal*/ ' &agrave ' . $hour . 'h ';
+            $mail->AltBody = $user . ' a r&eacuteserv&eacute un menu v&eacuteg&eacutetarien pour le ' . $date . /*$table . ' ' . $meal*/ ' &agrave ' . $hour . 'h ';
+
+
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
 }
