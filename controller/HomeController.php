@@ -58,41 +58,47 @@ class HomeController extends Controller
 
                 if (array_key_exists('username', $_POST) && $_POST['username'] != "") {
 
-                    $compte = $registerRepository->login($_POST['username'])->fetchAll();
+                    $compte = $registerRepository->login($_POST['username']);
 
                     if (array_key_exists('password', $_POST) && $_POST['password'] != "") {
-                        if ($compte[0]['usePassword'] != array() && password_verify($_POST['password'], $compte[0]['usePassword'])) {
-                            if ($_POST['password'] && $_POST['username']) {
-                                echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES CONNECTES</h1>';
-                                $_SESSION['username'] = $compte[0]['useUsername'];
-                                $_SESSION['role'] = $compte[0]['useRole'];
-                                $_SESSION['connected'] = true;
-                                $_SESSION['loginError'] = null;
-                                header("Location: index.php?controller=home&action=Accueil");
+                        if ($compte != -1) {
+                            if ($compte['usePassword'] != array() && password_verify($_POST['password'], $compte['usePassword'])) {
+                                if ($_POST['password'] && $_POST['username']) {
+                                    echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES CONNECTES</h1>';
+                                    $_SESSION['username'] = $compte['useUsername'];
+                                    $_SESSION['role'] = $compte['useRole'];
+                                    $_SESSION['connected'] = true;
+                                    $_SESSION['loginError'] = null;
+                                    header("Location: index.php?controller=home&action=Accueil");
+                                } else {
+
+                                    $_SESSION['loginError'] = true;
+
+                                    //header("Location: index.php?controller=login&action=index");
+                                    echo "erreur 1";
+                                }
                             } else {
 
+                                //TODO: A CHECK
                                 $_SESSION['loginError'] = true;
 
                                 //header("Location: index.php?controller=login&action=index");
-                                echo "erreur 1";
+                                echo "erreur 2";
                             }
                         } else {
-
-                            //TODO: A CHECK
                             $_SESSION['loginError'] = true;
 
-                            //header("Location: index.php?controller=login&action=index");
-                            echo "erreur 2";
+                            echo "erreur 3";
                         }
                     } else {
                         $_SESSION['loginError'] = true;
 
-                        echo "erreur 3";
+                        echo "erreur 4";
                     }
                 } else {
                     $_SESSION['loginError'] = true;
 
-                    echo "erreur 4";
+                    echo "erreur 5";
                 }
 
             }

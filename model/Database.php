@@ -224,7 +224,12 @@ class Database
 
     public function login($username)
     {
-        $userList = $this->connector->query("SELECT * FROM t_user WHERE useUsername = '$username'");
-        return $userList;
+        $results = $this->querySimpleExecute("SELECT * FROM t_user WHERE useUsername = '$username'");
+        $results = $this->formatData($results);
+        if (count($results) > 0) {
+            var_dump($results);
+            return $results[0];
+        }
+        return -1;
     }
 }
