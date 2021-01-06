@@ -8,7 +8,15 @@
 		<!-- header du site avec le bouteau Accueil, connexion, à propos, commande, option-->
 		<div class="topnav">
 			<a href="index.php?controller=home&action=Accueil" <?php if($_GET['action'] == 'Accueil') echo 'id="active"'; ?>>Accueil</a>
-			<a href="index.php?controller=home&action=Commander" <?php if($_GET['action'] == 'Commander') echo 'id="active"'; ?> >Commander</a>
+			<?php 
+			if(array_key_exists('role', $_SESSION) && $_SESSION['role'] == 0){
+				echo '<a href="index.php?controller=home&action=Commander"';
+				if($_GET['action'] == 'Commander'){
+					echo ' id="active"';
+				}
+				echo '>Commander</a>';
+			}
+			?>
 			<?php 
 			if(array_key_exists('username', $_SESSION)){
 				echo '<a href="index.php?controller=home&action=Disconnect">Déconnexion</a>';
