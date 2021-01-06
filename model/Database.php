@@ -257,15 +257,19 @@ class Database
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
             $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
+            //note we use &eacute and &agrave to write html special characters
+            
             //Recipients
-            $mail->setFrom('cafeteriatestABR@outlook.com');
+            $mail->setFrom('caf&eacuteteriatestABR@outlook.com');
             $mail->addAddress('simon.guggisberg@eduvaud.ch');     // Add a recipient
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'réservation de l\'utilisateur : ' . $userId;
-            $mail->Body    = $date . ' ' . $table . ' ' . $hour . ' ' . $meal . ' ' . $userId;
-            $mail->AltBody = $date . ' ' . $table . ' ' . $hour . ' ' . $meal . ' ' . $userId;
+            $user = $this->getUser($userId);
+            $mail->Subject = 'reservation de l\'utilisateur : ' . $user;
+            $mail->Body = $user . ' a r&eacuteserv&eacute un menu v&eacuteg&eacutetarien pour le ' . $date . /*$table . ' ' . $meal*/ ' &agrave ' . $hour . 'h ';
+            $mail->AltBody = $user . ' a r&eacuteserv&eacute un menu v&eacuteg&eacutetarien pour le ' . $date . /*$table . ' ' . $meal*/ ' &agrave ' . $hour . 'h ';
+
 
             $mail->send();
             echo 'Message has been sent';
