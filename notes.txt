@@ -1,17 +1,16 @@
 ﻿20201214
-deadline commandes à minuit la veille
+DONE - deadline commandes à minuit la veille
 exposer paramètres pour admin
-que végétarien for now
+DONE - que végétarien for now
 manger sur place/emporter comme critère à ajouter
-enlever toute notion de table pour l'instant
-pas de limite suérieure à priori (?)
+DONE - enlever toute notion de table pour l'instant
+DONE - pas de limite supérieure à priori (?)
 fini rentrée septembre 2021, tests en printemps 2021
 identifier personne via carte étudiant/eduvaud
 envoyer email lorsque commande ou email/jour pour lendemain/surlendemain
 mettre image pour plats via vue admin
 
 20210106
-Liste doléances :
 à propos est vide
 page connexion : retravailler
 cacher commander si pas connecté
