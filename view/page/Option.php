@@ -12,13 +12,6 @@ echo '
         <th>Jeudi</th>
         <th>Vendredi</th>
     </tr>
-    <tr>
-        <td>Jill</td>
-        <td>Smith</td>
-        <td>Bla</td>
-        <td>bla</td>
-        <td>truc</td>
-    </tr>
     <tr>';
 $database = new Database();
 for ($i = 0; $i < 5; $i++) {
