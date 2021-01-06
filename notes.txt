@@ -1,10 +1,6 @@
 ﻿20201214
-DONE - deadline commandes à minuit la veille
 exposer paramètres pour admin
-DONE - que végétarien for now
 manger sur place/emporter comme critère à ajouter
-DONE - enlever toute notion de table pour l'instant
-DONE - pas de limite supérieure à priori (?)
 fini rentrée septembre 2021, tests en printemps 2021
 identifier personne via carte étudiant/eduvaud
 WIP - envoyer email lorsque commande ou email/jour pour lendemain/surlendemain
@@ -13,15 +9,9 @@ mettre image pour plats via vue admin
 20210106
 à propos est vide
 page connexion : retravailler
-WIP - cacher commander si vue admin
-WIP - slideshow page accueil
 pas de vérification de compte
-WIP - manque d'informations lors d'inscription (nom, prénom, etc) - updater SQL aussi
-WIP - manque de feedbacks sur formulaire (raison d'erreurs)
 vue admin : changer numéro de pat par le type (enum)
-vue admin faire calendrier plus joli : mettre toutes les infos directes là dedans
-quand inscription, envoyez un mail
-Police ETML ne s'affiche pas
-couleurs vue admin à changer par qchose de visible (pas fluo)
+vue admin faire calendrier plus joli
+WIP - quand inscription, envoyez un mail
+Police ETML ne s'affiche pas selon navigateur/ordinateur
 changer de semaine en mode admin
-ajouter features décrits plus hauts/souhaitées par client
