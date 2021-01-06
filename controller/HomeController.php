@@ -23,6 +23,12 @@ class HomeController extends Controller
             $action = 'AccueilAction'; // listAction
         }
 
+        if(!array_key_exists('role', $_SESSION)) $_SESSION['role'] = 0;
+
+        if($_GET['action'] == 'Option' && $_SESSION['role'] < 50){
+            $action = 'AccueilAction'; // listAction
+            $_GET['action'] = 'Accueil';
+        }
 
         if (method_exists(get_class($this), $action)) {
             return call_user_func(array($this, $action));
