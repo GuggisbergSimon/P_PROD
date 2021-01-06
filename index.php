@@ -18,7 +18,6 @@ date_default_timezone_set('Europe/Zurich');
 
 include_once 'controller/Controller.php';
 include_once 'controller/HomeController.php';
-include_once 'controller/LoginController.php';
 
 
 class MainController {
@@ -50,12 +49,6 @@ class MainController {
             case 'home':
                 $link = new HomeController();
                 break;
-            case 'catalog':
-                $link = new CatalogController();
-                break;
-            case 'login':
-                $link = new LoginController();
-                break;
             default:
                 $link = new HomeController();
                 break;
@@ -73,22 +66,11 @@ class MainController {
 
             $content = $currentPage->display();
 
-            //var_dump($_POST);  
-            if(array_key_exists('disconnect', $_POST) && $_POST['disconnect']){
-                    $_SESSION = array();
-            }
-
-            if($currentPage instanceof LoginController && $_GET['action'] == 'index'){
-                echo $content;
-            }
-            else{
-                include(dirname(__FILE__) . '/view/head.php');
-                include(dirname(__FILE__) . '/view/header.php');
-                echo $content;
-                include(dirname(__FILE__) . '/view/footer.php');
-            }
-
-            //RAJOUTER controle de connexion sur newbook
+            include(dirname(__FILE__) . '/view/head.php');
+            include(dirname(__FILE__) . '/view/header.php');
+            echo $content;
+            include(dirname(__FILE__) . '/view/footer.php');
+            
     }
 }
 

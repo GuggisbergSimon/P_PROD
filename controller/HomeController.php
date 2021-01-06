@@ -223,12 +223,7 @@ class HomeController extends Controller
         //unset($_SESSION['username']);
         $_SESSION = array();
 
-        $view = file_get_contents('view/page/Accueil.php');
-        ob_start();
-        eval('?>' . $view);
-        $content = ob_get_clean();
-
-        return $content;
+        header('Location: index.php?controller=home&action=Accueil');
     }
 
     /**
