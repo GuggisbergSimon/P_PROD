@@ -1,0 +1,28 @@
+﻿20201214
+deadline commandes à minuit la veille
+exposer paramètres pour admin
+que végétarien for now
+manger sur place/emporter comme critère à ajouter
+enlever toute notion de table pour l'instant
+pas de limite suérieure à priori (?)
+fini rentrée septembre 2021, tests en printemps 2021
+identifier personne via carte étudiant/eduvaud
+envoyer email lorsque commande ou email/jour pour lendemain/surlendemain
+mettre image pour plats via vue admin
+
+20210106
+Liste doléances :
+à propos est vide
+page connexion : retravailler
+cacher commander si pas connecté
+slideshow page accueil
+pas de vérification de compte
+manque d'informations lors d'inscription (nom, prénom, etc)
+manque de feedbacks sur formulaire (raison d'erreurs)
+vue admin : changer numéro de pat par le type (enum)
+vue admin faire calendrier plus joli : mettre toutes les infos directes là dedans
+quand inscription, envoyez un mail
+Police ETML ne s'affiche pas
+couleurs vue admin à changer par qchose de visible (pas fluo)
+changer de semaine en mode admin
+ajouter features décrits plus hauts/souhaitées par client
