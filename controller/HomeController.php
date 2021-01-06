@@ -48,7 +48,7 @@ class HomeController extends Controller
     {
         //var_dump($_POST);
         $view = file_get_contents('view/page/Connexion.php');
-        $compte;
+        $compte = [];
 
         if (array_key_exists('login', $_POST)) {
             if ($_POST['login'] == true) {
@@ -62,7 +62,6 @@ class HomeController extends Controller
 
                     if (array_key_exists('password', $_POST) && $_POST['password'] != "") {
                         if ($compte != -1) {
-                            if ($compte['usePassword'] != array() && password_verify($_POST['password'], $compte['usePassword'])) {
                                 if ($_POST['password'] && $_POST['username']) {
                                     echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES CONNECTES</h1>';
                                     $_SESSION['username'] = $compte['useUsername'];
@@ -95,12 +94,6 @@ class HomeController extends Controller
 
                         echo "erreur 4";
                     }
-                } else {
-                    $_SESSION['loginError'] = true;
-
-                    echo "erreur 5";
-                }
-
             }
         }
 
