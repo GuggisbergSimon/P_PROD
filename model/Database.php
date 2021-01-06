@@ -5,7 +5,7 @@
 
  // Load Composer's autoloader
  require 'vendor/autoload.php';
- require 'vendor/phpmaile/phpmailer/src/Exception.php';
+ require 'vendor/phpmailer/phpmailer/src/Exception.php';
  require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
  require 'vendor/phpmailer/phpmailer/src/SMTP.php';
 
