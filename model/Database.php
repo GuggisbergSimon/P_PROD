@@ -219,10 +219,10 @@ class Database
 
 #endregion
 
-    public function register($username, $password, $email, $firstName, $lastName)
+    public function register($username, $password, $email, $firstName, $lastName, $role)
     {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        $insertUser = "INSERT INTO t_user (useUsername, usePassword, useEmail, useFirstName, UseLastName) VALUES ('" . $username . "' , '" . $passwordHash . "' , '" . $email . "' , '" . $firstName . "' , '" . $lastName . "')";
+        $insertUser = "INSERT INTO t_user (useUsername, usePassword, useEmail, useFirstName, UseLastName, useRole) VALUES ('" . $username . "' , '" . $passwordHash . "' , '" . $email . "' , '" . $firstName . "' , '" . $lastName . "' , '" . $role ."')";
 
         if ($this->connector->query($insertUser) == TRUE) {
             echo "New record created successfully";

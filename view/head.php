@@ -20,6 +20,7 @@ if($_SESSION == array()){
 	<?php 
 	if(array_key_exists('role', $_SESSION) && $_SESSION['role'] >= 50){
 		echo '<style>';
+		echo '.topnav a:hover { background-color: indigo; }';
 		echo '.topnav { background-color: darkblue; }';
 		echo '#active { background-color: blue; }';
 		echo '</style>';
