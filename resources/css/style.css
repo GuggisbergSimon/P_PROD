@@ -1,113 +1,123 @@
 /*ajout de la police ETML*/
 @font-face {
-	font-family: ETML;
-	src: url(../../font/ETML.ttf);
+    font-family: "ETML";
+    src: url("../../resources/font/ETML.ttf") format("truetype"),
+        url("../../resources/font/ETML.woff") format("woff"),
+        url("../../resources/font/ETML.woff2") format("woff2");
 }
 
-
-
 /* images accueil*/
-.slideshow-container img{
+.slideshow-container img {
     height: 400px;
     width: auto;
 }
+
 .slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
 }
+
 /* animation */
 .fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1s;
-  animation-name: fade;
-  animation-duration: 5s;
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1s;
+    animation-name: fade;
+    animation-duration: 5s;
 }
+
 @-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
 }
+
 @keyframes fade {
-  from {opacity: 80%} 
-  to {opacity: 100%}
+    from {
+        opacity: 80%
+    }
+    to {
+        opacity: 100%
+    }
 }
-
-
-
 
 /* Tout en haut (nom école)*/
 .toptop {
-	text-align: center;
-	text-decoration: none;
+    text-align: center;
+    text-decoration: none;
 }
+
 .toptop a {
-	color: #004595;
-	text-align: center;
-	font-family: ETML;
-	font-size: 20px;
-}
-.toptop a:hover{
-	color: #2862bf;
-	text-decoration: none;
+    color: #004595;
+    text-align: center;
+    font-family: "ETML";
+    font-size: 20px;
 }
 
-
-
+.toptop a:hover {
+    color: #2862bf;
+    text-decoration: none;
+}
 
 /*barre de navigation*/
 .topnav {
-  background-color: #556B2F;
-  overflow: hidden;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background-color: #556B2F;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 /*couleur sur l'onglet où nous sommes actuellement*/
-#active
-{
-	background-color: #798737;
-	height: 20%;
-	border-radius: 20px;
+#active {
+    background-color: #798737;
+    height: 20%;
+    border-radius: 20px;
 }
+
 /*barre de navigation text*/
 .topnav a {
-	font-family: Exo;
-  float: left;
-  color: #f2f2f2;
-  padding: 9px 25px;
-  text-decoration: none;
-  font-size: 18px;
-  margin: 7px;
+    font-family: Exo;
+    float: left;
+    color: #f2f2f2;
+    padding: 9px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 7px;
 }
+
 /* Quand souris dessus */
 .topnav a:hover {
-  border-radius: 20px;
-  background-color: #3d4d21;
-  color: white;
-  text-decoration: none;
+    border-radius: 20px;
+    background-color: #3d4d21;
+    color: white;
+    text-decoration: none;
 }
 
 .textAccueil {
-	font-size : 18px;
-  margin: auto;
-  width: 51%;
-  border: 3px solid green;
-  padding: 10px;
+    font-size: 18px;
+    margin: auto;
+    width: 51%;
+    border: 3px solid green;
+    padding: 10px;
 }
 
 /*contact*/
 
-.imageContact img {	
-	margin: 4px;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+.imageContact img {
+    margin: 4px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /*barre "contact"*/
 .contactbarre {
-	display: block;
+    display: block;
     margin-left: auto;
     margin-right: auto;
     background-color: #a1cc43;
@@ -117,36 +127,35 @@
 
 /*barre de navigation text*/
 .contactbarre p {
-	float: left;
-	font-weight: bold;
+    float: left;
+    font-weight: bold;
     padding: 0px;
     font-size: 27px;
     margin: 7px;
 }
 
-.map{
-	display: block;
-	margin-right: 20%;
+.map {
+    display: block;
+    margin-right: 20%;
     margin-left: 20%;
-	margin-top: 4px;
+    margin-top: 4px;
 }
 
-
-h2{
-	padding-top: 30px;
-	margin: auto;
-	width: 60%;
+h2 {
+    padding-top: 30px;
+    margin: auto;
+    width: 60%;
 }
 
-h3{
-	padding-top: 30px;
-	margin: auto;
-	width: 60%;
+h3 {
+    padding-top: 30px;
+    margin: auto;
+    width: 60%;
 }
-	
+
 .ligne {
-	height: 1px;
-	display: block;
+    height: 1px;
+    display: block;
     margin-left: auto;
     margin-right: auto;
     background-color: #a1cc43;
@@ -154,88 +163,64 @@ h3{
     width: 60%;
 }
 
-.info{
-	margin: auto;
-	width: 60%;
+.info {
+    margin: auto;
+    width: 60%;
 }
 
 .formulaire {
-	padding-top: 20px;
-	margin: auto;
-	width: 60%;
-	padding-left: 12px;
+    padding-top: 20px;
+    margin: auto;
+    width: 60%;
+    padding-left: 12px;
 }
 
-.col-12{
-	padding-top: 20px;
+.col-12 {
+    padding-top: 20px;
 }
 
-.form-label{
+.form-label {
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*Page commander*/
 input {
-	width: 100%;
+    width: 100%;
 }
 
 submit {
-	margin-top: 15px;
+    margin-top: 15px;
 }
 
 .Date {
-	margin: auto;
-	width: 50%;
-	padding-left: 12px;
+    margin: auto;
+    width: 50%;
+    padding-left: 12px;
 }
 
 .Table {
-	margin: auto;
-	width: 50%;
-	padding-left: 12px;
+    margin: auto;
+    width: 50%;
+    padding-left: 12px;
 }
 
 .Heure {
-	margin: auto;
-	width: 50%;
-	padding-left: 12px;
+    margin: auto;
+    width: 50%;
+    padding-left: 12px;
 }
 
 .Reserver {
-	margin: auto;
-	width: 50%;
-	padding-left: 12px;
+    margin: auto;
+    width: 50%;
+    padding-left: 12px;
 }
 
-
-
-
-
-
-
 .footer {
-	height: 50px;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #c6c6bf;
-  color: white;
-  text-align: center;
+    height: 50px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #c6c6bf;
+    color: white;
+    text-align: center;
 }
