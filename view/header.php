@@ -1,6 +1,6 @@
 		<!--header-->
 		<div class="toptop">
-			<a href="https://www.etml.ch" target="_blank">ETML</a>
+            <a style= "font-family: 'ETML';" href="https://www.etml.ch" target="_blank">ETML</a>
 			<p>Ecole technique - Ecole des métiers - Lausanne</p>
 		</div>
 		
