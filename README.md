@@ -11,16 +11,21 @@ Nous avons utilisé Composer pour installer phpmailer afin de gérer l'envoi de 
 doit être fini pour rentrée septembre 2021, tests en printemps 2021
 
 TODO List par ordre de priorité, de important à moindre :
+Trivial-en cours :
 - faire fonctionner error_log
-- WIP - envoyer un email/jour pour commandes du lendemain+surlendemain
-- WIP - quand commande, envoyez un mail (peut être overkill, à désactiver en option ?)
+
+Visuel :
 - pas assez responsif
 - page connexion : retravailler visuel
 - vue admin faire calendrier plus joli
+
+Fonctionnalités légères
 - changer de semaine en mode admin
 - vue admin : changer numéro de plat par le type (enum)
 - manger sur place/emporter comme critère à ajouter
+
+Fonctionnalités complexes :
+- envoyer email/jour pour lendemain/surlendemain
 - identifier personne via carte étudiant/eduvaud
 - pas de vérification de compte
-- Police ETML ne s'affiche pas selon navigateur/ordinateur
 - mettre image pour plats via vue admin
