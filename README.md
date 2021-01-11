@@ -10,6 +10,16 @@ Nous avons utilisé Composer pour installer phpmailer afin de gérer l'envoi de 
 
 doit être fini pour rentrée septembre 2021, tests en printemps 2021
 
+marche à suivre braindead :
+1. cloner notre répertoire git https://github.com/GuggisbergSimon/P_PROD (bouton vert/Code puis download zip) celui ci contient votre code + le notre normalement
+2. télécharger uwamp https://www.uwamp.com/fr/?page=download version rar/zip
+3. mettre le dossier de projet dans le dossier www d'uwamp
+4. lancer uwamp, sélectionner php : 7.0.3 et sélectionnez navigateur www
+5. naviguez jusqu'à la page index/home
+6. dans uwamp, sélectionner phpmyadmin
+7. connecter vous avec "root" et "root" comme usename/password
+8. importez une database, avec le fichier suivant : https://github.com/GuggisbergSimon/P_PROD/blob/main/src/database/bd_p_prod.sql
+
 TODO List par ordre de priorité, de important à moindre :
 Trivial-en cours :
 - faire fonctionner error_log
