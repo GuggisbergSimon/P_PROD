@@ -16,17 +16,6 @@ Police ETML ne s'affiche pas selon navigateur/ordinateur
 changer de semaine en mode admin
 
 20210111
-meilleur responsive
+pas assez responsive
 formulaire apropos ne fonctionne pas- à garder ?
-updater 
-cacher menus dont admin n'a pas besoin
 faire fonctionner error_log
-ya du vert quand hover en admin
-
-fonts/ETM/.ttf .woff .woff2
-@font-face {
-	font-family: "ETML",
-	src:url("resources/font/ETML.ttf") format("truetype"),
-		url("resources/font/ETML.woff") format("woff"),
-		url("resources/font/ETML.woff2") format("woff2")
-}
