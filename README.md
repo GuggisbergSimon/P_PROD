@@ -8,16 +8,20 @@ Nous avons utilisé composer pour installer phpmailer afin de gérer l'envoi de 
 À noter que plusieurs types de comptes existent, en fonction de leur useRights : 100 étant le maximum, pour un super admin, et en dessous de 50 un user standard, convention non indiquée donc possible de s'en écarter néanmoins.
 
 TODO List :
-- exposer paramètres pour admin
-- manger sur place/emporter comme critère à ajouter  
-- identifier personne via carte étudiant/eduvaud  
-- WIP - envoyer email/jour pour lendemain/surlendemain  
-- mettre image pour plats via vue admin  
-- à propos est vide  
-- page connexion à retravailler  
-- pas de vérification de compte -> à changer 
-- vue admin : changer numéro de pat par le type (enum)  
-- vue admin faire calendrier plus joli  
-- WIP - quand commande, envoyez un mail  
-- Police ETML ne s'affiche pas selon navigateur/ordinateur  
-- changer de semaine en mode admin
+- exposer paramètres pour admin 
+- manger sur place/emporter comme critère à ajouter 
+- fini rentrée septembre 2021, tests en printemps 2021 
+- identifier personne via carte étudiant/eduvaud 
+- WIP - envoyer email/jour pour lendemain/surlendemain 
+- mettre image pour plats via vue admin   
+- page connexion : retravailler 
+- pas de vérification de compte 
+- vue admin : changer numéro de pat par le type (enum) 
+- vue admin faire calendrier plus joli 
+- WIP - quand commande, envoyez un mail 
+- Police ETML ne s'affiche pas selon navigateur/ordinateur 
+- changer de semaine en mode admin 
+- pas assez responsive 
+- formulaire apropos ne fonctionne pas- à garder ? 
+- faire fonctionner error_log 
+- ETML font not always being displayed

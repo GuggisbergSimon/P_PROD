@@ -164,7 +164,7 @@ class HomeController extends Controller
                                     if ($_POST['password'] && $_POST['username'] && ($registerRepository->userExistsAt($_POST['username']) < 0)) {
                                         $compte = $registerRepository->register($_POST['username'], $_POST['password'], $_POST['email'], $_POST['firstName'], $_POST['lastName'], 0);
                                         echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES INSCRIS </h1>';
-                                        $_SESSION['username'] = $compte[0]['useUsername'];
+                                        $_SESSION['username'] = $compte;
                                         //$_SESSION['connected'] = true;
                                     } else {
 

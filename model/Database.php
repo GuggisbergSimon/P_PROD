@@ -1,13 +1,14 @@
 <?php
- use PHPMailer\PHPMailer\PHPMailer;
- use PHPMailer\PHPMailer\SMTP;
- use PHPMailer\PHPMailer\Exception;
 
- // Load Composer's autoloader
- require 'vendor/autoload.php';
- require 'vendor/phpmailer/phpmailer/src/Exception.php';
- require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
- require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+// Load Composer's autoloader
+require 'vendor/autoload.php';
+require 'vendor/phpmailer/phpmailer/src/Exception.php';
+require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'vendor/phpmailer/phpmailer/src/SMTP.php';
 
 
 /**
@@ -222,10 +223,12 @@ class Database
     public function register($username, $password, $email, $firstName, $lastName, $role)
     {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        $insertUser = "INSERT INTO t_user (useUsername, usePassword, useEmail, useFirstName, UseLastName, useRole) VALUES ('" . $username . "' , '" . $passwordHash . "' , '" . $email . "' , '" . $firstName . "' , '" . $lastName . "' , '" . $role ."')";
+        $query = $this->addUser($username, $firstName, $lastName, $email, $password, $role);
+        $insertUser = "INSERT INTO t_user (useUsername, usePassword, useEmail, useFirstName, UseLastName, useRole) VALUES ('" . $username . "' , '" . $passwordHash . "' , '" . $email . "' , '" . $firstName . "' , '" . $lastName . "' , '" . $role . "')";
 
-        if ($this->connector->query($insertUser) == TRUE) {
+        if ($query) {
             echo "New record created successfully";
+            return $username;
         } else {
             echo "Error: " . $insertUser . "<br>";
         }
@@ -242,19 +245,20 @@ class Database
         return -1;
     }
 
-    public function sendMail($date, $table, $hour, $meal, $userId){
+    public function sendMail($date, $table, $hour, $meal, $userId)
+    {
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);
 
         try {
             //Server settings
             $mail->isSMTP();                                            // Send using SMTP
-            $mail->Host       = 'smtp.office365.com';                    // Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-            $mail->Username   = 'cafeteriatestABR@outlook.com';                     // SMTP username
-            $mail->Password   = '.Etml-*123';                               // SMTP password
+            $mail->Host = 'smtp.office365.com';                    // Set the SMTP server to send through
+            $mail->SMTPAuth = true;                                   // Enable SMTP authentication
+            $mail->Username = 'cafeteriatestABR@outlook.com';                     // SMTP username
+            $mail->Password = '.Etml-*123';                               // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+            $mail->Port = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
             //note we use &eacute and &agrave to write html special characters
 
@@ -266,8 +270,10 @@ class Database
             $mail->isHTML(true);                                  // Set email format to HTML
             $user = $this->getUser($userId);
             $mail->Subject = 'reservation de l\'utilisateur : ' . $user;
-            $mail->Body = $user . ' a r&eacuteserv&eacute un menu v&eacuteg&eacutetarien pour le ' . $date . /*$table . ' ' . $meal*/ ' &agrave ' . $hour . 'h ';
-            $mail->AltBody = $user . ' a r&eacuteserv&eacute un menu v&eacuteg&eacutetarien pour le ' . $date . /*$table . ' ' . $meal*/ ' &agrave ' . $hour . 'h ';
+            $mail->Body = $user . ' a r&eacuteserv&eacute un menu v&eacuteg&eacutetarien pour le ' . $date . /*$table . ' ' . $meal*/
+                ' &agrave ' . $hour . 'h ';
+            $mail->AltBody = $user . ' a r&eacuteserv&eacute un menu v&eacuteg&eacutetarien pour le ' . $date . /*$table . ' ' . $meal*/
+                ' &agrave ' . $hour . 'h ';
 
 
             $mail->send();
