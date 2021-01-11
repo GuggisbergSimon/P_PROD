@@ -263,8 +263,9 @@ class Database
             //note we use &eacute and &agrave to write html special characters
 
             //Recipients
+            //TODO change for definitive address mail
             $mail->setFrom('cafeteriatestABR@outlook.com');
-            $mail->addAddress('adrian.barreira@eduvaud.ch');     // Add a recipient
+            $mail->addAddress('cafeteriatestABR@outlook.com');     // Add a recipient
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
