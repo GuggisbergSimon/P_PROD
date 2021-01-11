@@ -74,7 +74,7 @@ class HomeController extends Controller
                                     $_SESSION['loginError'] = true;
 
                                     //header("Location: index.php?controller=login&action=index");
-                                    echo "erreur 1";
+                                    echo "Identifiants incorrects - erreur 1";
                                 }
                             } else {
 
@@ -82,17 +82,17 @@ class HomeController extends Controller
                                 $_SESSION['loginError'] = true;
 
                                 //header("Location: index.php?controller=login&action=index");
-                                echo "erreur 2";
+                                echo "Identifiants incorrects - erreur 2";
                             }
                         } else {
                             $_SESSION['loginError'] = true;
 
-                            echo "erreur 3";
+                            echo "Identifiants incorrects - erreur 3";
                         }
                     } else {
                         $_SESSION['loginError'] = true;
 
-                        echo "erreur 4";
+                        echo "Identifiants incorrects - erreur 4";
                     }
             }
         }
@@ -164,7 +164,7 @@ class HomeController extends Controller
                                     if ($_POST['password'] && $_POST['username'] && ($registerRepository->userExistsAt($_POST['username']) < 0)) {
                                         $compte = $registerRepository->register($_POST['username'], $_POST['password'], $_POST['email'], $_POST['firstName'], $_POST['lastName'], 0);
                                         echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES INSCRIS </h1>';
-                                        $_SESSION['username'] = $compte[0]['useUsername'];
+                                        $_SESSION['username'] = $compte;
                                         //$_SESSION['connected'] = true;
                                     } else {
 
