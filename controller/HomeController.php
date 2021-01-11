@@ -146,7 +146,6 @@ class HomeController extends Controller
      */
     private function RegisterAction()
     {
-
         //var_dump($_POST);
         $view = file_get_contents('view/page/Inscription.php');
 
@@ -163,7 +162,7 @@ class HomeController extends Controller
                             if (array_key_exists('firstName', $_POST) && $_POST['firstName'] != "") {
                                 if (array_key_exists('lastName', $_POST) && $_POST['lastName'] != "") {
                                     if ($_POST['password'] && $_POST['username'] && ($registerRepository->userExistsAt($_POST['username']) < 0)) {
-                                        $compte = $registerRepository->register($_POST['username'], $_POST['password'], $_POST['email'], $_POST['firstName'], $_POST['lastName']);
+                                        $compte = $registerRepository->register($_POST['username'], $_POST['password'], $_POST['email'], $_POST['firstName'], $_POST['lastName'], 0);
                                         echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES INSCRIS </h1>';
                                         $_SESSION['username'] = $compte[0]['useUsername'];
                                         //$_SESSION['connected'] = true;
