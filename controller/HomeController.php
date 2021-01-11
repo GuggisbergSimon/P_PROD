@@ -74,7 +74,7 @@ class HomeController extends Controller
                                     $_SESSION['loginError'] = true;
 
                                     //header("Location: index.php?controller=login&action=index");
-                                    echo "erreur 1";
+                                    echo "Identifiants incorrects - erreur 1";
                                 }
                             } else {
 
@@ -82,17 +82,17 @@ class HomeController extends Controller
                                 $_SESSION['loginError'] = true;
 
                                 //header("Location: index.php?controller=login&action=index");
-                                echo "erreur 2";
+                                echo "Identifiants incorrects - erreur 2";
                             }
                         } else {
                             $_SESSION['loginError'] = true;
 
-                            echo "erreur 3";
+                            echo "Identifiants incorrects - erreur 3";
                         }
                     } else {
                         $_SESSION['loginError'] = true;
 
-                        echo "erreur 4";
+                        echo "Identifiants incorrects - erreur 4";
                     }
             }
         }

@@ -213,7 +213,8 @@ class Database
      */
     function addReservation($date, $table, $hour, $meal, $userId): int
     {
-        $this->sendMail($date, $table, $hour, $meal, $userId);
+        //TODO make it work
+        //$this->sendMail($date, $table, $hour, $meal, $userId);
 
         return $this->addData('t_reservation', ['resDate', 'resTable', 'resHour', 'resMeal', 'fkUser'], [$date, $table, $hour, $meal, $userId]);
     }

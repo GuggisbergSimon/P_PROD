@@ -19,4 +19,3 @@ changer de semaine en mode admin
 pas assez responsive
 formulaire apropos ne fonctionne pas- à garder ?
 faire fonctionner error_log
-ETML font not always being displayed
