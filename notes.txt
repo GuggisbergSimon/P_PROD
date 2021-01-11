@@ -1,4 +1,4 @@
-20201214
+﻿20201214
 exposer paramètres pour admin
 manger sur place/emporter comme critère à ajouter
 fini rentrée septembre 2021, tests en printemps 2021
@@ -7,7 +7,6 @@ WIP - envoyer email/jour pour lendemain/surlendemain
 mettre image pour plats via vue admin
 
 20210106
-à propos est vide
 page connexion : retravailler
 pas de vérification de compte
 vue admin : changer numéro de pat par le type (enum)
@@ -15,3 +14,19 @@ vue admin faire calendrier plus joli
 WIP - quand commande, envoyez un mail
 Police ETML ne s'affiche pas selon navigateur/ordinateur
 changer de semaine en mode admin
+
+20210111
+meilleur responsive
+formulaire apropos ne fonctionne pas- à garder ?
+updater 
+cacher menus dont admin n'a pas besoin
+faire fonctionner error_log
+ya du vert quand hover en admin
+
+fonts/ETM/.ttf .woff .woff2
+@font-face {
+	font-family: "ETML",
+	src:url("resources/font/ETML.ttf") format("truetype"),
+		url("resources/font/ETML.woff") format("woff"),
+		url("resources/font/ETML.woff2") format("woff2")
+}
