@@ -307,8 +307,8 @@ class Database
 
             //Recipients
             //TODO change for definitive address mail
-            $mail->setFrom('cafeteriatestaba@outlook.com');
-            $mail->addAddress('cafeteriatestaba@outlook.com');     // Add a recipient
+            $mail->setFrom(MAIL_ADDRESS);
+            $mail->addAddress(MAIL_ADDRESS);     // Add a recipient
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
