@@ -2,8 +2,8 @@
 @font-face {
     font-family: "ETML";
     src: url("../../resources/font/ETML.ttf") format("truetype"),
-        url("../../resources/font/ETML.woff") format("woff"),
-        url("../../resources/font/ETML.woff2") format("woff2");
+    url("../../resources/font/ETML.woff") format("woff"),
+    url("../../resources/font/ETML.woff2") format("woff2");
 }
 
 /* images accueil*/
@@ -63,7 +63,7 @@
 }
 
 /*barre de navigation*/
-.topnav {
+.navbar-nav {
     background-color: #556B2F;
     overflow: hidden;
     width: 100%;
@@ -73,15 +73,14 @@
 }
 
 /*couleur sur l'onglet où nous sommes actuellement*/
-#active {
+.active {
     background-color: #798737;
     height: 20%;
     border-radius: 20px;
 }
 
 /*barre de navigation text*/
-.topnav a {
-    font-family: Exo;
+.nav-item {
     float: left;
     color: #f2f2f2;
     padding: 9px 25px;
@@ -91,7 +90,7 @@
 }
 
 /* Quand souris dessus */
-.topnav a:hover {
+.nav-item:hover {
     border-radius: 20px;
     background-color: #3d4d21;
     color: white;

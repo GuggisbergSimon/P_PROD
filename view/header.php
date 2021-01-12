@@ -6,45 +6,71 @@
 		
 		
 		<!-- header du site avec le bouteau Accueil, connexion, à propos, commande, option-->
-		<div class="topnav">
-			<a href="index.php?controller=home&action=Accueil" <?php if($_GET['action'] == 'Accueil') echo 'id="active"'; ?>>Accueil</a>
+            <nav class="navbar-expand-md navbar-light bg-light">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item
+            <?php if($_GET['action'] == 'Accueil') {
+                        echo ' active';
+            }?>">
+			    <a href="index.php?controller=home&action=Accueil" class="nav-link">Accueil</a>
+            </li>
 			<?php
 			if(array_key_exists('role', $_SESSION) && $_SESSION['role'] == 0){
-				echo '<a href="index.php?controller=home&action=Commander"';
-				if($_GET['action'] == 'Commander'){
-					echo ' id="active"';
-				}
-				echo '>Commander</a>';
+				echo '<li class="nav-item';
+                if($_GET['action'] == 'Commander'){
+                    echo ' active';
+                }
+                echo '">
+				<a href="index.php?controller=home&action=Commander" class="nav-link">Commander</a></li>';
 			}
 			?>
 			<?php 
 			if(array_key_exists('username', $_SESSION)){
-				echo '<a href="index.php?controller=home&action=Disconnect">Déconnexion</a>';
+				echo '<li class="nav-item">
+                <a href="index.php?controller=home&action=Disconnect" class="nav-link">Déconnexion</a>
+                </li>';
 			}
-			else{
-				echo '<a href="index.php?controller=home&action=Connexion"';
-				if($_GET['action'] == 'Connexion' || $_GET['action'] == 'Register'){
-					echo 'id="active"';
-				} 
-				echo '>Connexion</a>';
+			else {
+				echo '<li class="nav-item';
+                if($_GET['action'] == 'Connexion' || $_GET['action'] == 'Register'){
+                    echo ' active';
+                }
+                echo '">
+                <a href="index.php?controller=home&action=Connexion" class="nav-link">Connexion</a></li>';
 			}
 			?>
 			<?php
 			if(array_key_exists('role', $_SESSION) && $_SESSION['role'] >= 50){
-				echo '<a href="index.php?controller=home&action=Option"';
-				if($_GET['action'] == 'Option'){
-					echo 'id="active"';
-				} 
-				echo '>Administration</a>';
+				echo '<li class="nav-item';
+                if($_GET['action'] == 'Option'){
+                    echo ' active"';
+                }
+                echo '">
+                <a href="index.php?controller=home&action=Option"  class="nav-link">Administration</a></li>';
 			}
 			else {
 			    ?>
-                <a href="index.php?controller=home&action=Contact" <?php if($_GET['action'] == 'Contact') echo 'id="active"'; ?>>Contact</a>
-                <a href="index.php?controller=home&action=Apropos" <?php if($_GET['action'] == 'Apropos') echo 'id="active"'; ?>>À propos</a>
+                <li class="nav-item
+                <?php
+                if($_GET['action'] == 'Contact') {
+                    echo ' active"';
+                }
+                ?>">
+                    <a href="index.php?controller=home&action=Contact"  class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item
+                <?php
+                if($_GET['action'] == 'Apropos') {
+                    echo ' active"';
+                }
+                ?>">
+                    <a href="index.php?controller=home&action=Apropos"  class="nav-link">À propos</a>
+                </li>
+            </ul>
+            </nav>
                 <?php
             }
 			?>
-		</div>	
 
 		<?php
 		/*
