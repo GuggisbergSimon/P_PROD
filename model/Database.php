@@ -213,7 +213,6 @@ class Database
      */
     function addReservation($date, $table, $hour, $meal, $userId): int
     {
-        //TODO make it work
         $this->sendMail($date, $table, $hour, $meal, $userId);
 
         return $this->addData('t_reservation', ['resDate', 'resTable', 'resHour', 'resMeal', 'fkUser'], [$date, $table, $hour, $meal, $userId]);
@@ -264,8 +263,9 @@ class Database
             //note we use &eacute and &agrave to write html special characters
 
             //Recipients
+            //TODO change for definitive address mail
             $mail->setFrom('cafeteriatestABR@outlook.com');
-            $mail->addAddress('adrian.barreira@eduvaud.ch');     // Add a recipient
+            $mail->addAddress('cafeteriatestABR@outlook.com');     // Add a recipient
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
@@ -278,6 +278,9 @@ class Database
             //echo 'Message has been sent';
         } catch (Exception $e) {
             //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            //fopen("logs/testfile.txt", "w");
+            error_log("\n[" . date("H:i:s Y-m-d") . "]" . "Message could not be sent. Mailer Error: {$mail->ErrorInfo}", 3, "logs/ErrorLogs.log");
+            //error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}", 3, "/logs/new");
         }
     }
 }

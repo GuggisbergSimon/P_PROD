@@ -3,7 +3,7 @@ exposer paramètres pour admin
 manger sur place/emporter comme critère à ajouter
 fini rentrée septembre 2021, tests en printemps 2021
 identifier personne via carte étudiant/eduvaud
-WIP - envoyer email/jour pour lendemain/surlendemain
+envoyer email/jour pour lendemain/surlendemain
 mettre image pour plats via vue admin
 
 20210106
@@ -11,8 +11,6 @@ page connexion : retravailler
 pas de vérification de compte
 vue admin : changer numéro de pat par le type (enum)
 vue admin faire calendrier plus joli
-WIP - quand commande, envoyez un mail
-Police ETML ne s'affiche pas selon navigateur/ordinateur
 changer de semaine en mode admin
 
 20210111

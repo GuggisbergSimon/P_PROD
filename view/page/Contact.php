@@ -20,14 +20,16 @@
     <p>Rue de Sébeillon 12 <br>Tél : 021 316 77 77 <br> 1004 Lausanne</p>
 </div>
 
+
+<?php
+/*
+TODO make it work
 <!-- formulaire de contact-->
 
 <h3>Formulaire de contact</h3>
 <div class="ligne">
 </div>
-<?php
-/*
-TODO make it work
+
 <div class="formulaire">
     <div class="row mb-3">
         <label for="inputEmail3" class="col-sm-2 col-form-label">Nom</label>
