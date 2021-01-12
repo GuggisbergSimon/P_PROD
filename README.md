@@ -24,10 +24,11 @@ marche à suivre braindead :
 TODO List par ordre de priorité, de important à moindre :
 
 Visuel :
-- aligner la navbar au centre si non responsive
+- petit problème d'affichage en mdoe responsive, il faut appuyer 2x sur le menu hamburger
 
 Fonctionnalités légères
 - changer de semaine en mode admin
+- Mettre plus d'error_log
 - faire fonctionner formulaire de contact
 - manger sur place/emporter comme critère à ajouter
 
