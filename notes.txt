@@ -7,13 +7,7 @@ envoyer email/jour pour lendemain/surlendemain
 mettre image pour plats via vue admin
 
 20210106
-page connexion : retravailler
 pas de vérification de compte
-vue admin : changer numéro de pat par le type (enum)
+vue admin : changer numéro de plat par le type (enum)
 vue admin faire calendrier plus joli
 changer de semaine en mode admin
-
-20210111
-pas assez responsive
-formulaire apropos ne fonctionne pas- à garder ?
-faire fonctionner error_log

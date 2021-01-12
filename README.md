@@ -23,16 +23,12 @@ marche à suivre braindead :
 
 TODO List par ordre de priorité, de important à moindre :
 
-Trivial-en cours :
-- faire fonctionner error_log
-
 Visuel :
-- pas assez responsif
-- page connexion : retravailler visuel
-- vue admin faire calendrier plus joli
+- aligner la navbar au centre si non responsive
 
 Fonctionnalités légères
 - changer de semaine en mode admin
+- faire fonctionner formulaire de contact
 - vue admin : changer numéro de plat par le type (enum)
 - manger sur place/emporter comme critère à ajouter
 
