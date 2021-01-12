@@ -29,7 +29,6 @@ Visuel :
 Fonctionnalités légères
 - changer de semaine en mode admin
 - faire fonctionner formulaire de contact
-- vue admin : changer numéro de plat par le type (enum)
 - manger sur place/emporter comme critère à ajouter
 
 Fonctionnalités complexes :

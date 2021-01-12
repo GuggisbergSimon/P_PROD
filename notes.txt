@@ -8,6 +8,5 @@ mettre image pour plats via vue admin
 
 20210106
 pas de vérification de compte
-vue admin : changer numéro de plat par le type (enum)
 vue admin faire calendrier plus joli
 changer de semaine en mode admin
