@@ -1,10 +1,10 @@
-<h4>Page réservée à l'admin du site permettant d'y apporter des modifications ainsi que de nouvelles fonctionnalités</h4>
 <?php
 include_once "model/Database.php";
 
 $day = date('w');
 echo '
-<table style="width:100%">
+<div class="container mt-5 mb-5">
+<table class="table table-bordered" style="width:100%">
     <tr>
         <th>Lundi</th>
         <th>Mardi</th>
@@ -37,6 +37,6 @@ for ($i = 0; $i < 5; $i++) {
     }
     echo '</td>';
 }
-echo '</tr></table>';
+echo '</tr></table></div>';
 $week_end = date('d-m-Y', strtotime('+' . (6 - $day) . ' days'));
 ?>
