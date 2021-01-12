@@ -23,7 +23,7 @@ if($_SESSION == array()){
 		echo '<style>';
 		echo '.topnav a:hover { background-color: indigo; }';
 		echo '.topnav { background-color: darkblue; }';
-		echo '#active { background-color: blue; }';
+		echo '.topnav a.active { background-color: blue; }';
 		echo '</style>';
 	}
 	?>
