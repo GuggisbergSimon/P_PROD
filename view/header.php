@@ -3,74 +3,64 @@
             <a style= "font-family: 'ETML';" href="https://www.etml.ch" target="_blank">ETML</a>
 			<p>Ecole technique - Ecole des métiers - Lausanne</p>
 		</div>
-		
-		
-		<!-- header du site avec le bouteau Accueil, connexion, à propos, commande, option-->
-            <nav class="navbar-expand-md navbar-light bg-light">
-            <ul class="navbar-nav mr-auto">
-            <li class="nav-item
-            <?php if($_GET['action'] == 'Accueil') {
-                        echo ' active';
-            }?>">
-			    <a href="index.php?controller=home&action=Accueil" class="nav-link">Accueil</a>
-            </li>
-			<?php
-			if(array_key_exists('role', $_SESSION) && $_SESSION['role'] == 0){
-				echo '<li class="nav-item';
-                if($_GET['action'] == 'Commander'){
-                    echo ' active';
+
+        <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <div class="topnav" id="myTopnav">
+            <a href="index.php?controller=home&action=Accueil"
+            <?php
+            if($_GET['action'] == 'Accueil') {
+                echo ' class="active"';
+            }
+            ?>>Accueil</a>
+            <?php
+            if(array_key_exists('role', $_SESSION) && $_SESSION['role'] == 0) {
+                echo '<a href="index.php?controller=home&action=Commander"';
+                if($_GET['action'] == 'Commander') {
+                    echo ' class="active"';
                 }
-                echo '">
-				<a href="index.php?controller=home&action=Commander" class="nav-link">Commander</a></li>';
-			}
-			?>
-			<?php 
-			if(array_key_exists('username', $_SESSION)){
-				echo '<li class="nav-item">
-                <a href="index.php?controller=home&action=Disconnect" class="nav-link">Déconnexion</a>
-                </li>';
-			}
-			else {
-				echo '<li class="nav-item';
+                echo '>Commander</a>';
+            }
+
+            if(array_key_exists('username', $_SESSION)){
+                echo '<a href="index.php?controller=home&action=Disconnect">Déconnexion</a>';
+            }
+            else {
+                echo '<a href="index.php?controller=home&action=Connexion"';
                 if($_GET['action'] == 'Connexion' || $_GET['action'] == 'Register'){
-                    echo ' active';
+                    echo ' class="active"';
                 }
-                echo '">
-                <a href="index.php?controller=home&action=Connexion" class="nav-link">Connexion</a></li>';
-			}
-			?>
-			<?php
-			if(array_key_exists('role', $_SESSION) && $_SESSION['role'] >= 50){
-				echo '<li class="nav-item';
+                echo '">Connexion</a>';
+            }
+            if(array_key_exists('role', $_SESSION) && $_SESSION['role'] >= 50){
+                echo '<a href="index.php?controller=home&action=Option"';
                 if($_GET['action'] == 'Option'){
-                    echo ' active"';
+                    echo ' class="active"';
                 }
-                echo '">
-                <a href="index.php?controller=home&action=Option"  class="nav-link">Administration</a></li>';
-			}
-			else {
-			    ?>
-                <li class="nav-item
+                echo '>Administration</a>';
+            }
+            else {
+                ?>
+                <a href="index.php?controller=home&action=Contact"
                 <?php
                 if($_GET['action'] == 'Contact') {
-                    echo ' active"';
+                    echo ' class="active"';
                 }
-                ?>">
-                    <a href="index.php?controller=home&action=Contact"  class="nav-link">Contact</a>
-                </li>
-                <li class="nav-item
+                ?>>Contact</a>
+                <a href="index.php?controller=home&action=Apropos"
                 <?php
                 if($_GET['action'] == 'Apropos') {
-                    echo ' active"';
+                    echo ' class="active"';
                 }
-                ?>">
-                    <a href="index.php?controller=home&action=Apropos"  class="nav-link">À propos</a>
-                </li>
-            </ul>
-            </nav>
-                <?php
+                ?>>À propos</a>
+            <?php
             }
-			?>
+            ?>
+            <a href="javascript:void(0);" class="icon" onclick="toggleBurger()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
 
 		<?php
 		/*
