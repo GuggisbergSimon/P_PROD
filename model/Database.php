@@ -223,29 +223,72 @@ class Database
     public function register($username, $password, $email, $firstName, $lastName, $role)
     {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        $query = $this->addUser($username, $firstName, $lastName, $email, $password, $role);
-        $insertUser = "INSERT INTO t_user (useUsername, usePassword, useEmail, useFirstName, UseLastName, useRole) VALUES ('" . $username . "' , '" . $passwordHash . "' , '" . $email . "' , '" . $firstName . "' , '" . $lastName . "' , '" . $role . "')";
+        //$query = $this->addUser($username, $firstName, $lastName, $email, $password, $role);
+        $values = array(
+            1=> array(
+                'marker' => ':username',
+                'var' => $username,
+                'type' => PDO::PARAM_STR
+            ),
+            2=> array(
+                'marker' => ':password',
+                'var' => $passwordHash,
+                'type' => PDO::PARAM_STR
+            ),
+            3=> array(
+                'marker' => ':email',
+                'var' => $email,
+                'type' => PDO::PARAM_STR
+            ),
+            4=> array(
+                'marker' => ':firstName',
+                'var' => $firstName,
+                'type' => PDO::PARAM_STR
+            ),
+            5=> array(
+                'marker' => ':lastName',
+                'var' => $lastName,
+                'type' => PDO::PARAM_STR
+            ),
+            6=> array(
+                'marker' => ':role',
+                'var' => $role,
+                'type' => PDO::PARAM_STR
+            )
+        );
 
-        if ($query) {
-            echo "New record created successfully";
-            return $username;
-        } else {
-            echo "Error: " . $insertUser . "<br>";
-        }
+        $results = $this->queryPrepareExecute("INSERT INTO t_user (useUsername, usePassword, useEmail, useFirstName, UseLastName, useRole) VALUES (:username, :password, :email, :firstName, :lastName, :role)", $values);
+
+        $results = $this->unsetData($results);
+        //$insertUser = "INSERT INTO t_user (useUsername, usePassword, useEmail, useFirstName, UseLastName, useRole) VALUES ('" . $username . "' , '" . $passwordHash . "' , '" . $email . "' , '" . $firstName . "' , '" . $lastName . "' , '" . $role . "')";
     }
 
     public function login($username)
     {
-        $results = $this->querySimpleExecute("SELECT * FROM t_user WHERE useUsername = '$username'");
+        // $results = $this->querySimpleExecute("SELECT * FROM t_user WHERE useUsername = :username");
+        $values = array(
+            1=> array(
+                'marker' => ':username',
+                'var' => $username,
+                'type' => PDO::PARAM_STR
+            )
+        );
+
+        $results = $this->queryPrepareExecute("SELECT * FROM t_user WHERE useUsername = :username", $values);
+
         $results = $this->formatData($results);
         if (count($results) > 0) {
             var_dump($results);
             return $results[0];
         }
+
+        $this->unsetData($results);
+
         return -1;
     }
 
     public function sendMail($date, $table, $hour, $meal, $userId){
+        include_once "../config.ini.php";
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);
 
@@ -255,8 +298,8 @@ class Database
             $mail->isSMTP();                                            // Send using SMTP
             $mail->Host       = 'smtp.office365.com';                    // Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-            $mail->Username   = 'cafeteriatestABR@outlook.com';                     // SMTP username
-            $mail->Password   = '.Etml-*123';                               // SMTP password
+            $mail->Username   = MAIL_USERNAME;                     // SMTP username
+            $mail->Password   = MAIL_PASSWORD;                               // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
             $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
@@ -264,8 +307,8 @@ class Database
 
             //Recipients
             //TODO change for definitive address mail
-            $mail->setFrom('cafeteriatestABR@outlook.com');
-            $mail->addAddress('cafeteriatestABR@outlook.com');     // Add a recipient
+            $mail->setFrom('cafeteriatestaba@outlook.com');
+            $mail->addAddress('cafeteriatestaba@outlook.com');     // Add a recipient
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
@@ -283,4 +326,17 @@ class Database
             //error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}", 3, "/logs/new");
         }
     }
+
+    protected function queryPrepareExecute($query, $binds)
+    {
+        $req = $this->connector->prepare($query);
+        foreach($binds as $bind)
+        {
+            $req->bindValue($bind['marker'], $bind['var'], $bind['type']);
+        }
+        $req->execute();
+
+        return $req;
+    }
+
 }
