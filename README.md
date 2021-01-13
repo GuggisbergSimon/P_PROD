@@ -37,15 +37,11 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
  
 ##TODO
 ####Bugs connus :
-- Conexion acceptée avec mauvais mdp
-- Connexion avec username non existant crée une erreur
 
 ####Améliorations visuelles :
-- afficher nom + prénom et pas username
 - Feedback une fois le compte créé
 - Erreurs de connexion/envoi de form à retravailler
 - petit problème d'affichage en mode responsive, il faut appuyer 2x sur le menu hamburger
-- admin changer date en dd.MM.YYYY
 
 ####Fonctionnalités légères :
 - compter le nombre de plats par jour (autre ligne)

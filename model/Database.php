@@ -112,8 +112,8 @@ class Database
     }
 
     function getUser($userId) {
-        $results = $this->querySimpleExecute("select useUsername from t_user where idUser=$userId");
-        return $results = $this->formatData($results)[0]['useUsername'];
+        $results = $this->querySimpleExecute("select * from t_user where idUser=$userId");
+        return $results = $this->formatData($results)[0];
     }
 
     function deleteUser($username)
@@ -213,7 +213,7 @@ class Database
      */
     function addReservation($date, $table, $hour, $meal, $userId): int
     {
-        $user = $this->getUser($userId);
+        $user = $this->getUser($userId)['useUsername'];
         $subject = 'réservation de l\'utilisateur : ' . $user;
         $body = $user . ' a réservé un menu végétarien pour le ' . $date . /*$table . ' ' . $meal*/ ' à ' . $hour . 'h ';
 
