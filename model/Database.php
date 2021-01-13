@@ -274,15 +274,16 @@ class Database
             )
         );
 
-        $results = $this->queryPrepareExecute("SELECT * FROM t_user WHERE useUsername = :username", $values);
+        $req = $this->queryPrepareExecute("SELECT * FROM t_user WHERE useUsername = :username", $values);
 
-        $results = $this->formatData($results);
+        $results = $this->formatData($req);
+
         if (count($results) > 0) {
-            var_dump($results);
+            //var_dump($results);
             return $results[0];
         }
 
-        $this->unsetData($results);
+        $this->unsetData($req);
 
         return -1;
     }

@@ -62,7 +62,7 @@ class HomeController extends Controller
 
                     if (array_key_exists('password', $_POST) && $_POST['password'] != "") {
                         if ($compte != -1) {
-                                if ($_POST['password'] && $_POST['username']) {
+                                if (password_verify($_POST['password'], $compte['usePassword'])) {
                                     echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES CONNECTES</h1>';
                                     $_SESSION['username'] = $compte['useUsername'];
                                     $_SESSION['role'] = $compte['useRole'];
@@ -74,7 +74,7 @@ class HomeController extends Controller
                                     $_SESSION['loginError'] = true;
 
                                     //header("Location: index.php?controller=login&action=index");
-                                    echo "Identifiants incorrects - erreur 1";
+                                    //echo "mdp erroné - erreur 1";
                                 }
                             } else {
 
@@ -82,17 +82,17 @@ class HomeController extends Controller
                                 $_SESSION['loginError'] = true;
 
                                 //header("Location: index.php?controller=login&action=index");
-                                echo "Identifiants incorrects - erreur 2";
+                                // echo "compte n'existe pas - erreur 2";
                             }
                         } else {
                             $_SESSION['loginError'] = true;
 
-                            echo "Identifiants incorrects - erreur 3";
+                            // echo "pas de mdp inséré - erreur 3";
                         }
                     } else {
                         $_SESSION['loginError'] = true;
 
-                        echo "Identifiants incorrects - erreur 4";
+                        // echo "rien n'est rempli - erreur 4";
                     }
             }
         }
