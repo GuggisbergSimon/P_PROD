@@ -24,7 +24,7 @@ echo '
     <tr>';
 $database = new Database();
 for ($i = 0; $i < 5; $i++) {
-    $week_day = date('Y-m-d', strtotime('+1 days', strtotime('+' . ($i - $day) . ' days')));
+    $week_day = date('d.m.Y', strtotime('+1 days', strtotime('+' . ($i - $day) . ' days')));
     echo "<td>$week_day</td>";
 }
 echo '</tr><tr>';
@@ -36,11 +36,12 @@ for ($i = 0; $i < 5; $i++) {
     if (key_exists('role', $_SESSION) && $_SESSION['role'] > 50) {
         $reservations = $database->readReservationPerDay($week_day);
         foreach ($reservations as $reservation) {
+            $user = $database->getUser($reservation['fkUser']);
             echo '
                 <p>
                     ' . $reservation['resHour'] . 'h <br>
                     ' . $meals[$reservation['resMeal']] . ' <br>
-                    Utilisateur : ' . $database->getUser($reservation['fkUser']) . '
+                    Pour ' . $user['useFirstName'] . ' ' . $user['useLastName'] . '
                 </p>';
         }
     }

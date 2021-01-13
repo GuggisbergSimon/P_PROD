@@ -1,4 +1,5 @@
 <?php
+//todo choix de tables/menus mis en commentaires pour le moment, à rétablir
 if (!array_key_exists('username', $_SESSION)) {
     header("Location: index.php?controller=home&action=Connexion");
     exit();
