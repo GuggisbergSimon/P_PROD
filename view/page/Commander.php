@@ -37,4 +37,38 @@ if (!array_key_exists('username', $_SESSION)) {
 </form>
     ';
 }
+
+if(array_key_exists('CommandDone', $_SESSION) && $_SESSION['CommandDone']){
+    echo 
+    '
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="myModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Commande réalisée</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Commande bien effectuée</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>';
+
+    //var_dump($_SESSION);
+
+    unset($_SESSION['CommandDone']);
+
+    //var_dump($_SESSION);
+
+    echo "<script> $('#myModal').modal('show');</script>";
+}
 ?>
