@@ -23,17 +23,15 @@ marche à suivre braindead :
 
 TODO List par ordre de priorité, de important à moindre :
 
-Trivial-en cours :
-- faire fonctionner error_log
-
 Visuel :
-- pas assez responsif
-- page connexion : retravailler visuel
-- vue admin faire calendrier plus joli
+- petit problème d'affichage en mdoe responsive, il faut appuyer 2x sur le menu hamburger
+- admin changer date en dd.MM.YYYY
 
 Fonctionnalités légères
+- compter le nombre de plats par jour (autre ligne)
 - changer de semaine en mode admin
-- vue admin : changer numéro de plat par le type (enum)
+- Mettre plus d'error_log
+- faire fonctionner formulaire de contact
 - manger sur place/emporter comme critère à ajouter
 
 Fonctionnalités complexes :

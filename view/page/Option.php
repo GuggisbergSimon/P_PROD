@@ -1,10 +1,19 @@
-<h4>Page réservée à l'admin du site permettant d'y apporter des modifications ainsi que de nouvelles fonctionnalités</h4>
 <?php
 include_once "model/Database.php";
 
 $day = date('w');
+
+$meals = [
+    1=> "Menu du jour 1",
+    2=>"Menu du jour 2",
+    3=>"Menu pâtes",
+    4 =>"Menu hamburger",
+    5=> "Menu végétarien"
+];
+
 echo '
-<table style="width:100%">
+<div class="container mt-5 mb-5">
+<table class="table table-bordered" style="width:100%">
     <tr>
         <th>Lundi</th>
         <th>Mardi</th>
@@ -29,14 +38,14 @@ for ($i = 0; $i < 5; $i++) {
         foreach ($reservations as $reservation) {
             echo '
                 <p>
-                    Heure : ' . $reservation['resHour'] . 'h <br>
-                    Plat : ' . $reservation['resMeal'] . ' <br>
+                    ' . $reservation['resHour'] . 'h <br>
+                    ' . $meals[$reservation['resMeal']] . ' <br>
                     Utilisateur : ' . $database->getUser($reservation['fkUser']) . '
                 </p>';
         }
     }
     echo '</td>';
 }
-echo '</tr></table>';
+echo '</tr></table></div>';
 $week_end = date('d-m-Y', strtotime('+' . (6 - $day) . ' days'));
 ?>
