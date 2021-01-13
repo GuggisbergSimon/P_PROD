@@ -20,11 +20,42 @@
     <p>Rue de Sébeillon 12 <br>Tél : 021 316 77 77 <br> 1004 Lausanne</p>
 </div>
 
+<?php
+    if($mailSent){
+        echo 
+        '
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <!-- Modal -->
+        <div class="modal" tabindex="-1" role="dialog" id="myModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Message envoyé</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Le message a bien été envoyé.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+              </div>
+            </div>
+          </div>
+        </div>';
+    }
+?>
+
+
 <!-- formulaire de contact-->
 
 <h3>Formulaire de contact</h3>
 <div class="ligne">
 </div>
+
+<script> $('#myModal').modal('show');</script>
 
 <form action="index.php?controller=home&action=Contact" class="formulaire" method="post">
     <div class="row mb-3">
@@ -40,4 +71,4 @@
             <button class="btn btn-primary" type="submit">Envoyer</button>
         </div>
     </div>
-</div>
+</form>
