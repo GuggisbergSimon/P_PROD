@@ -1,4 +1,4 @@
-# Application Cafetaria
+# Site restaurant
 Projet en cours permettant la réservation de menus, et de table, à terme, à la cafétaria de l'ETML.
 ####Autres documentations et fichiers
 Plus d'informations quant à la documentation du projet se trouve sur K:\INF\Eleves\Classes\FIN2\02_P_PROD\adrbarreira_simguggisberg. 
@@ -21,7 +21,7 @@ Idéalement le projet devrait être fini en septembre 2021, avec des tests lors 
 ####Notes
 Deux types de comptes existent, défini en fonction de leur useRole; la convention est la suivante : 100 étant le maximum, pour un super admin, et en dessous de 50 un user standard. Il est uniquement possible de modifier useRole via la basede données mysql pour le moment.
 
-Les parties du code concernant le choix de tables ou d'autres plats lors d'une commande ainsi que le formulaire de contact ont été mis en commentaires, par choix (le site s'adressant d'abord au petit nombre de végétariens) ou par manque d'implémentation (le formulaire n'envoyant actuellement pas de mail).
+Les parties du code concernant le choix de tables ou d'autres plats lors d'une commande ainsi que le formulaire de contact ont été mis en commentaires, souvent par choix (le site s'adressant d'abord au moindre nombre de végétariens), mais peut être aussi par manque d'implémentation.
 
 ####Simple Setup Uwamp
 1. téléchargez et installez uwamp https://www.uwamp.com/fr/?page=download version exe (ou en version zip, il faut alors l'extraire)
@@ -47,7 +47,6 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
 - compter le nombre de plats par jour (autre ligne)
 - changer de semaine en mode admin
 - Mettre plus d'error_log
-- faire fonctionner formulaire de contact
 - manger sur place/emporter comme critère à ajouter
 
 ####Fonctionnalités complexes :
