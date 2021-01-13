@@ -280,6 +280,13 @@ class HomeController extends Controller
     private
     function ContactAction()
     {
+        if($_POST != array()){
+            include_once 'model/Database.php';
+
+            //var_dump($_POST);
+            $database = new Database();
+            $database->contactSendMail();
+        }
 
         $view = file_get_contents('view/page/Contact.php');
         ob_start();
