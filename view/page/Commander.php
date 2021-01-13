@@ -1,4 +1,5 @@
 <?php
+//todo choix de tables/menus mis en commentaires pour le moment, à rétablir
 if (!array_key_exists('username', $_SESSION)) {
     echo '<h1 class="mt-3 text-center text-success" >Veuillez-vous connecter afin d\'effectuer une commande</h1>';
 } else {
