@@ -1,6 +1,7 @@
 <?php
 if (!array_key_exists('username', $_SESSION)) {
-    echo '<h1 class="mt-3 text-center text-success" >Veuillez-vous connecter afin d\'effectuer une commande</h1>';
+    header("Location: index.php?controller=home&action=Connexion");
+    exit();
 } else {
     echo '
 <form action="index.php?controller=home&action=ValidateReservation" method="post">
