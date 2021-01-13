@@ -8,7 +8,7 @@
 
 /* images accueil*/
 .slideshow-container img {
-    height: 400px;
+    max-height: 400px;
     width: auto;
 }
 
@@ -101,7 +101,6 @@
 .textAccueil {
     font-size: 18px;
     margin: auto;
-    width: 51%;
     border: 3px solid green;
     padding: 10px;
 }
@@ -110,19 +109,12 @@
 
 .imageContact img {
     margin: 4px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 /*barre "contact"*/
 .contactbarre {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
     background-color: #a1cc43;
     overflow: hidden;
-    width: 60%;
 }
 
 /*barre de navigation text*/
@@ -135,43 +127,34 @@
 }
 
 .map {
-    display: block;
-    margin-right: 20%;
-    margin-left: 20%;
     margin-top: 4px;
 }
 
 h2 {
     padding-top: 30px;
     margin: auto;
-    width: 60%;
 }
 
 h3 {
     padding-top: 30px;
     margin: auto;
-    width: 60%;
 }
 
 .ligne {
     height: 1px;
-    display: block;
     margin-left: auto;
     margin-right: auto;
     background-color: #a1cc43;
     overflow: hidden;
-    width: 60%;
 }
 
 .info {
     margin: auto;
-    width: 60%;
 }
 
 .formulaire {
     padding-top: 20px;
     margin: auto;
-    width: 60%;
     padding-left: 12px;
 }
 
