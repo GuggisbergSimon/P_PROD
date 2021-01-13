@@ -62,15 +62,8 @@
     text-decoration: none;
 }
 
-/*barre de navigation*/
-.topnav {
-    background-color: #556B2F;
-    overflow: hidden;
-}
-
 /* Style the links inside the navigation bar */
-.topnav a {
-    float: left;
+.navbar a {
     color: #f2f2f2;
     padding: 9px 25px;
     text-decoration: none;
@@ -78,24 +71,36 @@
     margin: 7px;
 }
 
-/* Quand souris dessus */
-.topnav a:hover {
+.navbar .link.active {
+    background-color: #798737;
+    border-radius: 20px;
+}
+
+.navbar .link:hover {
     border-radius: 20px;
     background-color: #3d4d21;
-    color: white;
-    text-decoration: none;
 }
 
-/*couleur sur l'onglet où nous sommes actuellement*/
-.topnav a.active {
+.navbar .link.active:hover {
     background-color: #798737;
-    height: 20%;
-    border-radius: 20px;
 }
 
-/* Hide the link that should open and close the topnav on small screens */
-.topnav .icon {
-    display: none;
+
+
+.navbar-admin {
+    background-color: darkblue !important;
+}
+
+.navbar-admin .link.active {
+    background-color: blue;
+}
+
+.navbar-admin .link:hover {
+    background-color: indigo;
+}
+
+.navbar-admin .link.active:hover {
+    background-color: blue;
 }
 
 .textAccueil {
