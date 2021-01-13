@@ -54,7 +54,29 @@ if(array_key_exists('CommandDone', $_SESSION) && $_SESSION['CommandDone']){
             </button>
           </div>
           <div class="modal-body">
-            <p>Commande bien effectuée</p>
+            <p> Commande bien effectuée pour le ';
+            echo $_SESSION['CommandTemp']['resDate'] . ' de ';
+            switch ($_SESSION['CommandTemp']['resHour']) {
+                case 11:
+                    echo "11h20 à 12h00 ";
+                    break;
+                case 12:
+                    echo '12h10 à 12h50 ';
+                    break;
+                default:
+                    echo 'heure non reconnue ';
+                    break;
+            }
+            echo '. Vous avez commandé : ';
+            switch ($_SESSION['CommandTemp']['resMeal']) {
+                case 5:
+                    echo "plat végétarien";
+                    break;
+                default:
+                    echo 'plat non reconnu';
+                    break;
+            }
+            echo '</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -64,8 +86,11 @@ if(array_key_exists('CommandDone', $_SESSION) && $_SESSION['CommandDone']){
     </div>';
 
     //var_dump($_SESSION);
+    //var_dump($_SESSION['CommandTemp']);
 
     unset($_SESSION['CommandDone']);
+    unset($_SESSION['CommandTemp']);
+    //var_dump($_SESSION);
 
     //var_dump($_SESSION);
 

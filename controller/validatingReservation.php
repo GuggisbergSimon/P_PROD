@@ -32,6 +32,7 @@ if (array_key_exists($sResDate, $_POST) && preg_match($dDateRegex, $_POST[$sResD
                 $database->addReservation($date, 0 /*$table*/, $hour, $_POST[$sResMeal], $database->getIdUser($_SESSION['username']));
                 //echo 'Réservation ajoutée !<br>';
                 $_SESSION['CommandDone'] = true;
+                $_SESSION['CommandTemp'] = $_POST;
                 header('Location: index.php?controller=home&action=Commander');
                 //}
             } else {
