@@ -23,12 +23,13 @@ class HomeController extends Controller
             $action = 'AccueilAction'; // listAction
         }
 
-        if (!array_key_exists('role', $_SESSION)) $_SESSION['role'] = 0;
-
-        if ($_GET['action'] == 'Option' && $_SESSION['role'] < 50) {
-            $action = 'AccueilAction'; // listAction
-            $_GET['action'] = 'Accueil';
+        if (!array_key_exists('role', $_SESSION) || $_SESSION['role'] < 50) {
+            if ($_GET['action'] == "Option") {
+                $action = 'AccueilAction'; // listAction
+                $_GET['action'] = 'Accueil';
+            }
         }
+
 
         if (method_exists(get_class($this), $action)) {
             return call_user_func(array($this, $action));
@@ -218,8 +219,7 @@ class HomeController extends Controller
     function DisconnectAction()
     {
 
-        //unset($_SESSION['username']);
-        $_SESSION = array();
+        session_destroy();
 
         header('Location: index.php?controller=home&action=Accueil');
     }
@@ -280,13 +280,19 @@ class HomeController extends Controller
     private
     function ContactAction()
     {
+        $mailSent = false;
+        
         if($_POST != array()){
             include_once 'model/Database.php';
 
             //var_dump($_POST);
             $database = new Database();
             $database->contactSendMail();
+
+            $mailSent = true;
         }
+
+        //var_dump($mailSent);
 
         $view = file_get_contents('view/page/Contact.php');
         ob_start();

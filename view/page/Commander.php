@@ -39,4 +39,63 @@ if (!array_key_exists('username', $_SESSION)) {
 </form>
     ';
 }
+
+if(array_key_exists('CommandDone', $_SESSION) && $_SESSION['CommandDone']){
+    echo 
+    '
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="myModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Commande réalisée</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p> Commande bien effectuée pour le ';
+            echo $_SESSION['CommandTemp']['resDate'] . ' de ';
+            switch ($_SESSION['CommandTemp']['resHour']) {
+                case 11:
+                    echo "11h20 à 12h00 ";
+                    break;
+                case 12:
+                    echo '12h10 à 12h50 ';
+                    break;
+                default:
+                    echo 'heure non reconnue ';
+                    break;
+            }
+            echo '. Vous avez commandé : ';
+            switch ($_SESSION['CommandTemp']['resMeal']) {
+                case 5:
+                    echo "plat végétarien";
+                    break;
+                default:
+                    echo 'plat non reconnu';
+                    break;
+            }
+            echo '</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>';
+
+    //var_dump($_SESSION);
+    //var_dump($_SESSION['CommandTemp']);
+
+    unset($_SESSION['CommandDone']);
+    unset($_SESSION['CommandTemp']);
+    //var_dump($_SESSION);
+
+    //var_dump($_SESSION);
+
+    echo "<script> $('#myModal').modal('show');</script>";
+}
 ?>
