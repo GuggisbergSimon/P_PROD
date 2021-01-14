@@ -1,11 +1,11 @@
 # Site restaurant
 Projet en cours permettant la réservation de menus, et de table, à terme, à la cafétaria de l'ETML.
-##Autres documentations et fichiers
+### Autres documentations et fichiers
 Plus d'informations quant à la documentation du projet se trouve sur K:\INF\Eleves\Classes\FIN2\02_P_PROD\adrbarreira_simguggisberg. 
 
 Le dossier contient également un fichier de configuration contenant les accréditations email, informations confidentielles ne pouvant se trouver sur github. Ce fichier est à mettre dans le fichier parent de celui contenant le projet. Ainsi, si l'arborescence est la suivante pour le répertoire : uwamp\www\P_Prod alors le fichier de configuration devrait être donc dans uwamp\www
 
-##Fonctionnalités
+### Fonctionnalités
 Le cahier des charges de ce projet projet était d'abord de permettre aux végétariens de pouvoir s'inscrire à la cafétaria, puis au reste des clients. En spécifiant notamment le numéro de la table souhaitée, le menu, l'heure, le jour et enfin le nom de la personne. Certaines de ces données ont été laissées en commentaire pour le moment, ce site s'adressant aux végétariens uniquement.
 
 Une fois une commande effectuée par un client, un courriel est envoyé à une addresse mail mentionnée dans le fichier de configuration mentionné au point précédent. Les utilisateurs ne peuvent pas accéder à la partie administration et vice-versa. Les deux options spécifiques aux utilisateurs sont de se déconnecter ou de passer une commande. Les deux options des admins sont de se déconnecter et de consulter la liste des commandes passées cette semaine, qui se réactualise automatiquemenet chaque semaine, tout comme le footer copyright, se mettant à jour automatiquement.
@@ -23,7 +23,7 @@ Deux types de comptes existent, défini en fonction de leur useRole; la conventi
 
 Les parties du code concernant le choix de tables ou d'autres plats lors d'une commande ainsi que le formulaire de contact ont été mis en commentaires, souvent par choix (le site s'adressant d'abord au moindre nombre de végétariens), mais peut être aussi par manque d'implémentation.
 
-##Simple Setup Uwamp
+### Simple Setup Uwamp
 1. téléchargez et installez uwamp https://www.uwamp.com/fr/?page=download version exe (ou en version zip, il faut alors l'extraire)
 2. clonez répertoire git https://github.com/GuggisbergSimon/P_PROD (bouton vert/Code puis download zip)
 3. mettre le dossier de projet dans le dossier www d'uwamp
@@ -35,7 +35,7 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
 9. Créez un utilisateur via connexion -> inscription
 10. Retournez sur la base de données mysql, se rendre dans t_user et modifiez un user existant avec droits supérieurs à 50, pour qu'il soit administrateur.
  
-##TODO
+## TODO
 Bugs connus :
 
 Améliorations visuelles :
