@@ -1,5 +1,5 @@
 <div class="container container-sm-fluid">
-    
+
     <div class="imageContact text-center">
         <img class="img-fluid" src="resources/userContent/image_contact.jpg">
     </div>
@@ -20,16 +20,15 @@
     <div class="ligne"></div>
     <div class="info">
         <p>
-        Rue de Sébeillon 12 <br>
-        Tél : 021 316 77 77<br>
-        1004 Lausanne
+            Rue de Sébeillon 12 <br>
+            Tél : 021 316 77 77<br>
+            1004 Lausanne
         </p>
     </div>
-</div>
 
-<?php
-    if($mailSent){
-        echo 
+    <?php
+    if ($mailSent) {
+        echo
         '
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -53,29 +52,31 @@
           </div>
         </div>';
     }
-?>
+    ?>
 
 
-<!-- formulaire de contact-->
+    <!-- formulaire de contact-->
 
     <h3>Formulaire de contact</h3>
     <div class="ligne">
     </div>
 
-<script> $('#myModal').modal('show');</script>
+    <script> $('#myModal').modal('show');</script>
 
-<form action="index.php?controller=home&action=Contact" class="formulaire" method="post">
-    <div class="row mb-3">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">Nom</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail3" name="contactNom">
+    <form action="index.php?controller=home&action=Contact" class="formulaire" method="post">
+        <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Nom</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputEmail3" name="contactNom">
+            </div>
         </div>
-    </div>
-    <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="contactMsg"></textarea>
-        <div class="col-12">
-            <button class="btn btn-primary" type="submit">Envoyer</button>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="contactMsg"></textarea>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Envoyer</button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+
+</div>
