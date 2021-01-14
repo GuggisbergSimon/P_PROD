@@ -65,18 +65,16 @@
 
     <form action="index.php?controller=home&action=Contact" class="formulaire" method="post">
         <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Nom</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputEmail3" name="contactNom">
-            </div>
+            <label for="contactNom" class="form-label">Nom</label><br>
+            <input type="text" class="form-control" id="contactNom" name="contactNom">
         </div>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="contactMsg"></textarea>
-            <div class="col-12">
-                <button class="btn btn-primary" type="submit">Envoyer</button>
-            </div>
+        <div class="row mb-3">
+            <label for="contactMsg" class="form-label">Message</label>
+            <textarea class="form-control" id="contactMsg" rows="3" name="contactMsg"></textarea>
+
+            <button class="btn btn-primary mt-3" type="submit">Envoyer</button>
         </div>
+
     </form>
 
 </div>
