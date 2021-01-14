@@ -39,8 +39,7 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
 Bugs connus :
 
 Améliorations visuelles :
-- Footer pas responsif
-- Feedback une fois le compte créé
+- Feedback supplémentaire une fois le compte créé
 - Erreurs de connexion/envoi de form à retravailler
 - petit problème d'affichage en mode responsive, il faut appuyer 2x sur le menu hamburger
 
