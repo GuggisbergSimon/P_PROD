@@ -34,18 +34,21 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
 8. Rendez vous sur le site internet en cliquant sur le bouton "navigateur www" puis le lien P_PROD
 9. Créez un utilisateur via connexion -> inscription
 10. Retournez sur la base de données mysql, se rendre dans t_user et modifiez un user existant avec droits supérieurs à 50, pour qu'il soit administrateur.
- 
+
 ## TODO
 Bugs connus :
+- refill formulaire en cours (inscription surtout)
+- impossible de commander lors de création de compte
+- switch name-surname
+- envoyer mail name surname
 
 Améliorations visuelles :
-- Feedback supplémentaire une fois le compte créé
-- Erreurs de connexion/envoi de form à retravailler
-- petit problème d'affichage en mode responsive, il faut appuyer 2x sur le menu hamburger
+- Feedback supplémentaire une fois le compte créé (Vous vous êtes inscris)
+- améliorer la balise toptop
 
 Fonctionnalités légères :
 - compter le nombre de plats par jour (autre ligne)
-- changer de semaine en mode admin
+- changer de semaine en mode admin (flèches gauche/droite)
 - Mettre plus d'error_log
 - manger sur place/emporter comme critère à ajouter
 
