@@ -21,7 +21,7 @@
     <div class="info">
         <p>
             Rue de Sébeillon 12 <br>
-            Tél : 021 316 77 77<br>
+            Tél : 021 316 77 89<br>
             1004 Lausanne
         </p>
     </div>
