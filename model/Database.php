@@ -213,10 +213,10 @@ class Database
      */
     function addReservation($date, $table, $hour, $meal, $userId): int
     {
-        $user = $this->getUser($userId)['useUsername'];
-        $subject = 'réservation de l\'utilisateur : ' . $user;
-        $body = $user . ' a réservé un menu végétarien pour le ' . $date . /*$table . ' ' . $meal*/ ' à ' . $hour . 'h ';
-
+        $user = $this->getUser($userId);
+        $user = $user['useFirstName'] . ' ' . $user['useLastName'];
+        $subject = 'Réservation de ' . $user;
+        $body = $user . ' a réservé un menu végétarien pour le ' . $date . /*$table . ' ' . $meal*/ ' à ' . $hour . 'h.';
 
         $this->sendMail($subject, $body);
 
@@ -224,12 +224,7 @@ class Database
     }
 
     /**
-     * @param $date yyyy-mm-dd
-     * @param int $table
-     * @param int $hour
-     * @param int $meal
-     * @param int $userId
-     * @return int
+     * @return void
      */
     function contactSendMail()
     {
