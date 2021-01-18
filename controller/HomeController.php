@@ -47,12 +47,11 @@ class HomeController extends Controller
      */
     private function ConnexionAction()
     {
-        //var_dump($_POST);
         $view = file_get_contents('view/page/Connexion.php');
         $compte = [];
 
-        if (array_key_exists('login', $_POST)) {
-            if ($_POST['login'] == true) {
+        if (array_key_exists('submitBtn', $_POST)) {
+            if (isset($_POST['submitBtn'])) {
                 include_once 'model/Database.php';
 
                 $registerRepository = new Database();
@@ -98,41 +97,6 @@ class HomeController extends Controller
             }
         }
 
-        /*
-        if(array_key_exists('password', $_POST)){
-            if($_POST['password'] == $compte[0]['usePassword']){
-                if($_POST['password'] && $_POST['username']){
-                    echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES CONNECTES</h1>';
-                    $_SESSION['username'] = $compte[0]['useUsername'];
-                    $_SESSION['connected'] = true;
-                }
-                else{
-
-                    $_SESSION['loginError'] = true;
-
-                    //header("Location: index.php?controller=login&action=index");
-                    echo "erreur 1";
-                }
-            }
-            else{
-                $_SESSION['loginError'] = true;
-
-                //header("Location: index.php?controller=login&action=index");
-                echo "erreur 2";
-            }
-        }
-        else{
-            if(array_key_exists('username', $_POST)){
-                //header("Location: index.php?controller=login&action=index");
-                echo "erreur 3";
-            }
-            else{
-                //header("Location: index.php?controller=home&action=index");
-                echo "erreur 4";
-            }
-        }
-    }*/
-
         ob_start();
         eval('?>' . $view);
         $content = ob_get_clean();
@@ -147,57 +111,47 @@ class HomeController extends Controller
      */
     private function RegisterAction()
     {
-        //var_dump($_POST);
         $view = file_get_contents('view/page/Inscription.php');
+        
+        $_SESSION['registerError'] = array();
 
-        if (array_key_exists('register', $_POST)) {
+        if (array_key_exists('submitBtn', $_POST)) {
+            if (isset($_POST['submitBtn'])) {
 
-            if ($_POST['register'] == true) {
                 include_once 'model/Database.php';
 
                 $registerRepository = new Database();
 
-                if (array_key_exists('username', $_POST) && $_POST['username'] != "") {
-                    if (array_key_exists('password', $_POST) && $_POST['password'] != "" && array_key_exists('confPassword', $_POST) && $_POST['confPassword'] == $_POST['password']) {
-                        if (array_key_exists('email', $_POST) && $_POST['email'] != "") {
-                            if (array_key_exists('firstName', $_POST) && $_POST['firstName'] != "") {
-                                if (array_key_exists('lastName', $_POST) && $_POST['lastName'] != "") {
-                                    if ($_POST['password'] && $_POST['username'] && ($registerRepository->userExistsAt($_POST['username']) < 0)) {
-                                        $compte = $registerRepository->register($_POST['username'], $_POST['password'], $_POST['email'], $_POST['firstName'], $_POST['lastName'], 0);
-                                        echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES INSCRIS </h1>';
-                                        $_SESSION['username'] = $compte;
-                                        //$_SESSION['connected'] = true;
-                                    } else {
+                if (!array_key_exists('username', $_POST) || $_POST['username'] == "") {
+                    $_SESSION['registerError'][] = "Veuillez entrez un nom d'utilisateur.";
+                }
 
-                                        $_SESSION['registerError'] = true;
+                if (!array_key_exists('password', $_POST) || $_POST['password'] == "" || !array_key_exists('confPassword', $_POST) || $_POST['confPassword'] != $_POST['password']) {
+                    $_SESSION['registerError'][] = "Mots de passe incorrects, veuillez les entrer à nouveau.";
+                }
 
-                                        //header("Location: index.php?controller=login&action=index");
-                                        echo "Nom d'utilisateur déjà présent, veuillez en sélectionner un autre.";
-                                    }
-                                } else {
-                                    $_SESSION['registerError'] = true;
-
-                                    echo "Veuillez remplir le champ Nom.";
-                                }
-                            } else {
-                                $_SESSION['registerError'] = true;
-
-                                echo "Veuillez remplir le champ Prénom.";
-                            }
-                        } else {
-                            $_SESSION['registerError'] = true;
-
-                            echo "Veuillez remplir le champ Email.";
-                        }
-                    } else {
-                        $_SESSION['registerError'] = true;
-
-                        echo "Mots de passe incorrects, veuillez l'entrer à nouveau.";
+                if (!array_key_exists('email', $_POST) || $_POST['email'] == "") {
+                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                        $_SESSION['registerError'][] = "Veuillez renseigner un mail valide.";
                     }
-                } else {
-                    $_SESSION['registerError'] = true;
+                }
 
-                    echo "Veuillez entrez un nom d'utilisateur.";
+                if (!array_key_exists('firstName', $_POST) || $_POST['firstName'] == "") {
+                    $_SESSION['registerError'][] = "Veuillez remplir le champ Prénom.";   
+                }
+
+                if (!array_key_exists('lastName', $_POST) || $_POST['lastName'] == "") {
+                    $_SESSION['registerError'][] = "Veuillez remplir le champ Nom.";   
+                }
+
+                if (!array_key_exists('username', $_POST) || ($registerRepository->userExistsAt($_POST['username']) >= 0)) {
+                    $_SESSION['registerError'][] = "Nom d'utilisateur déjà présent, veuillez en sélectionner un autre.";
+                }
+
+                if (empty($_SESSION['registerError'])) {
+                    $compte = $registerRepository->register($_POST['username'], $_POST['password'], $_POST['email'], $_POST['firstName'], $_POST['lastName'], 0);
+                    unset($_POST);
+                    $_SESSION['success'] = true;
                 }
             }
         }
@@ -218,7 +172,6 @@ class HomeController extends Controller
     private
     function DisconnectAction()
     {
-
         session_destroy();
 
         header('Location: index.php?controller=home&action=Accueil');
@@ -281,18 +234,23 @@ class HomeController extends Controller
     function ContactAction()
     {
         $mailSent = false;
-        
-        if($_POST != array()){
-            include_once 'model/Database.php';
 
-            //var_dump($_POST);
-            $database = new Database();
-            $database->contactSendMail();
-
-            $mailSent = true;
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            if (isset($_POST['submitBtn'])) {
+                if (isset($_POST['contactNom']) && isset($_POST['contactMsg'])) {
+                    if (!empty($_POST['contactNom']) && !empty($_POST['contactMsg'])) {
+                        include_once 'model/Database.php';
+                        $database = new Database();
+                        $database->contactSendMail();
+            
+                        $mailSent = true;
+                        unset($_SESSION['contactError']);
+                    } else {
+                        $_SESSION['contactError'] = true;
+                    }
+                }
+            }
         }
-
-        //var_dump($mailSent);
 
         $view = file_get_contents('view/page/Contact.php');
         ob_start();

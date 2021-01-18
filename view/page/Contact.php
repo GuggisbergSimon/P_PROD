@@ -61,18 +61,30 @@
     <div class="ligne">
     </div>
 
+    <?php
+    if (isset($_SESSION['contactError'])) {
+        if ($_SESSION['contactError']) {
+    ?>
+            <div class="alert alert-danger mt-5">
+                Veuillez remplir tous les champs.
+            </div>
+    <?php
+        }
+    }
+    ?>
+
     <script> $('#myModal').modal('show');</script>
 
-    <form action="index.php?controller=home&action=Contact" class="formulaire" method="post">
+    <form action="index.php?controller=home&action=Contact" id="contact-form" class="formulaire" method="post">
         <div class="row mb-3">
             <label for="contactNom" class="form-label">Nom</label><br>
-            <input type="text" class="form-control" id="contactNom" name="contactNom">
+            <input type="text" class="form-control" id="contactNom" name="contactNom" value="<?php if (isset($_POST['contactNom'])) { echo htmlspecialchars($_POST['contactNom']); } ?>">
         </div>
         <div class="row mb-3">
             <label for="contactMsg" class="form-label">Message</label>
-            <textarea class="form-control" id="contactMsg" rows="3" name="contactMsg"></textarea>
+            <textarea class="form-control" id="contactMsg" rows="3" name="contactMsg"><?php if (isset($_POST['contactMsg'])) { echo htmlspecialchars($_POST['contactMsg']); } ?></textarea>
 
-            <button class="btn btn-primary mt-3" type="submit">Envoyer</button>
+            <button class="btn btn-primary mt-3" name="submitBtn" type="submit">Envoyer</button>
         </div>
 
     </form>
