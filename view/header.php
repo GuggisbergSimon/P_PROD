@@ -61,8 +61,8 @@
             ?>
             <div class="d-flex flex-row">
                 <a class="nav-item nav-link link <?php if ($_GET['action'] == 'Register') { echo 'active'; } ?>" href="index.php?controller=home&action=Register">Inscription</a>
-                <div class="btn-nav btn-primary rounded">
-                    <a class="nav-item nav-link pl-sm-2 pr-sm-2" style="color: white;" href="index.php?controller=home&action=Connexion">Connexion</a>
+                <div class="btn-nav btn-primary rounded my-auto">
+                    <a class="nav-item nav-link pl-sm-2 pr-sm-2 m-1" style="color: white;" href="index.php?controller=home&action=Connexion">Connexion</a>
                 </div>
             </div>
             <?php
