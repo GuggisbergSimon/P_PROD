@@ -37,18 +37,24 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
 
 ## TODO
 Bugs connus :
+- username is not case sensitive -> tout en lower
+- message feedback commande au format yyyy-mm-dd et non pas dd.mm.yyyy (+dd-mm-yyyy est marqué à retirer)
+- "Bonjour ..." n'est pas complètement aligné avec bouton Déconnexion en vue responsive
 
-Améliorations visuelles :
-- améliorer la balise toptop
+TODO avant rendu :
+- Deux menus végétariens updatables par la vue admin
+- envoyer email à plusieurs adresses mails
+- reset DB + création compte admin
 
 Fonctionnalités légères :
-- compter le nombre de plats par jour (autre ligne)
+- ajouter option pour imprimer vue admin/jour (jour courant)
+- compter le nombre de plats par jour (autre ligne) par tranche horaire
 - changer de semaine en mode admin (flèches gauche/droite)
 - Mettre plus d'error_log
-- manger sur place/emporter comme critère à ajouter
+- critère réservation à ajouter - manger sur place/à l'emporter
 
 Fonctionnalités complexes :
-- envoyer email/jour pour lendemain/surlendemain
+- envoyer un email/jour pour le lendemain/surlendemain
 - identifier personne via carte étudiant/eduvaud
 - pas de vérification de compte
 - mettre image pour plats via vue admin

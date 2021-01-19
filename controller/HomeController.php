@@ -75,7 +75,6 @@ class HomeController extends Controller
                                 }
                             } else {
 
-                                //TODO: A CHECK
                                 $_SESSION['loginError'] = true;
 
                                 //header("Location: index.php?controller=login&action=index");

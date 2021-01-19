@@ -17,7 +17,7 @@ echo '
             <select name="resHour">
                 <option value="Choose">Choisir</option>
                 <option value="11">11h20-12h</option>
-                <option value="12">12h10-13h50</option>
+                <option value="12">12h10-12h50</option>
             </select>
         </p>
         <p>
