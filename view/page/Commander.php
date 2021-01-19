@@ -1,4 +1,5 @@
 <?php
+//todo choix de tables/menus mis en commentaires pour le moment, à rétablir
 if (!array_key_exists('username', $_SESSION)) {
     header("Location: index.php?controller=home&action=Connexion");
     exit();
@@ -37,5 +38,60 @@ if (!array_key_exists('username', $_SESSION)) {
     </div>
 </form>
     ';
+}
+
+if (array_key_exists('CommandDone', $_SESSION) && $_SESSION['CommandDone']) {
+?>
+    <!-- Modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="myModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Commande réalisée</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p> Commande bien effectuée pour le <?php
+            echo $_SESSION['CommandTemp']['resDate'] . ' de ';
+            switch ($_SESSION['CommandTemp']['resHour']) {
+                case 11:
+                    echo "11h20 à 12h00 ";
+                    break;
+                case 12:
+                    echo '12h10 à 12h50 ';
+                    break;
+                default:
+                    echo 'heure non reconnue ';
+                    break;
+            }
+            echo '. Vous avez commandé : ';
+            switch ($_SESSION['CommandTemp']['resMeal']) {
+                case 5:
+                    echo "plat végétarien";
+                    break;
+                default:
+                    echo 'plat non reconnu';
+                    break;
+            }
+            ?></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <script>
+        $('#myModal').modal('show');
+    </script>
+
+    <?php
+    unset($_SESSION['CommandDone']);
+    unset($_SESSION['CommandTemp']);
+
 }
 ?>

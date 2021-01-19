@@ -112,8 +112,8 @@ class Database
     }
 
     function getUser($userId) {
-        $results = $this->querySimpleExecute("select useUsername from t_user where idUser=$userId");
-        return $results = $this->formatData($results)[0]['useUsername'];
+        $results = $this->querySimpleExecute("select * from t_user where idUser=$userId");
+        return $results = $this->formatData($results)[0];
     }
 
     function deleteUser($username)
@@ -213,9 +213,26 @@ class Database
      */
     function addReservation($date, $table, $hour, $meal, $userId): int
     {
-        $this->sendMail($date, $table, $hour, $meal, $userId);
+        $user = $this->getUser($userId);
+        $user = $user['useFirstName'] . ' ' . $user['useLastName'];
+        $subject = 'Réservation de ' . $user;
+        $body = $user . ' a réservé un menu végétarien pour le ' . $date . /*$table . ' ' . $meal*/ ' à ' . $hour . 'h.';
+
+        $this->sendMail($subject, $body);
 
         return $this->addData('t_reservation', ['resDate', 'resTable', 'resHour', 'resMeal', 'fkUser'], [$date, $table, $hour, $meal, $userId]);
+    }
+
+    /**
+     * @return void
+     */
+    function contactSendMail()
+    {
+        $subject = 'Contact : ' . $_POST['contactNom'];
+        $body = $_POST['contactMsg'];
+
+
+        $this->sendMail($subject, $body);
     }
 
 #endregion
@@ -274,20 +291,21 @@ class Database
             )
         );
 
-        $results = $this->queryPrepareExecute("SELECT * FROM t_user WHERE useUsername = :username", $values);
+        $req = $this->queryPrepareExecute("SELECT * FROM t_user WHERE useUsername = :username", $values);
 
-        $results = $this->formatData($results);
+        $results = $this->formatData($req);
+
         if (count($results) > 0) {
-            var_dump($results);
+            //var_dump($results);
             return $results[0];
         }
 
-        $this->unsetData($results);
+        $this->unsetData($req);
 
         return -1;
     }
 
-    public function sendMail($date, $table, $hour, $meal, $userId){
+    public function sendMail($subject, $body){
         include_once "../config.ini.php";
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);
@@ -296,6 +314,7 @@ class Database
             //Server settings
             //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
             $mail->isSMTP();                                            // Send using SMTP
+            $mail->CharSet = 'UTF-8';
             $mail->Host       = 'smtp.office365.com';                    // Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
             $mail->Username   = MAIL_USERNAME;                     // SMTP username
@@ -303,7 +322,6 @@ class Database
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
             $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-            //note we use &eacute and &agrave to write html special characters
 
             //Recipients
             //TODO change for definitive address mail
@@ -312,10 +330,9 @@ class Database
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $user = $this->getUser($userId);
-            $mail->Subject = 'reservation de l\'utilisateur : ' . $user;
-            $mail->Body = $user . ' a r&eacuteserv&eacute un menu v&eacuteg&eacutetarien pour le ' . $date . /*$table . ' ' . $meal*/ ' &agrave ' . $hour . 'h ';
-            $mail->AltBody = $user . ' a r&eacuteserv&eacute un menu v&eacuteg&eacutetarien pour le ' . $date . /*$table . ' ' . $meal*/ ' &agrave ' . $hour . 'h ';
+            $mail->Subject = $subject;
+            $mail->Body = $body;
+            $mail->AltBody = $body;
 
             $mail->send();
             //echo 'Message has been sent';

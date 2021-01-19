@@ -1,5 +1,37 @@
+<?php
+  if (isset($mailSent)) {
+    if ($mailSent) {
+?>
+      <!-- Modal for user feedback -->
+      <div class="modal" tabindex="-1" role="dialog" id="messageSentModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Message envoyé</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Le message a bien été envoyé.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+          $('#messageSentModal').modal('show');
+      </script>
+<?php
+    }
+  }
+?>
+
 <div class="container container-sm-fluid">
-    
+
     <div class="imageContact text-center">
         <img class="img-fluid" src="resources/userContent/image_contact.jpg">
     </div>
@@ -20,49 +52,41 @@
     <div class="ligne"></div>
     <div class="info">
         <p>
-        Rue de Sébeillon 12 <br>
-        Tél : 021 316 77 77<br>
-        1004 Lausanne
+            Rue de Sébeillon 12 <br>
+            Tél : 021 316 77 89<br>
+            1004 Lausanne
         </p>
     </div>
-</div>
 
-
-    <?php
-    /*
-    TODO make it work
     <!-- formulaire de contact-->
 
     <h3>Formulaire de contact</h3>
-    <div class="ligne">
-    </div>
+    <div class="ligne"></div>
 
-    <div class="formulaire">
-        <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Nom</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail3">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">E-mail</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail3">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Sujet</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail3">
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            <div class="col-12">
-                <button class="btn btn-primary" type="submit">Envoyer</button>
-            </div>
-        </div>
-    </div>
-    */
+    <?php
+    if (isset($contactError)) {
+        if ($contactError) {
     ?>
+            <div class="alert alert-danger mt-5">
+                Veuillez remplir tous les champs.
+            </div>
+    <?php
+        }
+    }
+    ?>
+
+    <form action="index.php?controller=home&action=Contact" id="contact-form" class="formulaire" method="post">
+        <div class="row mb-3">
+            <label for="contactNom" class="form-label">Nom</label><br>
+            <input type="text" class="form-control" id="contactNom" name="contactNom" value="<?php if (isset($_POST['contactNom'])) { echo htmlspecialchars($_POST['contactNom']); } ?>">
+        </div>
+        <div class="row mb-3">
+            <label for="contactMsg" class="form-label">Message</label>
+            <textarea class="form-control" id="contactMsg" rows="3" name="contactMsg"><?php if (isset($_POST['contactMsg'])) { echo htmlspecialchars($_POST['contactMsg']); } ?></textarea>
+
+            <button class="btn btn-primary mt-3" name="submitBtn" type="submit">Envoyer</button>
+        </div>
+
+    </form>
+
+</div>

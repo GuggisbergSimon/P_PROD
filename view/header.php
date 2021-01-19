@@ -1,7 +1,7 @@
 <!--header-->
-<div class="toptop">
-    <a style= "font-family: 'ETML'; text-decoration: none;" href="https://www.etml.ch" target="_blank">ETML</a>
-    <p>Ecole technique - Ecole des métiers - Lausanne</p>
+<div class="toptop container d-flex align-items-center justify-content-between py-3" style="font-size: 18px;">
+    <a style="font-family: 'ETML'; text-decoration: none;" href="https://www.etml.ch" target="_blank">ETML</a>
+    <p class="my-auto">Ecole technique - Ecole des métiers - Lausanne</p>
 </div>
 
 <?php
@@ -61,8 +61,8 @@
             ?>
             <div class="d-flex flex-row">
                 <a class="nav-item nav-link link <?php if ($_GET['action'] == 'Register') { echo 'active'; } ?>" href="index.php?controller=home&action=Register">Inscription</a>
-                <div class="btn-nav btn-primary rounded">
-                    <a class="nav-item nav-link pl-sm-2 pr-sm-2" style="color: white;" href="index.php?controller=home&action=Connexion">Connexion</a>
+                <div class="btn-nav btn-primary rounded my-auto">
+                    <a class="nav-item nav-link pl-sm-2 pr-sm-2 m-1" style="color: white;" href="index.php?controller=home&action=Connexion">Connexion</a>
                 </div>
             </div>
             <?php
