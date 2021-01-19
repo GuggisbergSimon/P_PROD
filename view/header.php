@@ -36,6 +36,7 @@
                     } else if ($_SESSION['role'] >= 50) {
                 ?>
                         <a class="nav-item nav-link link <?php if ($_GET['action'] == 'Option') { echo 'active'; } ?>" href="index.php?controller=home&action=Option"><i class="fas fa-cog"></i> Administration</a>
+                        <a class="nav-item nav-link link <?php if ($_GET['action'] == 'Recap') { echo 'active'; } ?>" href="index.php?controller=home&action=Recap"><i class="fas fa-file-alt"></i> Récapitulatif</a>
                 <?php
                     }
                 } else {

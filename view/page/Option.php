@@ -1,4 +1,11 @@
+<div class="container">
+    <div class="my-4">
+        <h3 class="my-0">Menus de la semaine</h3>
+        <div class="ligne ligne-admin"></div>
+    </div>
+
 <?php
+
 include_once "model/Database.php";
 
 $day = date('w');
@@ -12,7 +19,6 @@ $meals = [
 ];
 
 echo '
-<div class="container mt-5 mb-5">
 <table class="table table-bordered w-100">
     <thead class="thead-dark">
         <tr>
@@ -50,6 +56,24 @@ for ($i = 0; $i < 5; $i++) {
     }
     echo '</td>';
 }
-echo '</tr></table></div>';
+echo '</tr></table>';
 $week_end = date('d-m-Y', strtotime('+' . (6 - $day) . ' days'));
 ?>
+    <div class="my-4">
+        <h3 class="my-0">Changement des menus</h3>
+        <div class="ligne ligne-admin"></div>
+    </div>
+
+    <form action="#" method="post" class="mb-5">
+    <div class="form-group">
+        <label for="menuNumberOne">Menu n°1</label>
+        <input type="text" class="form-control" id="menuNumberOne" name="menuNumberOne">
+    </div>
+    <div class="form-group">
+        <label for="menuNumberTwo">Menu n°2</label>
+        <input type="text" class="form-control" id="menuNumberTwo" name="menuNumberTwo">
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+
+</div>
