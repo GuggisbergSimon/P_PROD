@@ -344,7 +344,7 @@ class Database
      * @param $body string body text of the email
      */
     public function sendMail($subject, $body){
-        include_once "../config.ini.php";
+        include_once "../configConfidential.ini.php";
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);
 
@@ -362,8 +362,11 @@ class Database
 
 
             //Recipients
-            $mail->setFrom(MAIL_ADDRESS);
-            $mail->addAddress(MAIL_ADDRESS);     // Add a recipient
+            $mail->setFrom(MAIL_FROMADDRESS);
+
+            foreach(MAIL_ADDRESSES as $mailAdress){
+                $mail->addAddress($mailAdress);     // Add a recipient
+            }
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
