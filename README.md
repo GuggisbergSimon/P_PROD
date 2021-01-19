@@ -37,6 +37,9 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
 
 ## TODO
 Bugs connus :
+- username is case sensitive
+- message feedback commande au format yyyy-mm-dd et non pas dd.mm.yyyy
+- "Bonjour ..." n'est pas complètement aligné avec bouton Déconnexion en vue responsive
 
 Fonctionnalités légères :
 - compter le nombre de plats par jour (autre ligne) par tranche horaire
