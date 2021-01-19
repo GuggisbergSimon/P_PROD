@@ -37,11 +37,17 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
 
 ## TODO
 Bugs connus :
-- username is case sensitive
-- message feedback commande au format yyyy-mm-dd et non pas dd.mm.yyyy
+- username is not case sensitive -> tout en lower
+- message feedback commande au format yyyy-mm-dd et non pas dd.mm.yyyy (+dd-mm-yyyy est marqué à retirer)
 - "Bonjour ..." n'est pas complètement aligné avec bouton Déconnexion en vue responsive
 
+TODO avant rendu :
+- Deux menus végétariens updatables par la vue admin
+- envoyer email à plusieurs adresses mails
+- reset DB + création compte admin
+
 Fonctionnalités légères :
+- ajouter option pour imprimer vue admin/jour (jour courant)
 - compter le nombre de plats par jour (autre ligne) par tranche horaire
 - changer de semaine en mode admin (flèches gauche/droite)
 - Mettre plus d'error_log
