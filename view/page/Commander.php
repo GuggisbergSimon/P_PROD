@@ -40,11 +40,8 @@ if (!array_key_exists('username', $_SESSION)) {
     ';
 }
 
-if(array_key_exists('CommandDone', $_SESSION) && $_SESSION['CommandDone']){
-    echo 
-    '
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+if (array_key_exists('CommandDone', $_SESSION) && $_SESSION['CommandDone']) {
+?>
     <!-- Modal -->
     <div class="modal" tabindex="-1" role="dialog" id="myModal">
       <div class="modal-dialog" role="document">
@@ -56,7 +53,7 @@ if(array_key_exists('CommandDone', $_SESSION) && $_SESSION['CommandDone']){
             </button>
           </div>
           <div class="modal-body">
-            <p> Commande bien effectuée pour le ';
+            <p> Commande bien effectuée pour le <?php
             echo $_SESSION['CommandTemp']['resDate'] . ' de ';
             switch ($_SESSION['CommandTemp']['resHour']) {
                 case 11:
@@ -78,24 +75,23 @@ if(array_key_exists('CommandDone', $_SESSION) && $_SESSION['CommandDone']){
                     echo 'plat non reconnu';
                     break;
             }
-            echo '</p>
+            ?></p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
           </div>
         </div>
       </div>
-    </div>';
+    </div>
 
-    //var_dump($_SESSION);
-    //var_dump($_SESSION['CommandTemp']);
+    
+    <script>
+        $('#myModal').modal('show');
+    </script>
 
+    <?php
     unset($_SESSION['CommandDone']);
     unset($_SESSION['CommandTemp']);
-    //var_dump($_SESSION);
 
-    //var_dump($_SESSION);
-
-    echo "<script> $('#myModal').modal('show');</script>";
 }
 ?>

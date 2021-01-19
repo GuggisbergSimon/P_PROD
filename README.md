@@ -37,11 +37,8 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
 
 ## TODO
 Bugs connus :
-- refill formulaire en cours (inscription surtout)
-- impossible de commander lors de création de compte
 
 Améliorations visuelles :
-- Feedback supplémentaire une fois le compte créé (Vous vous êtes inscris)
 - améliorer la balise toptop
 
 Fonctionnalités légères :
