@@ -100,7 +100,7 @@ class Database
 
     function readReservationPerDay(string $day)
     {
-        $results = $this->querySimpleExecute("select * from t_reservation where resDate between '$day 00:00:00' and '$day 23:59:59' order by resHour ASC, resTable ASC, resMeal ASC");
+        $results = $this->querySimpleExecute("select * from t_reservation where resDate between '$day 00:00:00' and '$day 23:59:59' order by resHour ASC, resTable ASC, fkMeal ASC");
         $results = $this->formatData($results);
         return $results;
     }
@@ -225,11 +225,11 @@ class Database
      * @param $date yyyy-mm-dd
      * @param int $table
      * @param int $hour
-     * @param int $meal
+     * @param int $mealId
      * @param int $userId
      * @return int id of the new reservation
      */
-    function addReservation($date, $table, $hour, $meal, $userId): int
+    function addReservation($date, $table, $hour, $mealId, $userId): int
     {
         $user = $this->getUser($userId);
         $user = $user['useFirstName'] . ' ' . $user['useLastName'];
@@ -238,7 +238,7 @@ class Database
 
         $this->sendMail($subject, $body);
 
-        return $this->addData('t_reservation', ['resDate', 'resTable', 'resHour', 'resMeal', 'fkUser'], [$date, $table, $hour, $meal, $userId]);
+        return $this->addData('t_reservation', ['resDate', 'resTable', 'resHour', 'fkMeal', 'fkUser'], [$date, $table, $hour, $mealId, $userId]);
     }
 
     /**

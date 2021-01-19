@@ -49,7 +49,7 @@ for ($i = 0; $i < 5; $i++) {
             echo '
                 <p class="mb-0 mt-2">
                     ' . $reservation['resHour'] . 'h <br>
-                    ' . $meals[$reservation['resMeal']] . ' <br>
+                    ' . $meals[$reservation['fkMeal']] . ' <br>
                     Pour ' . $user['useFirstName'] . ' ' . $user['useLastName'] . '
                 </p>';
         }

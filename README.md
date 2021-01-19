@@ -12,13 +12,13 @@ Une fois une commande effectuée par un client, un courriel est envoyé à une a
 
 Idéalement le projet devrait être fini en septembre 2021, avec des tests lors du semestre de printemps.
 
-##Outils utilisés
+### Outils utilisés
 - Composer est utilisé pour installer phpmailer afin de gérer l'envoi de mail.
 - La partie HTML/CSS a été faite de manière séparé du code PHP, qui utilise un framework MVC custom ETML.
 - Une base de données MySql gère les utilisateurs et les réservations, le fichier de création de celle-ci est src/database/bd_etmeal.sql.
 - Bootstrap pour tout ce qui est styles et rendre le site responsif.
 
-###Notes
+### Notes
 Deux types de comptes existent, défini en fonction de leur useRole; la convention est la suivante : 100 étant le maximum, pour un super admin, et en dessous de 50 un user standard. Il est uniquement possible de modifier useRole via la basede données mysql pour le moment, un compte admin a déjà été créé, son mot de passe se trouve dans le fichier configConfidential.ini.php dans le dossier parent (voir point autres documentations et fichiers pour plus de détails).
 
 Les parties du code concernant le choix de tables ou d'autres plats lors d'une commande ainsi que le formulaire de contact ont été mis en commentaires, souvent par choix (le site s'adressant d'abord au moindre nombre de végétariens), mais peut être aussi par manque d'implémentation.
