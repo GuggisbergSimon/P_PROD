@@ -1,12 +1,33 @@
 <?php
+
 //todo choix de tables/menus mis en commentaires pour le moment, à rétablir si besoin est
 if (!array_key_exists('username', $_SESSION)) {
     header("Location: index.php?controller=home&action=Connexion");
     exit();
 } else {
+
     echo '
-<form action="index.php?controller=home&action=ValidateReservation" method="post">
-    <div class="container">
+<form action="#" method="post">
+    <div class="container">';
+
+    if (isset($commandErrors)) {
+        if (count($commandErrors) > 0) {
+    ?>
+            <div class="alert alert-danger mt-5">
+                Oups ... Nous avons rencontré quelques erreurs :<br>
+                <ul class="mb-0">
+    <?php
+                foreach ($commandErrors as $error) {
+                    echo "<li>$error</li>";
+                }
+    ?>
+                </ul>
+            </div>
+    <?php
+        }
+    }
+
+    echo '
     <div class="form-group mt-4">
         <label>Date de la réservation : </label>
         <input class="form-control" type="date" name="resDate">
@@ -34,7 +55,7 @@ if (!array_key_exists('username', $_SESSION)) {
         '<option value="5">Menu végétarien</option>
         </select>
     </div>
-    <input class="btn btn-primary mt-4 mb-4" type="Submit">
+    <input class="btn btn-primary mt-4 mb-4" name="submitBtn" type="submit">
     </div>
 </form>
     ';
@@ -53,26 +74,27 @@ if (array_key_exists('CommandDone', $_SESSION) && $_SESSION['CommandDone']) {
             </button>
           </div>
           <div class="modal-body">
-            <p> Commande bien effectuée pour le <?php
-            echo $_SESSION['CommandTemp']['resDate'] . ' de ';
+            <p class="mb-2"> Commande suivante bien effectuée :<br>
+            <?php
+            echo 'Date : ' . date('d.m.Y', strtotime($_SESSION['CommandTemp']['resDate'])) . '<br>Heure : ';
             switch ($_SESSION['CommandTemp']['resHour']) {
                 case 11:
-                    echo "11h20 à 12h00 ";
+                    echo "11h20 à 12h00";
                     break;
                 case 12:
-                    echo '12h10 à 12h50 ';
+                    echo '12h10 à 12h50';
                     break;
                 default:
-                    echo 'heure non reconnue ';
+                    echo 'Heure non reconnue';
                     break;
             }
-            echo '. Vous avez commandé : ';
+            echo '<br>Plat : ';
             switch ($_SESSION['CommandTemp']['resMeal']) {
                 case 5:
-                    echo "plat végétarien";
+                    echo "Plat végétarien";
                     break;
                 default:
-                    echo 'plat non reconnu';
+                    echo 'Plat non reconnu';
                     break;
             }
             ?></p>

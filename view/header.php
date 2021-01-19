@@ -1,6 +1,8 @@
 <!--header-->
 <div class="toptop container d-flex align-items-center justify-content-between py-3" style="font-size: 18px;">
-    <a style="font-family: 'ETML'; text-decoration: none;" href="https://www.etml.ch" target="_blank">ETML</a>
+    <div>
+        <a style="font-family: 'ETML'; text-decoration: none;" href="https://www.etml.ch" target="_blank">ETML</a>
+    </div>
     <p class="my-auto">Ecole technique - Ecole des métiers - Lausanne</p>
 </div>
 
@@ -34,6 +36,7 @@
                     } else if ($_SESSION['role'] >= 50) {
                 ?>
                         <a class="nav-item nav-link link <?php if ($_GET['action'] == 'Option') { echo 'active'; } ?>" href="index.php?controller=home&action=Option"><i class="fas fa-cog"></i> Administration</a>
+                        <a class="nav-item nav-link link <?php if ($_GET['action'] == 'Recap') { echo 'active'; } ?>" href="index.php?controller=home&action=Recap"><i class="fas fa-file-alt"></i> Récapitulatif</a>
                 <?php
                     }
                 } else {
@@ -54,7 +57,7 @@
             <?php 
             if(array_key_exists('username', $_SESSION)){
             ?>
-                <a href="index.php?controller=home&action=Disconnect" class="btn btn-danger">Déconnexion</a>
+                <p class="my-auto text-white">Bonjour <?= $_SESSION['username'] ?></p><a href="index.php?controller=home&action=Disconnect" class="btn btn-danger">Déconnexion</a>
             <?php
             }
             else {

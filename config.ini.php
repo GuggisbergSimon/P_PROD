@@ -1,7 +1,7 @@
 <?php
 
 $GLOBALS['database'] = array(
-    'dbname' => 'bd_p_prod',
+    'dbname' => 'bd_etmeal',
     'username' => 'root',
     'password' => 'root',
     'host' => 'localhost',

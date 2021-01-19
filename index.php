@@ -15,6 +15,7 @@ if ($debug) {
 
 }
 date_default_timezone_set('Europe/Zurich');
+setlocale(LC_TIME, "fr_CH");
 
 include_once 'controller/Controller.php';
 include_once 'controller/HomeController.php';
