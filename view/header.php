@@ -1,6 +1,8 @@
 <!--header-->
 <div class="toptop container d-flex align-items-center justify-content-between py-3" style="font-size: 18px;">
-    <a style="font-family: 'ETML'; text-decoration: none;" href="https://www.etml.ch" target="_blank">ETML</a>
+    <div>
+        <a style="font-family: 'ETML'; text-decoration: none;" href="https://www.etml.ch" target="_blank">ETML</a>
+    </div>
     <p class="my-auto">Ecole technique - Ecole des métiers - Lausanne</p>
 </div>
 
@@ -54,7 +56,7 @@
             <?php 
             if(array_key_exists('username', $_SESSION)){
             ?>
-                <a href="index.php?controller=home&action=Disconnect" class="btn btn-danger">Déconnexion</a>
+                <p class="my-auto text-white">Bonjour <?= $_SESSION['username'] ?></p><a href="index.php?controller=home&action=Disconnect" class="btn btn-danger">Déconnexion</a>
             <?php
             }
             else {

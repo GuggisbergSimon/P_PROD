@@ -36,8 +36,6 @@ class HomeController extends Controller
         } else {
             return call_user_func(array($this, "AccueilAction"));
         }
-
-        //return call_user_func(array($this, $action));
     }
 
     /**
@@ -63,7 +61,6 @@ class HomeController extends Controller
                     if (array_key_exists('password', $_POST) && $_POST['password'] != "") {
                         if ($compte != -1) {
                                 if (password_verify($_POST['password'], $compte['usePassword'])) {
-                                    echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES CONNECTES</h1>';
                                     $_SESSION['username'] = $compte['useUsername'];
                                     $_SESSION['role'] = $compte['useRole'];
                                     $_SESSION['connected'] = true;
@@ -197,19 +194,6 @@ class HomeController extends Controller
     }
 
     /**
-     * @return false|string$
-     */
-    private function ValidateReservationAction()
-    {
-        $view = file_get_contents('controller/validatingReservation.php');
-        ob_start();
-        eval('?>' . $view);
-        $content = ob_get_clean();
-
-        return $content;
-    }
-
-    /**
      * Display About Action
      *
      * @return string
@@ -304,6 +288,62 @@ class HomeController extends Controller
      */
     private function CommanderAction()
     {
+        // VALIDATION
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            if (isset($_POST['submitBtn'])) {
+                include_once 'model/Database.php';
+
+                $database = new Database();
+                $sResDate = 'resDate';
+                //$sResTable = 'resTable';
+                $sResHour = 'resHour';
+                $sResMeal = 'resMeal';
+                $aMeals = array(
+                    //1 => 'Daily1',
+                    //2 => 'Daily2',
+                    //3 => 'Pasta',
+                    //4 => 'Burger',
+                    5 => 'Vegetarian'
+                );
+        
+                $dDateRegex = '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/';
+        
+                $commandErrors = array();
+        
+                //if (array_key_exists($sResTable, $_POST) && $_POST[$sResTable] > 0 && $_POST[$sResTable] < 19)
+                if (!array_key_exists($sResDate, $_POST) || !preg_match($dDateRegex, $_POST[$sResDate]) || date('Y-m-d') > date('Y-m-d', strtotime($_POST[$sResDate]))) {
+                    $commandErrors[] = "Veuillez entrer une date à partir de demain, dans un format correct.";
+                }
+        
+                if (!array_key_exists($sResHour, $_POST) || ($_POST[$sResHour] != 11 && $_POST[$sResHour] != 12)) {
+                    $commandErrors[] = "Veuillez entrer une heure correcte.";
+                }
+        
+                if (!array_key_exists($sResMeal, $_POST) || $_POST[$sResMeal] <= 0 || $_POST[$sResMeal] >= 6) {
+                    $commandErrors[] = "Veuillez entrer un type de plat correct.";
+                }
+        
+                if (!array_key_exists('username', $_SESSION)) {
+                    $commandErrors[] = "Veuillez vous connectez pour ajouter une réservation.";
+                }
+        
+                if (count($commandErrors) == 0) {
+                    $date = $_POST[$sResDate];
+                    //$table = $_POST[$sResTable];
+                    $hour = $_POST[$sResHour];
+        
+                    //that condition is for checking wether the reservation exists already, only one reservation per date/table and hour
+                    //TODO rework it to handle limit of 4 people per table
+                    //if ($database->reservationExistsAt($date, $table, $hour) < 0) {
+                    $database->addReservation($date, 0 /*$table*/, $hour, $_POST[$sResMeal], $database->getIdUser($_SESSION['username']));
+                    //echo 'Réservation ajoutée !<br>';
+                    $_SESSION['CommandDone'] = true;
+                    $_SESSION['CommandTemp'] = $_POST;
+                    //}
+                }
+            }
+        }
+        // END VALIDATION
 
         $view = file_get_contents('view/page/Commander.php');
 

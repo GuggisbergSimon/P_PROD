@@ -51,7 +51,10 @@
     <div class="textAccueil mb-4">
         <h5>Des jeunes en formation préparent les repas à d'autres jeunes en formation </h5>
         <p> Des apprenti-e-s cuisiniers ou cuisinières et des apprenti-e-s gestionnaires en intendance du Centre d’Orientation et de Formations Professionnelles (COFOP) préparent les repas servis quotidiennement à l’ETML.</p>
-        <p>	Le projet est construit sur le modèle pédagogique du restaurant du COFOP. Il vise à répondre partiellement à la demande croissante de places d’apprentissage en cuisine et en intendance pour les jeunes et particulièrement dans le programme FORJAD (Formation pour jeunes adultes en difficulté). </p>
+        <p class="mb-0">Le projet est construit sur le modèle pédagogique du restaurant du COFOP. Il vise à répondre partiellement à la demande croissante de places d’apprentissage en cuisine et en intendance pour les jeunes et particulièrement dans le programme FORJAD (Formation pour jeunes adultes en difficulté). </p>
+        <div class="text-center mb-2">
+            <img class="img-fluid" src="resources/cofop.png">
+        </div>
         <p>	Ce sont ainsi 18 places d’apprentissage qui sont proposées à l’ETML dans un environnement original et motivant: ces apprenti-e-s évoluent au contact d’autres jeunes en formation.</p>
         <p>	Concrètement, les apprenti-e-s sont placé-e-s sous la responsabilité du COFOP. Ils et elles sont formé-e-s par quatre professionnel-le-s, deux en cuisine et deux en intendance ainsi qu’une enseignante et un enseignant en branches générales. Ils suivent les cours professionnels respectivement à l'Ecole Professionnelle de Montreux et au Centre d'Enseignement des Métiers de l'Economie Familiale de Marcelin. </p>
         <p>	Le projet est porteur à plusieurs niveaux: conformément à sa volonté politique de permettre à chacun d'obtenir une formation certifiante, l'Etat offre 18 nouvelles places d'apprentissage dans ses propres locaux à des jeunes au parcours pas toujours facile ou en rupture d'apprentissage. Ils ou elles acquièrent leur formation dans un cadre scolaire, tout en bénéficiant d'infrastructures professionnelles. </p>
