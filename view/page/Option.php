@@ -5,29 +5,32 @@ $day = date('w');
 
 $meals = [
     1=> "Menu du jour 1",
-    2=>"Menu du jour 2",
-    3=>"Menu pâtes",
-    4 =>"Menu hamburger",
+    2=> "Menu du jour 2",
+    3=> "Menu pâtes",
+    4 => "Menu hamburger",
     5=> "Menu végétarien"
 ];
 
 echo '
 <div class="container mt-5 mb-5">
-<table class="table table-bordered" style="width:100%">
-    <tr>
-        <th>Lundi</th>
-        <th>Mardi</th>
-        <th>Mercredi</th>
-        <th>Jeudi</th>
-        <th>Vendredi</th>
-    </tr>
+<table class="table table-bordered w-100">
+    <thead class="thead-dark">
+        <tr>
+            <th>Lundi</th>
+            <th>Mardi</th>
+            <th>Mercredi</th>
+            <th>Jeudi</th>
+            <th>Vendredi</th>
+        </tr>
+    </thead>
+    <thead class="thead-light">
     <tr>';
 $database = new Database();
 for ($i = 0; $i < 5; $i++) {
     $week_day = date('d.m.Y', strtotime('+1 days', strtotime('+' . ($i - $day) . ' days')));
-    echo "<td>$week_day</td>";
+    echo "<th>$week_day</th>";
 }
-echo '</tr><tr>';
+echo '</tr></thead><tr>';
 
 for ($i = 0; $i < 5; $i++) {
     $database = new Database();
@@ -38,7 +41,7 @@ for ($i = 0; $i < 5; $i++) {
         foreach ($reservations as $reservation) {
             $user = $database->getUser($reservation['fkUser']);
             echo '
-                <p>
+                <p class="mb-0 mt-2">
                     ' . $reservation['resHour'] . 'h <br>
                     ' . $meals[$reservation['resMeal']] . ' <br>
                     Pour ' . $user['useFirstName'] . ' ' . $user['useLastName'] . '
