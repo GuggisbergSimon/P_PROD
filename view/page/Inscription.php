@@ -3,10 +3,8 @@
 <form action="#" class="my-5" method="post">
     <div class="container">
         <?php
-
-        if (array_key_exists('success', $_SESSION))
-        {
-            if (isset($_SESSION['success'])) {
+        if (isset($success)) {
+            if ($success) {
         ?>
                 <div class="alert alert-success mt-5">
                     Vous êtes bien inscrits !
@@ -15,18 +13,18 @@
                     </ul>
                 </div>
         <?php
-                $_SESSION['success'] = null;
+                $success = null;
             }
         }
 
-        if (isset($_SESSION['registerError'])) {
-            if (count($_SESSION['registerError']) > 0) {
+        if (isset($registerErrors)) {
+            if (count($registerErrors) > 0) {
         ?>
                 <div class="alert alert-danger mt-5">
                     Oups ... Nous avons rencontré quelques erreurs :<br>
                     <ul class="mb-0">
         <?php
-                    foreach ($_SESSION['registerError'] as $error) {
+                    foreach ($registerErrors as $error) {
                         echo "<li>$error</li>";
                     }
         ?>

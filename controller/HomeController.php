@@ -113,7 +113,7 @@ class HomeController extends Controller
     {
         $view = file_get_contents('view/page/Inscription.php');
         
-        $_SESSION['registerError'] = array();
+        $registerErrors = array();
 
         if (array_key_exists('submitBtn', $_POST)) {
             if (isset($_POST['submitBtn'])) {
@@ -123,35 +123,38 @@ class HomeController extends Controller
                 $registerRepository = new Database();
 
                 if (!array_key_exists('username', $_POST) || $_POST['username'] == "") {
-                    $_SESSION['registerError'][] = "Veuillez entrez un nom d'utilisateur.";
+                    $registerErrors[] = "Veuillez entrez un nom d'utilisateur.";
                 }
 
                 if (!array_key_exists('password', $_POST) || $_POST['password'] == "" || !array_key_exists('confPassword', $_POST) || $_POST['confPassword'] != $_POST['password']) {
-                    $_SESSION['registerError'][] = "Mots de passe incorrects, veuillez les entrer à nouveau.";
+                    $registerErrors[] = "Mots de passe incorrects, veuillez les entrer à nouveau.";
                 }
 
                 if (!array_key_exists('email', $_POST) || $_POST['email'] == "") {
+                    $registerErrors[] = "Veuillez remplir le champ Email.";
+                } else {                    
                     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                        $_SESSION['registerError'][] = "Veuillez renseigner un mail valide.";
+                        $registerErrors[] = "Veuillez renseigner un mail valide.";
                     }
                 }
 
+
                 if (!array_key_exists('firstName', $_POST) || $_POST['firstName'] == "") {
-                    $_SESSION['registerError'][] = "Veuillez remplir le champ Prénom.";   
+                    $registerErrors[] = "Veuillez remplir le champ Prénom.";   
                 }
 
                 if (!array_key_exists('lastName', $_POST) || $_POST['lastName'] == "") {
-                    $_SESSION['registerError'][] = "Veuillez remplir le champ Nom.";   
+                    $registerErrors[] = "Veuillez remplir le champ Nom.";   
                 }
 
                 if (!array_key_exists('username', $_POST) || ($registerRepository->userExistsAt($_POST['username']) >= 0)) {
-                    $_SESSION['registerError'][] = "Nom d'utilisateur déjà présent, veuillez en sélectionner un autre.";
+                    $registerErrors[] = "Nom d'utilisateur déjà présent, veuillez en sélectionner un autre.";
                 }
 
-                if (empty($_SESSION['registerError'])) {
+                if (empty($registerErrors)) {
                     $compte = $registerRepository->register($_POST['username'], $_POST['password'], $_POST['email'], $_POST['firstName'], $_POST['lastName'], 0);
                     unset($_POST);
-                    $_SESSION['success'] = true;
+                    $success = true;
                 }
             }
         }
@@ -165,25 +168,24 @@ class HomeController extends Controller
     }
 
     /**
-     * Display Contact Action
+     * Display Disconnect Action
      *
      * @return string
      */
-    private
-    function DisconnectAction()
+    private function DisconnectAction()
     {
         session_destroy();
 
         header('Location: index.php?controller=home&action=Accueil');
+        exit();
     }
 
     /**
-     * Display Contact Action
+     * Display Home Action
      *
      * @return string
      */
-    private
-    function AccueilAction()
+    private function AccueilAction()
     {
 
         $view = file_get_contents('view/page/Accueil.php');
@@ -197,8 +199,7 @@ class HomeController extends Controller
     /**
      * @return false|string$
      */
-    private
-    function ValidateReservationAction()
+    private function ValidateReservationAction()
     {
         $view = file_get_contents('controller/validatingReservation.php');
         ob_start();
@@ -209,12 +210,11 @@ class HomeController extends Controller
     }
 
     /**
-     * Display Contact Action
+     * Display About Action
      *
      * @return string
      */
-    private
-    function AproposAction()
+    private function AproposAction()
     {
 
         $view = file_get_contents('view/page/Apropos.php');
@@ -230,8 +230,7 @@ class HomeController extends Controller
      *
      * @return string
      */
-    private
-    function ContactAction()
+    private function ContactAction()
     {
         $mailSent = false;
 
@@ -244,9 +243,11 @@ class HomeController extends Controller
                         $database->contactSendMail();
             
                         $mailSent = true;
-                        unset($_SESSION['contactError']);
+                    
+                        unset($contactError);
+                        unset($_POST);
                     } else {
-                        $_SESSION['contactError'] = true;
+                        $contactError = true;
                     }
                 }
             }
@@ -261,12 +262,11 @@ class HomeController extends Controller
     }
 
     /**
-     * Display Contact Action
+     * Display Option Action
      *
      * @return string
      */
-    private
-    function OptionAction()
+    private function OptionAction()
     {
 
         $view = file_get_contents('view/page/Option.php');
@@ -280,12 +280,11 @@ class HomeController extends Controller
     }
 
     /**
-     * Display Contact Action
+     * Display Parameters Action
      *
      * @return string
      */
-    private
-    function ParametreAction()
+    private function ParametreAction()
     {
 
         $view = file_get_contents('view/page/Parametre.php');
@@ -298,8 +297,12 @@ class HomeController extends Controller
         return $content;
     }
 
-    private
-    function CommanderAction()
+    /**
+     * Display Command Action
+     * 
+     * @return string
+     */
+    private function CommanderAction()
     {
 
         $view = file_get_contents('view/page/Commander.php');
