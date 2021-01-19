@@ -143,7 +143,7 @@ class HomeController extends Controller
                     $registerErrors[] = "Veuillez remplir le champ Nom.";   
                 }
 
-                if (!array_key_exists('username', $_POST) || ($registerRepository->userExistsAt($_POST['username']) >= 0)) {
+                if (!array_key_exists('username', $_POST) || ($registerRepository->userExistsAt(strtolower($_POST['username'])) >= 0)) {
                     $registerErrors[] = "Nom d'utilisateur déjà présent, veuillez en sélectionner un autre.";
                 }
 
