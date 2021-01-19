@@ -362,8 +362,11 @@ class Database
 
 
             //Recipients
-            $mail->setFrom(MAIL_ADDRESS);
-            $mail->addAddress(MAIL_ADDRESS);     // Add a recipient
+            $mail->setFrom(MAIL_FROMADDRESS);
+
+            foreach(MAIL_ADDRESSES as $mailAdress){
+                $mail->addAddress($mailAdress);     // Add a recipient
+            }
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
