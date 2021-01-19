@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr-CH">
 <head>
+	<link href="resources/favicon.ico" rel="shortcut icon">
 	<!-- police que le site de l'ETML utilise pour la barre de nav.-->
 	<link href='https://fonts.googleapis.com/css?family=Exo:500,600' rel='stylesheet' type='text/css'>
-	<!-- Logo Etml onglet page internet -->
-	<link rel="icon" type="image/png" sizes="16x16" src="../../userContent/logoOnlet.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ETML - Restaurant</title>
+	<title>Restaurant - ETML</title>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css">

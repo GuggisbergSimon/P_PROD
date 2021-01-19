@@ -1,10 +1,32 @@
 <?php
-  if ($mailSent) {
-  ?>
+  if (isset($mailSent)) {
+    if ($mailSent) {
+?>
+      <!-- Modal for user feedback -->
+      <div class="modal" tabindex="-1" role="dialog" id="messageSentModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Message envoyé</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Le message a bien été envoyé.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <script>
-        $('#messageSentModal').modal('show');
+          $('#messageSentModal').modal('show');
       </script>
-  <?php
+<?php
+    }
   }
 ?>
 
@@ -35,28 +57,6 @@
             1004 Lausanne
         </p>
     </div>
-
-    <!-- Modal for user feedback -->
-
-    <div class="modal" tabindex="-1" role="dialog" id="messageSentModal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Message envoyé</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>Le message a bien été envoyé.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
 
     <!-- formulaire de contact-->
 

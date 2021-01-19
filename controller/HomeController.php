@@ -307,7 +307,6 @@ class HomeController extends Controller
 
         $view = file_get_contents('view/page/Commander.php');
 
-
         ob_start();
         eval('?>' . $view);
         $content = ob_get_clean();

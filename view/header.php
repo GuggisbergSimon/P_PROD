@@ -1,7 +1,7 @@
 <!--header-->
-<div class="toptop">
-    <a style= "font-family: 'ETML'; text-decoration: none;" href="https://www.etml.ch" target="_blank">ETML</a>
-    <p>Ecole technique - Ecole des métiers - Lausanne</p>
+<div class="toptop container d-flex align-items-center justify-content-between py-3" style="font-size: 18px;">
+    <a style="font-family: 'ETML'; text-decoration: none;" href="https://www.etml.ch" target="_blank">ETML</a>
+    <p class="my-auto">Ecole technique - Ecole des métiers - Lausanne</p>
 </div>
 
 <?php
