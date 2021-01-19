@@ -49,6 +49,20 @@
 <div class="container container-sm-fluid">
 
     <div class="textAccueil mb-4">
+        <h1 class="text-center mb-3">Menus végétariens de la semaine</h1>
+        <div class="d-flex justify-content-around flex-wrap">
+            <div class="text-center my-1">
+                <p class="mb-0">Menu n°1</p>
+                <h3 class="py-0">Hamburger végétarien</h3>
+            </div>
+            <div class="text-center my-1">
+                <p class="mb-0">Menu n°2</p>
+                <h3 class="py-0">Falafele végétarienne</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="textAccueil mb-4">
         <h5>Des jeunes en formation préparent les repas à d'autres jeunes en formation </h5>
         <p> Des apprenti-e-s cuisiniers ou cuisinières et des apprenti-e-s gestionnaires en intendance du Centre d’Orientation et de Formations Professionnelles (COFOP) préparent les repas servis quotidiennement à l’ETML.</p>
         <p class="mb-0">Le projet est construit sur le modèle pédagogique du restaurant du COFOP. Il vise à répondre partiellement à la demande croissante de places d’apprentissage en cuisine et en intendance pour les jeunes et particulièrement dans le programme FORJAD (Formation pour jeunes adultes en difficulté). </p>

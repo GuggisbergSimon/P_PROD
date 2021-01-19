@@ -281,6 +281,22 @@ class HomeController extends Controller
     }
 
     /**
+     * Display Recap Action
+     *
+     * @return string
+     */
+    private function RecapAction()
+    {
+        $view = file_get_contents('view/page/Recap.php');
+
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        return $content;
+    }
+
+    /**
      * Display Command Action
      * 
      * @return string
@@ -352,4 +368,6 @@ class HomeController extends Controller
 
         return $content;
     }
+
+
 }

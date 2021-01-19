@@ -107,6 +107,10 @@
     padding: 10px;
 }
 
+.textAccueil-admin {
+    border: 3px solid darkblue !important;
+}
+
 /*contact*/
 
 .imageContact img {
@@ -148,6 +152,10 @@ h3 {
     margin-right: auto;
     background-color: #a1cc43;
     overflow: hidden;
+}
+
+.ligne-admin {
+    background-color: darkblue !important;
 }
 
 .info {
@@ -209,5 +217,9 @@ submit {
     .navbar .nav-link {
       padding-left: .5rem !important;
       padding-right: .5rem !important;
+    }
+
+    .navbar-right {
+        flex-direction: row !important;
     }
 }
