@@ -37,9 +37,6 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
 
 ## TODO
 Bugs connus :
-- username is not case sensitive -> tout en lower
-- message feedback commande au format yyyy-mm-dd et non pas dd.mm.yyyy (+dd-mm-yyyy est marqué à retirer)
-- "Bonjour ..." n'est pas complètement aligné avec bouton Déconnexion en vue responsive
 
 TODO avant rendu :
 - Deux menus végétariens updatables par la vue admin
@@ -52,6 +49,7 @@ Fonctionnalités légères :
 - changer de semaine en mode admin (flèches gauche/droite)
 - Mettre plus d'error_log
 - critère réservation à ajouter - manger sur place/à l'emporter
+- ajouter options de gestion de compte (suppression, reset mdp, etc)
 
 Fonctionnalités complexes :
 - envoyer un email/jour pour le lendemain/surlendemain

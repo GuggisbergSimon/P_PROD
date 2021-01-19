@@ -76,7 +76,7 @@ if (array_key_exists('CommandDone', $_SESSION) && $_SESSION['CommandDone']) {
           <div class="modal-body">
             <p class="mb-2"> Commande suivante bien effectuée :<br>
             <?php
-            echo 'Date (yyyy-mm-dd) : ' . $_SESSION['CommandTemp']['resDate'] . '<br>Heure : ';
+            echo 'Date : ' . date('d.m.Y', strtotime($_SESSION['CommandTemp']['resDate'])) . '<br>Heure : ';
             switch ($_SESSION['CommandTemp']['resHour']) {
                 case 11:
                     echo "11h20 à 12h00";
