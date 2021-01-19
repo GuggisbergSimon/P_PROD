@@ -1,5 +1,5 @@
 <?php
-//todo choix de tables/menus mis en commentaires pour le moment, à rétablir
+//todo choix de tables/menus mis en commentaires pour le moment, à rétablir si besoin est
 if (!array_key_exists('username', $_SESSION)) {
     header("Location: index.php?controller=home&action=Connexion");
     exit();
@@ -20,7 +20,7 @@ if (!array_key_exists('username', $_SESSION)) {
         <select class="form-control" name="resHour">
             <option value="Choose">Choisir</option>
             <option value="11">11h20-12h</option>
-            <option value="12">12h10-13h50</option>
+            <option value="12">12h10-12h50</option>
         </select>
     </div>
     <div class="form-group">

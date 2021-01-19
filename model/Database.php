@@ -12,7 +12,7 @@ require 'vendor/phpmailer/phpmailer/src/SMTP.php';
 
 
 /**
- * Authors : Adrian Barreira & Simon Guggisberg
+ * Authors : Adrian Barreira, Simon Guggisberg & Hugo Ducommun
  * Date : 25.11.2020
  * Description : Database class interacting with data on MySQL server
  */
@@ -26,7 +26,7 @@ class Database
     private $connector;
 
     /**
-     * Database constructor.
+     * Database constructor
      */
     public function __construct()
     {
@@ -105,17 +105,31 @@ class Database
         return $results;
     }
 
+    /**
+     * Returns the id of the user with the corresponding username
+     * @param $username string
+     * @return mixed
+     */
     function getIdUser($username)
     {
         $results = $this->querySimpleExecute("select * from t_user where useUsername='". $username . "'");
         return $results = $this->formatData($results)[0]['idUser'];
     }
 
+    /**
+     * Returns the user with the corresponding id as an array
+     * @param $userId int
+     * @return mixed
+     */
     function getUser($userId) {
         $results = $this->querySimpleExecute("select * from t_user where idUser=$userId");
         return $results = $this->formatData($results)[0];
     }
 
+    /**
+     * Deletes the user with the given username
+     * @param $username string
+     */
     function deleteUser($username)
     {
         $this->querySimpleExecute('delete from t_user where useUsername = ' . $username);
@@ -143,8 +157,9 @@ class Database
     }
 
     /**
+     * Checks wether a user exists with the given username
      * @param string $username
-     * @return int
+     * @return int -1 if the user does not exist, its id otherwise
      */
     function userExistsAt($username): int
     {
@@ -152,10 +167,11 @@ class Database
     }
 
     /**
+     * Checks wether a reservation exists at the given arguments
      * @param $date yyyy-mm-dd
      * @param string $table
      * @param int $hour
-     * @return int
+     * @return int returns -1 if it doesn't exist, the id of the reservation otherwise
      */
     function reservationExistsAt($date, $table, $hour): int
     {
@@ -177,7 +193,7 @@ class Database
      * @param string $table
      * @param string[] $columns
      * @param string[] $values
-     * @return int id
+     * @return int id of the new data
      */
     function addData($table, $columns, $values): int
     {
@@ -189,13 +205,14 @@ class Database
     }
 
     /**
+     * Adds a new user to the DB
      * @param string $username
      * @param string $firstName
      * @param string $lastName
      * @param string $email
      * @param string $password not hashed
      * @param int $role
-     * @return int
+     * @return int id of the new user
      */
     function addUser($username, $firstName, $lastName, $email, $password, $role): int
     {
@@ -204,12 +221,13 @@ class Database
     }
 
     /**
+     * Adds a reservation to the DB
      * @param $date yyyy-mm-dd
      * @param int $table
      * @param int $hour
      * @param int $meal
      * @param int $userId
-     * @return int
+     * @return int id of the new reservation
      */
     function addReservation($date, $table, $hour, $meal, $userId): int
     {
@@ -224,6 +242,7 @@ class Database
     }
 
     /**
+     * Sends an email through the contact form
      * @return void
      */
     function contactSendMail()
@@ -237,6 +256,15 @@ class Database
 
 #endregion
 
+    /**
+     * Registers a new account
+     * @param $username
+     * @param $password
+     * @param $email
+     * @param $firstName
+     * @param $lastName
+     * @param $role
+     */
     public function register($username, $password, $email, $firstName, $lastName, $role)
     {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
@@ -280,6 +308,11 @@ class Database
         //$insertUser = "INSERT INTO t_user (useUsername, usePassword, useEmail, useFirstName, UseLastName, useRole) VALUES ('" . $username . "' , '" . $passwordHash . "' , '" . $email . "' , '" . $firstName . "' , '" . $lastName . "' , '" . $role . "')";
     }
 
+    /**
+     * Logins as a user
+     * @param $username string
+     * @return int|mixed -1 if fail, user as an array if success
+     */
     public function login($username)
     {
         // $results = $this->querySimpleExecute("SELECT * FROM t_user WHERE useUsername = :username");
@@ -305,6 +338,11 @@ class Database
         return -1;
     }
 
+    /**
+     * Sends an email to the email address in the config.ini.php in the parent folder
+     * @param $subject string subject of the email
+     * @param $body string body text of the email
+     */
     public function sendMail($subject, $body){
         include_once "../config.ini.php";
         // Instantiation and passing `true` enables exceptions
@@ -324,7 +362,6 @@ class Database
 
 
             //Recipients
-            //TODO change for definitive address mail
             $mail->setFrom(MAIL_ADDRESS);
             $mail->addAddress(MAIL_ADDRESS);     // Add a recipient
 
@@ -344,6 +381,12 @@ class Database
         }
     }
 
+    /**
+     * prepare the execution of a query by binding values to prevent injection
+     * @param $query
+     * @param $binds
+     * @return bool|PDOStatement
+     */
     protected function queryPrepareExecute($query, $binds)
     {
         $req = $this->connector->prepare($query);

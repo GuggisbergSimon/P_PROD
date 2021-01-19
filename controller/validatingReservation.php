@@ -27,7 +27,6 @@ if (array_key_exists($sResDate, $_POST) && preg_match($dDateRegex, $_POST[$sResD
                 $hour = $_POST[$sResHour];
 
                 //that condition is for checking wether the reservation exists already, only one reservation per date/table and hour
-                //TODO rework it to handle limit of 4 people per table
                 //if ($database->reservationExistsAt($date, $table, $hour) < 0) {
                 $database->addReservation($date, 0 /*$table*/, $hour, $_POST[$sResMeal], $database->getIdUser($_SESSION['username']));
                 //echo 'Réservation ajoutée !<br>';
