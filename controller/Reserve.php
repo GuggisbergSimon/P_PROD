@@ -1,5 +1,6 @@
 <?php
 
+//TODO build list of meals dynamically, only take those "selected"
 echo '
 <body>
 <a onclick="return confirm(\'Êtes vous sûr de vouloir supprimer cet utilisateur ? \');" href="deleteTeacher.php">Supprimer utilisateur</a>
