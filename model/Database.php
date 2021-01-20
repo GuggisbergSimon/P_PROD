@@ -10,6 +10,8 @@ require 'vendor/phpmailer/phpmailer/src/Exception.php';
 require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require 'vendor/phpmailer/phpmailer/src/SMTP.php';
 
+require 'Model.php';
+
 
 /**
  * Authors : Adrian Barreira, Simon Guggisberg & Hugo Ducommun
@@ -21,9 +23,8 @@ include_once 'config.ini.php';
 /**
  * Class Database
  */
-class Database
+class Database extends Model
 {
-    private $connector;
 
     /**
      * Database constructor
@@ -42,32 +43,6 @@ class Database
         } catch (PDOException $e) {
             die('Erreur : ' . $e->getMessage());
         }
-    }
-
-    /**
-     * @param $query
-     * @return false|PDOStatement
-     */
-    private function querySimpleExecute($query)
-    {
-        return $this->connector->query($query);
-    }
-
-    /**
-     * @param $req
-     * @return mixed
-     */
-    private function formatData($req)
-    {
-        return $req->fetchALL(PDO::FETCH_ASSOC);
-    }
-
-    /**
-     * @param $req
-     */
-    private function unsetData($req)
-    {
-        $req->closeCursor();
     }
 
     /**
@@ -117,7 +92,12 @@ class Database
     }
 
     function getCurrentMeals() {
-        $results = $this->querySimpleExecute("select * from t_meal where meaIsCurrentMeal");
+        $results = $this->querySimpleExecute("select * from t_meal where meaIsCurrentMeal limit 2");
+        return $results = $this->formatData($results);
+    }
+
+    function getAllMeals() {
+        $results = $this->querySimpleExecute("select * from t_meal");
         return $results = $this->formatData($results);
     }
 
@@ -127,10 +107,72 @@ class Database
         return count($results) == 1 ? $results[0] : -1;
     }
 
-    function getReservationsPerDayPerHourPerMeal() {
-        //TODO request to send
-        //the date to lookup should be in date('YYYY-mm-dd') ((hopefully))
-        // select resHour, fkMeal, count(idReservation) as numberReservations from t_reservation where date(resDate)='2021-01-21' group by resHour, fkMeal order by resHour, fkMeal
+    /**
+     * Get the number of reservations for the recap
+     * @param string $date Date of the recap
+     * 
+     * @return array
+     */
+    public function getReservationsPerDayPerHourPerMeal($date) {
+        $req = $this->queryPrepareExecute(
+            "SELECT resHour, fkMeal, count(idReservation) AS numberReservations FROM t_reservation WHERE date(resDate) = :varDate GROUP BY resHour, fkMeal ORDER BY resHour, fkMeal",
+            array(
+                array(
+                    "marker" => "varDate",
+                    "var" => $date,
+                    "type" => PDO::PARAM_STR
+                )
+            )
+        );
+        $result = $this->formatData($req);
+        $this->unsetData($req);
+        return $result;
+    }
+
+    /**
+     * Add a meal to the database
+     * @param string $mealName Name of the meal
+     * 
+     * @return void
+     */
+    public function addMeal($mealName) {
+        $this->queryPrepareExecute(
+            "INSERT INTO t_meal (meaName) VALUES (:varMeaName)",
+            array(
+                array(
+                    "marker" => "varMeaName",
+                    "var" => $mealName,
+                    "type" => PDO::PARAM_STR
+                )
+            )
+        );
+    }
+
+    public function setNewCurrentMeals($mealName1, $mealName2) {
+        // Set false to the old current meals
+        $this->querySimpleExecute(
+            "UPDATE t_meal SET meaIsCurrentMeal = 0 WHERE meaIsCurrentMeal = 1"
+        );
+        // Set true to the new current meals
+        $this->queryPrepareExecute(
+            "UPDATE t_meal SET meaIsCurrentMeal = 1 WHERE meaName = :varMeaName",
+            array(
+                array(
+                    "marker" => "varMeaName",
+                    "var" => $mealName1,
+                    "type" => PDO::PARAM_STR
+                )
+            )
+        );
+        $this->queryPrepareExecute(
+            "UPDATE t_meal SET meaIsCurrentMeal = 1 WHERE meaName = :varMeaName",
+            array(
+                array(
+                    "marker" => "varMeaName",
+                    "var" => $mealName2,
+                    "type" => PDO::PARAM_STR)
+            )
+        );
     }
 
     /**
@@ -332,7 +374,6 @@ class Database
      */
     public function login($username)
     {
-        // $results = $this->querySimpleExecute("SELECT * FROM t_user WHERE useUsername = :username");
         $values = array(
             1=> array(
                 'marker' => ':username',
@@ -346,7 +387,6 @@ class Database
         $results = $this->formatData($req);
 
         if (count($results) > 0) {
-            //var_dump($results);
             return $results[0];
         }
 
@@ -399,23 +439,4 @@ class Database
             //error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}", 3, "/logs/new");
         }
     }
-
-    /**
-     * prepare the execution of a query by binding values to prevent injection
-     * @param $query
-     * @param $binds
-     * @return bool|PDOStatement
-     */
-    protected function queryPrepareExecute($query, $binds)
-    {
-        $req = $this->connector->prepare($query);
-        foreach($binds as $bind)
-        {
-            $req->bindValue($bind['marker'], $bind['var'], $bind['type']);
-        }
-        $req->execute();
-
-        return $req;
-    }
-
 }

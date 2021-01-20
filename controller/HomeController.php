@@ -183,11 +183,17 @@ class HomeController extends Controller
      */
     private function AccueilAction()
     {
+        include_once 'model/Database.php';
+        $db = new Database();
+
+        $currentMeals = $db->getCurrentMeals();
 
         $view = file_get_contents('view/page/Accueil.php');
         ob_start();
         eval('?>' . $view);
         $content = ob_get_clean();
+
+        $db = null;
 
         return $content;
     }
@@ -251,13 +257,80 @@ class HomeController extends Controller
      */
     private function OptionAction()
     {
+        // Reset variables
+        $menuErrors = null;
+        $menuSuccess = null;
+
+        // Validation
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            if (isset($_POST['submitBtn'])) {
+
+                $menuErrors = array();
+
+                // No post values
+                if (!array_key_exists("inputMenu1", $_POST) || !array_key_exists("inputMenu2", $_POST)) {
+                    $menuErrors[] = "Une erreur est survenue, veuillez réessayer.";
+                }
+
+                // If success
+                if (count($menuErrors) == 0) {
+
+                    include_once 'model/Database.php';
+                    $db = new Database();
+
+                    // Meals name
+                    $menu1 = htmlspecialchars($_POST['inputMenu1']);
+                    $menu2 = htmlspecialchars($_POST['inputMenu2']);
+
+                    // Meals in DB
+                    $meals = $db->getAllMeals();
+
+                    // Check if they are already in the DB otherwise create them in the DB
+                    $menu1Exists = false;
+                    $menu2Exists = false;
+
+                    foreach ($meals as $meal) {
+                        if (strtolower($meal['meaName']) == strtolower($menu1)) {
+                            $menu1Exists = true;
+                        }
+                        if (strtolower($meal['meaName']) == strtolower($menu2)) {
+                            $menu2Exists = true;
+                        }
+                    }
+
+                    if (!$menu1Exists) {
+                        $db->addMeal($menu1);
+                    }
+                    if (!$menu2Exists) {
+                        $db->addMeal($menu2);
+                    }
+                    
+                    // Set the new meals to currentMeal
+                    $db->setNewCurrentMeals($menu1, $menu2);
+
+                    // User feedback
+                    $menuSuccess = true;
+
+                    $db = null;
+                }
+            }
+        }
+        // End validation
+
+        include_once 'model/Database.php';
+
+        $db = new Database();
+
+        $meals = $db->getAllMeals();
+        $currentMeals = $db->getCurrentMeals();
 
         $view = file_get_contents('view/page/Option.php');
-
 
         ob_start();
         eval('?>' . $view);
         $content = ob_get_clean();
+
+        $db = null;
 
         return $content;
     }
@@ -287,11 +360,21 @@ class HomeController extends Controller
      */
     private function RecapAction()
     {
+        include_once 'model/Database.php';
+        $database = new Database();
+
+        $currentDate = date('Y-m-d');
+
+        $reservations = $database->getReservationsPerDayPerHourPerMeal($currentDate);
+        $currentMeals = $database->getCurrentMeals();
+
         $view = file_get_contents('view/page/Recap.php');
 
         ob_start();
         eval('?>' . $view);
         $content = ob_get_clean();
+
+        $database = null;
 
         return $content;
     }

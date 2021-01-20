@@ -1,6 +1,33 @@
 <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 
+<?php
+    $mealHour11Number1 = "";
+    $mealHour11Number2 = "";
+    $mealHour12Number1 = "";
+    $mealHour12Number2 = "";
+
+    if (isset($reservations)) {
+        if (!empty($reservations)) {
+            foreach ($reservations as $reservation) {
+                if ($reservation['resHour'] == "11") {
+                    if ($reservation['fkMeal'] == $currentMeals[0]['idMeal']) {
+                        $mealHour11Number1 = $reservation['numberReservations'] . "x";
+                    } else if ($reservation['fkMeal'] == $currentMeals[1]['idMeal']) {
+                        $mealHour11Number2 = $reservation['numberReservations'] . "x";
+                    }
+                } else if ($reservation['resHour'] == "12") {
+                    if ($reservation['fkMeal'] == $currentMeals[0]['idMeal']) {
+                        $mealHour12Number1 = $reservation['numberReservations'] . "x";
+                    } else if ($reservation['fkMeal'] == $currentMeals[1]['idMeal']) {
+                        $mealHour12Number2 = $reservation['numberReservations'] . "x";
+                    }
+                }
+            }
+        }
+    }
+?>
+
 <div class="container">
     <div class="my-4">
         <div class="text-center">
@@ -9,7 +36,6 @@
         <div id="menuRecap" class="p-5">
             <div class="mb-5 text-center">
                 <h1 class="my-0">Récapitulatif des menus végétariens du</h1>
-                <div class="ligne ligne-admin"></div>
                 <h1 class="my-0"><?= date("d/m/Y") ?></h5>
             </div>
             <div class="textAccueil textAccueil-admin mb-4 p-5">
@@ -17,13 +43,17 @@
                 <div class="d-flex justify-content-around flex-wrap">
                     <div class="text-center my-1">
                         <p class="mb-0">Menu n°1</p>
-                        <h3 class="py-0">Hamburger végétarien</h3>
-                        <h1 class="display-1">4x</h1>
+                        <h3 class="py-0"><?= $currentMeals[0]['meaName'] ?></h3>
+                        <h1 class="display-1">
+                            <?= $mealHour11Number1 ?>
+                        </h1>
                     </div>
                     <div class="text-center my-1">
                         <p class="mb-0">Menu n°2</p>
-                        <h3 class="py-0">Falafele végétarienne</h3>
-                        <h1 class="display-1">4x</h1>
+                        <h3 class="py-0"><?= $currentMeals[1]['meaName'] ?></h3>
+                        <h1 class="display-1">
+                            <?= $mealHour11Number2 ?>
+                        </h1>
                     </div>
                 </div>
             </div>
@@ -32,13 +62,17 @@
                 <div class="d-flex justify-content-around flex-wrap">
                     <div class="text-center my-1">
                         <p class="mb-0">Menu n°1</p>
-                        <h3 class="py-0">Hamburger végétarien</h3>
-                        <h1 class="display-1">4x</h1>
+                        <h3 class="py-0"><?= $currentMeals[0]['meaName'] ?></h3>
+                        <h1 class="display-1">
+                            <?= $mealHour12Number1 ?>
+                        </h1>
                     </div>
                     <div class="text-center my-1">
                         <p class="mb-0">Menu n°2</p>
-                        <h3 class="py-0">Falafele végétarienne</h3>
-                        <h1 class="display-1">4x</h1>
+                        <h3 class="py-0"><?= $currentMeals[1]['meaName'] ?></h3>
+                        <h1 class="display-1">
+                            <?= $mealHour12Number2 ?>
+                        </h1>
                     </div>
                 </div>
             </div>

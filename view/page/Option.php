@@ -52,20 +52,87 @@ echo '</tr></table>';
 $week_end = date('d-m-Y', strtotime('+' . (6 - $day) . ' days'));
 ?>
     <div class="my-4">
-        <h3 class="my-0">Changement des menus</h3>
+        <h3 class="my-0">Changement des menus de la semaine</h3>
         <div class="ligne ligne-admin"></div>
     </div>
 
-    <form action="#" method="post" class="mb-5">
-    <div class="form-group">
-        <label for="menuNumberOne">Menu n°1</label>
-        <input type="text" class="form-control" id="menuNumberOne" name="menuNumberOne">
-    </div>
-    <div class="form-group">
-        <label for="menuNumberTwo">Menu n°2</label>
-        <input type="text" class="form-control" id="menuNumberTwo" name="menuNumberTwo">
-    </div>
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
-    </form>
+    <?php 
+    if (isset($menuErrors)) {
+        if (count($menuErrors) > 0) {
+    ?>
+            <div class="alert alert-danger">
+                Oups ... Nous avons rencontré quelques erreurs :<br>
+                <ul class="mb-0">
+    <?php
+                foreach ($menuErrors as $error) {
+                    echo "<li>$error</li>";
+                }
+    ?>
+                </ul>
+            </div>
+    <?php
+        }
+    }
+    ?>
 
+    <?php 
+    if (isset($menuSuccess)) {
+        if ($menuSuccess) {
+    ?>
+            <div class="alert alert-success">
+                Les changements de menu ont bien été effectués !
+                <ul class="mb-0">
+                        <li><a href="index.php?controller=home&action=Accueil" style="text-decoration: none;">Voir la page d'accueil</a></li>
+                </ul>
+            </div>
+    <?php
+        }
+    }
+    ?>
+
+    <form action="#" method="post" class="mb-5" autocomplete="off">
+        <div class="form-group">
+            <label for="menuNumberOne">Menu n°1</label>
+            <input type="text" class="form-control" id="inputMenu1" name="inputMenu1" list="menuNumberOne" value="<?= $currentMeals[0]['meaName'] ?>">
+            <datalist id="menuNumberOne" name="menuNumberOne">
+                <?php
+                if (isset($meals))  {
+                    foreach($meals as $meal) {
+                ?>
+                        <option value="<?= $meal['meaName'] ?>">
+                <?php
+                    }
+                }
+                ?>
+            </datalist>
+        </div>
+
+        <div class="form-group">
+            <label for="menuNumberTwo">Menu n°2</label>
+            <input type="text" class="form-control" id="inputMenu2" name="inputMenu2" list="menuNumberOne" value="<?= $currentMeals[1]['meaName'] ?>">
+            <datalist id="menuNumberOne" name="menuNumberOne">
+                <?php
+                if (isset($meals))  {
+                    foreach($meals as $meal) {
+                ?>
+                        <option value="<?= $meal['meaName'] ?>">
+                <?php
+                    }
+                }
+                ?>
+            </datalist>
+        </div>
+
+        <button type="reset" class="btn btn-dark" id="resetBtn">Réinitialiser les champs</button>
+        <button type="submit" name="submitBtn" class="btn btn-primary">Enregistrer</button>
+    </form>
 </div>
+
+<script type="text/javascript">
+    $('#resetBtn').click(function () {
+        var defaultMenu1 = <?= $currentMeals[0]['meaName'] ?>;
+        var defaultMenu2 = <?= $currentMeals[1]['meaName'] ?>;
+        $('#inputMenu1').attr("value", defaultMenu1);
+        $('#inputMenu2').attr("value", defaultMenu2);
+    });
+</script>

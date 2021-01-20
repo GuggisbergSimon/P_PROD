@@ -36,7 +36,7 @@
         <img class="img-fluid" src="resources/userContent/image_contact.jpg">
     </div>
 
-    <div class="contactbarre">
+    <div class="contactbarre <?php if ($_SESSION['adminRight']) { echo "contactbarre-admin text-white"; } ?>">
         <p>Contact</p>
     </div>
 
@@ -49,7 +49,7 @@
     </div>
 
     <h3>Adresse et numéro de téléphone</h3>
-    <div class="ligne"></div>
+    <div class="ligne <?php if ($_SESSION['adminRight']) { echo "ligne-admin"; } ?>"></div>
     <div class="info">
         <p>
             Rue de Sébeillon 12 <br>
@@ -61,7 +61,7 @@
     <!-- formulaire de contact-->
 
     <h3>Formulaire de contact</h3>
-    <div class="ligne"></div>
+    <div class="ligne <?php if ($_SESSION['adminRight']) { echo "ligne-admin"; } ?>"></div>
 
     <?php
     if (isset($contactError)) {
