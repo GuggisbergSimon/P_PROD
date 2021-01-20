@@ -363,9 +363,10 @@ class HomeController extends Controller
         include_once 'model/Database.php';
         $database = new Database();
 
-        $currentDate = '2020-01-21';
+        $currentDate = date('Y-m-d');
 
         $reservations = $database->getReservationsPerDayPerHourPerMeal($currentDate);
+        $currentMeals = $database->getCurrentMeals();
 
         $view = file_get_contents('view/page/Recap.php');
 
