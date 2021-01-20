@@ -303,26 +303,20 @@ class HomeController extends Controller
      */
     private function CommanderAction()
     {
+        include_once 'model/Database.php';
+        $database = new Database();
+
         // VALIDATION
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if (isset($_POST['submitBtn'])) {
-                include_once 'model/Database.php';
 
-                $database = new Database();
                 $sResDate = 'resDate';
                 //$sResTable = 'resTable';
                 $sResHour = 'resHour';
+                $meals = $database->readTable('t_meal');
                 $sResMeal = 'resMeal';
-                $aMeals = array(
-                    //1 => 'Daily1',
-                    //2 => 'Daily2',
-                    //3 => 'Pasta',
-                    //4 => 'Burger',
-                    5 => 'Vegetarian'
-                );
-        
                 $dDateRegex = '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/';
-        
+
                 $commandErrors = array();
         
                 //if (array_key_exists($sResTable, $_POST) && $_POST[$sResTable] > 0 && $_POST[$sResTable] < 19)
@@ -334,12 +328,16 @@ class HomeController extends Controller
                     $commandErrors[] = "Veuillez entrer une heure correcte.";
                 }
         
-                if (!array_key_exists($sResMeal, $_POST) || $_POST[$sResMeal] <= 0 || $_POST[$sResMeal] >= 6) {
+                if (!array_key_exists($sResMeal, $_POST) || !array_key_exists($_POST[$sResMeal], $meals) || !$meals[$_POST[$sResMeal]]) {
                     $commandErrors[] = "Veuillez entrer un type de plat correct.";
                 }
         
                 if (!array_key_exists('username', $_SESSION)) {
                     $commandErrors[] = "Veuillez vous connectez pour ajouter une réservation.";
+                }
+
+                if (!array_key_exists('resMeal', $_POST) || $_POST['resMeal'] == 0) {
+                    $commandErrors[] = "Veuillez entrer un plat valide.";
                 }
         
                 if (count($commandErrors) == 0) {
