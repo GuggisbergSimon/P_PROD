@@ -6,15 +6,7 @@
     <p class="my-auto">Ecole technique - Ecole des métiers - Lausanne</p>
 </div>
 
-<?php
-	if(array_key_exists('role', $_SESSION) && $_SESSION['role'] >= 50){
-        $admin = true;
-	} else {
-        $admin = false;
-    }
-?>
-
-<nav class="navbar navbar-expand-lg navbar-dark py-3 <?php if ($admin) { echo "navbar-admin"; } ?>" style="background-color: #556B2F;">
+<nav class="navbar navbar-expand-lg navbar-dark py-3 <?php if ($_SESSION['adminRight']) { echo "navbar-admin"; } ?>" style="background-color: #556B2F;">
     <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

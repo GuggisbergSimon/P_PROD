@@ -117,13 +117,64 @@ class Database
     }
 
     function getCurrentMeals() {
-        $results = $this->querySimpleExecute("select * from t_meal where meaIsCurrentMeal");
+        $results = $this->querySimpleExecute("select * from t_meal where meaIsCurrentMeal limit 2");
+        return $results = $this->formatData($results);
+    }
+
+    function getAllMeals() {
+        $results = $this->querySimpleExecute("select * from t_meal");
         return $results = $this->formatData($results);
     }
 
     function getMeal($mealId) {
         $results = $this->querySimpleExecute("select * from t_meal where idMeal=$mealId");
         return $results = $this->formatData($results)[0];
+    }
+
+    /**
+     * Add a meal to the database
+     * @param string $mealName Name of the meal
+     * 
+     * @return void
+     */
+    public function addMeal($mealName) {
+        $this->queryPrepareExecute(
+            "INSERT INTO t_meal (meaName) VALUES (:varMeaName)",
+            array(
+                array(
+                    "marker" => "varMeaName",
+                    "var" => $mealName,
+                    "type" => PDO::PARAM_STR
+                )
+            )
+        );
+    }
+
+    public function setNewCurrentMeals($mealName1, $mealName2) {
+        // Set false to the old current meals
+        $this->querySimpleExecute(
+            "UPDATE t_meal SET meaIsCurrentMeal = 0 WHERE meaIsCurrentMeal = 1"
+        );
+        // Set true to the new current meals
+        $this->queryPrepareExecute(
+            "UPDATE t_meal SET meaIsCurrentMeal = 1 WHERE meaName = :varMeaName",
+            array(
+                array(
+                    "marker" => "varMeaName",
+                    "var" => $mealName1,
+                    "type" => PDO::PARAM_STR
+                )
+            )
+        );
+        $this->queryPrepareExecute(
+            "UPDATE t_meal SET meaIsCurrentMeal = 1 WHERE meaName = :varMeaName",
+            array(
+                array(
+                    "marker" => "varMeaName",
+                    "var" => $mealName2,
+                    "type" => PDO::PARAM_STR)
+            )
+        );
     }
 
     /**
@@ -325,7 +376,6 @@ class Database
      */
     public function login($username)
     {
-        // $results = $this->querySimpleExecute("SELECT * FROM t_user WHERE useUsername = :username");
         $values = array(
             1=> array(
                 'marker' => ':username',
@@ -339,7 +389,6 @@ class Database
         $results = $this->formatData($req);
 
         if (count($results) > 0) {
-            //var_dump($results);
             return $results[0];
         }
 

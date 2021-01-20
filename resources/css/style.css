@@ -154,7 +154,7 @@ h3 {
     overflow: hidden;
 }
 
-.ligne-admin {
+.ligne-admin, .contactbarre-admin {
     background-color: darkblue !important;
 }
 
