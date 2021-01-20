@@ -282,6 +282,12 @@ class HomeController extends Controller
                     $menu1 = htmlspecialchars($_POST['inputMenu1']);
                     $menu2 = htmlspecialchars($_POST['inputMenu2']);
 
+                    if (empty($menu1)) {
+                        $men1 = "-";
+                    } else if (empty($menu2)) {
+                        $menu2 = "-";
+                    }
+
                     // Meals in DB
                     $meals = $db->getAllMeals();
 
