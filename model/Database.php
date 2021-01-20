@@ -123,7 +123,14 @@ class Database
 
     function getMeal($mealId) {
         $results = $this->querySimpleExecute("select * from t_meal where idMeal=$mealId");
-        return $results = $this->formatData($results)[0];
+        $results = $this->formatData($results);
+        return count($results) == 1 ? $results[0] : -1;
+    }
+
+    function getReservationsPerDayPerHourPerMeal() {
+        //TODO request to send
+        //the date to lookup should be in date('YYYY-mm-dd') ((hopefully))
+        // select resHour, fkMeal, count(idReservation) as numberReservations from t_reservation where date(resDate)='2021-01-21' group by resHour, fkMeal order by resHour, fkMeal
     }
 
     /**
