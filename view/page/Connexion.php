@@ -17,13 +17,9 @@
         <input type="text" class="form-control" id="NomUser" aria-describedby="AideNomUser" name="username" value="<?php if (isset($_POST['username'])) { echo htmlspecialchars($_POST['username']); } ?>">
         <small id="AideNomUser" class="form-text text-muted">Votre nom d'utilisateur ne sera pas partagé.</small>
       </div>
-      <div class="form-group">
+      <div class="form-group mb-4">
         <label for="MotDePasse">Mot de passe</label>
         <input type="password" class="form-control" id="MotDePasse" name="password">
-      </div>
-      <div class="form-check mb-2">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Rester connecté</label>
       </div>
       <button type="submit" name="submitBtn" class="btn btn-primary">Connexion</button>
       <a href="index.php?controller=home&action=Register" class="ml-2" style="text-decoration: none;">Pas encore inscrit ?</a>

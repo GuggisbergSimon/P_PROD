@@ -37,11 +37,17 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
 
 ## TODO
 Bugs connus :
+- restreindre les commandes en semaine de cours (pas samedi-dimanche)
+- on peut commander pour today
+- mettre 0x si valeur vide
 
 Fonctionnalités légères :
+- dans récapitulatif, uniquement les menu courant sont affichés -> ou tout afficher ou restreindre les choix de menus lors de commande à ce qui est dans deadline (créer champ deadline pour t_meal, à updater lors d'un changement de menus)
+- rendre tableau vue admin mieux responsive (pour petites devices)
 - changer de semaine en mode admin (flèches gauche/droite)
 - Mettre plus d'error_log
 - critère réservation à ajouter - manger sur place/à l'emporter
+- voir ensemble de commandes passées + en annuler (pas dispo le matin même)
 - ajouter options de gestion de compte (suppression, reset mdp, etc)
 
 Fonctionnalités complexes :
