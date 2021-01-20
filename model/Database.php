@@ -128,7 +128,30 @@ class Database
 
     function getMeal($mealId) {
         $results = $this->querySimpleExecute("select * from t_meal where idMeal=$mealId");
-        return $results = $this->formatData($results)[0];
+        $results = $this->formatData($results);
+        return count($results) == 1 ? $results[0] : -1;
+    }
+
+    /**
+     * Get the number of reservations for the recap
+     * @param string $date Date of the recap
+     * 
+     * @return array
+     */
+    public function getReservationsPerDayPerHourPerMeal($date) {
+        $req = $this->queryPrepareExecute(
+            "SELECT resHour, fkMeal, count(idReservation) AS numberReservations FROM t_reservation WHERE date(resDate) = :varDate GROUP BY resHour, fkMeal ORDER BY resHour, fkMeal",
+            array(
+                array(
+                    "marker" => "varDate",
+                    "var" => $date,
+                    "type" => PDO::PARAM_STR
+                )
+            )
+        );
+        $result = $this->formatData($req);
+        $this->unsetData($req);
+        return $result;
     }
 
     /**

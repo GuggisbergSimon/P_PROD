@@ -60,36 +60,36 @@ class HomeController extends Controller
 
                     if (array_key_exists('password', $_POST) && $_POST['password'] != "") {
                         if ($compte != -1) {
-                                if (password_verify($_POST['password'], $compte['usePassword'])) {
-                                    $_SESSION['username'] = $compte['useUsername'];
-                                    $_SESSION['role'] = $compte['useRole'];
-                                    $_SESSION['connected'] = true;
-                                    $_SESSION['loginError'] = null;
-                                    header("Location: index.php?controller=home&action=Accueil");
-                                } else {
-
-                                    $_SESSION['loginError'] = true;
-
-                                    //header("Location: index.php?controller=login&action=index");
-                                    //echo "mdp erroné - erreur 1";
-                                }
+                            if (password_verify($_POST['password'], $compte['usePassword'])) {
+                                $_SESSION['username'] = $compte['useUsername'];
+                                $_SESSION['role'] = $compte['useRole'];
+                                $_SESSION['connected'] = true;
+                                $_SESSION['loginError'] = null;
+                                header("Location: index.php?controller=home&action=Accueil");
                             } else {
 
                                 $_SESSION['loginError'] = true;
 
                                 //header("Location: index.php?controller=login&action=index");
-                                // echo "compte n'existe pas - erreur 2";
+                                //echo "mdp erroné - erreur 1";
                             }
                         } else {
+
                             $_SESSION['loginError'] = true;
 
-                            // echo "pas de mdp inséré - erreur 3";
+                            //header("Location: index.php?controller=login&action=index");
+                            // echo "compte n'existe pas - erreur 2";
                         }
                     } else {
                         $_SESSION['loginError'] = true;
 
-                        // echo "rien n'est rempli - erreur 4";
+                        // echo "pas de mdp inséré - erreur 3";
                     }
+                } else {
+                    $_SESSION['loginError'] = true;
+
+                    // echo "rien n'est rempli - erreur 4";
+                }
             }
         }
 
@@ -108,7 +108,7 @@ class HomeController extends Controller
     private function RegisterAction()
     {
         $view = file_get_contents('view/page/Inscription.php');
-        
+
         $registerErrors = array();
 
         if (array_key_exists('submitBtn', $_POST)) {
@@ -128,7 +128,7 @@ class HomeController extends Controller
 
                 if (!array_key_exists('email', $_POST) || $_POST['email'] == "") {
                     $registerErrors[] = "Veuillez remplir le champ Email.";
-                } else {                    
+                } else {
                     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                         $registerErrors[] = "Veuillez renseigner un mail valide.";
                     }
@@ -136,11 +136,11 @@ class HomeController extends Controller
 
 
                 if (!array_key_exists('firstName', $_POST) || $_POST['firstName'] == "") {
-                    $registerErrors[] = "Veuillez remplir le champ Prénom.";   
+                    $registerErrors[] = "Veuillez remplir le champ Prénom.";
                 }
 
                 if (!array_key_exists('lastName', $_POST) || $_POST['lastName'] == "") {
-                    $registerErrors[] = "Veuillez remplir le champ Nom.";   
+                    $registerErrors[] = "Veuillez remplir le champ Nom.";
                 }
 
                 if (!array_key_exists('username', $_POST) || ($registerRepository->userExistsAt(strtolower($_POST['username'])) >= 0)) {
@@ -230,9 +230,9 @@ class HomeController extends Controller
                         include_once 'model/Database.php';
                         $database = new Database();
                         $database->contactSendMail();
-            
+
                         $mailSent = true;
-                    
+
                         unset($contactError);
                         unset($_POST);
                     } else {
@@ -360,18 +360,27 @@ class HomeController extends Controller
      */
     private function RecapAction()
     {
+        include_once 'model/Database.php';
+        $database = new Database();
+
+        $currentDate = '2020-01-21';
+
+        $reservations = $database->getReservationsPerDayPerHourPerMeal($currentDate);
+
         $view = file_get_contents('view/page/Recap.php');
 
         ob_start();
         eval('?>' . $view);
         $content = ob_get_clean();
 
+        $database = null;
+
         return $content;
     }
 
     /**
      * Display Command Action
-     * 
+     *
      * @return string
      */
     private function CommanderAction()
@@ -386,25 +395,29 @@ class HomeController extends Controller
                 $sResDate = 'resDate';
                 //$sResTable = 'resTable';
                 $sResHour = 'resHour';
-                $meals = $database->readTable('t_meal');
                 $sResMeal = 'resMeal';
                 $dDateRegex = '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/';
 
                 $commandErrors = array();
-        
+
                 //if (array_key_exists($sResTable, $_POST) && $_POST[$sResTable] > 0 && $_POST[$sResTable] < 19)
                 if (!array_key_exists($sResDate, $_POST) || !preg_match($dDateRegex, $_POST[$sResDate]) || date('Y-m-d') > date('Y-m-d', strtotime($_POST[$sResDate]))) {
                     $commandErrors[] = "Veuillez entrer une date à partir de demain, dans un format correct.";
                 }
-        
+
                 if (!array_key_exists($sResHour, $_POST) || ($_POST[$sResHour] != 11 && $_POST[$sResHour] != 12)) {
                     $commandErrors[] = "Veuillez entrer une heure correcte.";
                 }
-        
-                if (!array_key_exists($sResMeal, $_POST) || !array_key_exists($_POST[$sResMeal], $meals) || !$meals[$_POST[$sResMeal]]) {
+
+                if (!array_key_exists($sResMeal, $_POST)) {
                     $commandErrors[] = "Veuillez entrer un type de plat correct.";
+                } else {
+                    $meal = $database->getMeal($_POST[$sResMeal]);
+                    if ($meal < 0 || !$meal['meaIsCurrentMeal']) {
+                        $commandErrors[] = "Veuillez entrer un type de plat correct.";
+                    }
                 }
-        
+
                 if (!array_key_exists('username', $_SESSION)) {
                     $commandErrors[] = "Veuillez vous connectez pour ajouter une réservation.";
                 }
@@ -412,12 +425,12 @@ class HomeController extends Controller
                 if (!array_key_exists('resMeal', $_POST) || $_POST['resMeal'] == 0) {
                     $commandErrors[] = "Veuillez entrer un plat valide.";
                 }
-        
+
                 if (count($commandErrors) == 0) {
                     $date = $_POST[$sResDate];
                     //$table = $_POST[$sResTable];
                     $hour = $_POST[$sResHour];
-        
+
                     //that condition is for checking wether the reservation exists already, only one reservation per date/table and hour
                     //TODO rework it to handle limit of 4 people per table
                     //if ($database->reservationExistsAt($date, $table, $hour) < 0) {
