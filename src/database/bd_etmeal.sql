@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mer 20 Janvier 2021 à 08:20
+-- Généré le :  Mer 20 Janvier 2021 à 11:21
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
@@ -34,6 +34,14 @@ CREATE TABLE `t_meal` (
   `meaPicturePath` varchar(50) NOT NULL,
   `meaIsCurrentMeal` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `t_meal`
+--
+
+INSERT INTO `t_meal` (`idMeal`, `meaName`, `meaPicturePath`, `meaIsCurrentMeal`) VALUES
+(1, 'Assiette végétarienne', '', 1),
+(2, 'Burger végétarien', '', 1);
 
 -- --------------------------------------------------------
 
@@ -105,17 +113,17 @@ ALTER TABLE `t_user`
 -- AUTO_INCREMENT pour la table `t_meal`
 --
 ALTER TABLE `t_meal`
-  MODIFY `idMeal` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idMeal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `t_reservation`
 --
 ALTER TABLE `t_reservation`
-  MODIFY `idReservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idReservation` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `t_user`
 --
 ALTER TABLE `t_user`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Contraintes pour les tables exportées
 --

@@ -2,25 +2,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 
 <?php
-    $mealHour11Number1 = "";
-    $mealHour11Number2 = "";
-    $mealHour12Number1 = "";
-    $mealHour12Number2 = "";
+    $mealHour11Number1 = "0";
+    $mealHour11Number2 = "0";
+    $mealHour12Number1 = "0";
+    $mealHour12Number2 = "0";
 
     if (isset($reservations)) {
         if (!empty($reservations)) {
             foreach ($reservations as $reservation) {
                 if ($reservation['resHour'] == "11") {
                     if ($reservation['fkMeal'] == $currentMeals[0]['idMeal']) {
-                        $mealHour11Number1 = $reservation['numberReservations'] . "x";
+                        $mealHour11Number1 = $reservation['numberReservations'];
                     } else if ($reservation['fkMeal'] == $currentMeals[1]['idMeal']) {
-                        $mealHour11Number2 = $reservation['numberReservations'] . "x";
+                        $mealHour11Number2 = $reservation['numberReservations'];
                     }
                 } else if ($reservation['resHour'] == "12") {
                     if ($reservation['fkMeal'] == $currentMeals[0]['idMeal']) {
-                        $mealHour12Number1 = $reservation['numberReservations'] . "x";
+                        $mealHour12Number1 = $reservation['numberReservations'];
                     } else if ($reservation['fkMeal'] == $currentMeals[1]['idMeal']) {
-                        $mealHour12Number2 = $reservation['numberReservations'] . "x";
+                        $mealHour12Number2 = $reservation['numberReservations'];
                     }
                 }
             }
@@ -45,14 +45,14 @@
                         <p class="mb-0">Menu n°1</p>
                         <h3 class="py-0"><?= $currentMeals[0]['meaName'] ?></h3>
                         <h1 class="display-1">
-                            <?= $mealHour11Number1 ?>
+                            <?= $mealHour11Number1 ?>x
                         </h1>
                     </div>
                     <div class="text-center my-1">
                         <p class="mb-0">Menu n°2</p>
                         <h3 class="py-0"><?= $currentMeals[1]['meaName'] ?></h3>
                         <h1 class="display-1">
-                            <?= $mealHour11Number2 ?>
+                            <?= $mealHour11Number2 ?>x
                         </h1>
                     </div>
                 </div>
@@ -64,14 +64,14 @@
                         <p class="mb-0">Menu n°1</p>
                         <h3 class="py-0"><?= $currentMeals[0]['meaName'] ?></h3>
                         <h1 class="display-1">
-                            <?= $mealHour12Number1 ?>
+                            <?= $mealHour12Number1 ?>x
                         </h1>
                     </div>
                     <div class="text-center my-1">
                         <p class="mb-0">Menu n°2</p>
                         <h3 class="py-0"><?= $currentMeals[1]['meaName'] ?></h3>
                         <h1 class="display-1">
-                            <?= $mealHour12Number2 ?>
+                            <?= $mealHour12Number2 ?>x
                         </h1>
                     </div>
                 </div>

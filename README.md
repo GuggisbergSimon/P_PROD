@@ -31,26 +31,27 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
 5. dans uwamp, sélectionner phpmyadmin
 6. connectez vous avec "root" et "root" comme usename/password
 7. importez une base de données, avec le fichier suivant : https://github.com/GuggisbergSimon/P_PROD/blob/main/src/database/bd_etmeal.sql
-8. Rendez vous sur le site internet en cliquant sur le bouton "navigateur www" puis le lien P_PROD
+8. Rendez vous sur le site internet en cliquant sur le bouton "navigateur www" puis le lien P_PROD, les étapes suivantes sont optionnelles, pour créer un autre compte administrateur
 9. Créez un utilisateur via connexion -> inscription
 10. Retournez sur la base de données mysql, se rendre dans t_user et modifiez un user existant avec droits supérieurs à 50, pour qu'il soit administrateur.
 
 ## TODO
 Bugs connus :
-
-TODO avant rendu :
-- Deux menus végétariens updatables par la vue admin
+- restreindre les commandes en semaine de cours (pas samedi-dimanche)
+- on peut commander pour today
+- mettre 0x si valeur vide
 
 Fonctionnalités légères :
-- ajouter option pour imprimer vue admin/jour (jour courant)
-- compter le nombre de plats par jour (autre ligne) par tranche horaire
+- dans récapitulatif, uniquement les menu courant sont affichés -> ou tout afficher ou restreindre les choix de menus lors de commande à ce qui est dans deadline (créer champ deadline pour t_meal, à updater lors d'un changement de menus)
+- rendre tableau vue admin mieux responsive (pour petites devices)
 - changer de semaine en mode admin (flèches gauche/droite)
 - Mettre plus d'error_log
 - critère réservation à ajouter - manger sur place/à l'emporter
+- voir ensemble de commandes passées + en annuler (pas dispo le matin même)
 - ajouter options de gestion de compte (suppression, reset mdp, etc)
 
 Fonctionnalités complexes :
-- envoyer un email/jour pour le lendemain/surlendemain
+- envoyer un email/jour (le minuit à 23h59 par ex) pour les commandes du lendemain/surlendemain
 - identifier personne via carte étudiant/eduvaud
 - pas de vérification de compte
 - mettre image pour plats via vue admin
