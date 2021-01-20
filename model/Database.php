@@ -435,7 +435,6 @@ class Database extends Model
             //echo 'Message has been sent';
         } catch (Exception $e) {
             //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            //fopen("logs/testfile.txt", "w");
             error_log("\n[" . date("H:i:s Y-m-d") . "]" . "Message could not be sent. Mailer Error: {$mail->ErrorInfo}", 3, "logs/ErrorLogs.log");
             //error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}", 3, "/logs/new");
         }
