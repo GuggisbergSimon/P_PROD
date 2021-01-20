@@ -405,6 +405,12 @@ class HomeController extends Controller
                 if (!array_key_exists($sResDate, $_POST) || !preg_match($dDateRegex, $_POST[$sResDate]) || date('Y-m-d') >= date('Y-m-d', strtotime($_POST[$sResDate]))) {
                     $commandErrors[] = "Veuillez entrer une date à partir de demain, dans un format correct.";
                 }
+                else {
+                    $weekDay = date("w", strtotime($_POST[$sResDate]));
+                    if ($weekDay == 0 || $weekDay == 6) {
+                        $commandErrors[] = "Veuillez choisir une date en semaine, et non pas un samedi/dimanche.";
+                    }
+                }
 
                 if (!array_key_exists($sResHour, $_POST) || ($_POST[$sResHour] != 11 && $_POST[$sResHour] != 12)) {
                     $commandErrors[] = "Veuillez entrer une heure correcte.";

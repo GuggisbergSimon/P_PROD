@@ -37,7 +37,6 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
 
 ## TODO
 Bugs connus :
-- restreindre les commandes en semaine de cours (pas samedi-dimanche)
 
 Fonctionnalités légères :
 - dans récapitulatif, uniquement les menu courant sont affichés -> ou tout afficher ou restreindre les choix de menus lors de commande à ce qui est dans deadline (créer champ deadline pour t_meal, à updater lors d'un changement de menus)
