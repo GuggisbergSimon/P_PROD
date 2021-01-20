@@ -360,11 +360,20 @@ class HomeController extends Controller
      */
     private function RecapAction()
     {
+        include_once 'model/Database.php';
+        $database = new Database();
+
+        $currentDate = '2020-01-21';
+
+        $reservations = $database->getReservationsPerDayPerHourPerMeal($currentDate);
+
         $view = file_get_contents('view/page/Recap.php');
 
         ob_start();
         eval('?>' . $view);
         $content = ob_get_clean();
+
+        $database = null;
 
         return $content;
     }

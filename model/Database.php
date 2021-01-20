@@ -132,10 +132,26 @@ class Database
         return count($results) == 1 ? $results[0] : -1;
     }
 
-    function getReservationsPerDayPerHourPerMeal() {
-        //TODO request to send
-        //the date to lookup should be in date('YYYY-mm-dd') ((hopefully))
-        // select resHour, fkMeal, count(idReservation) as numberReservations from t_reservation where date(resDate)='2021-01-21' group by resHour, fkMeal order by resHour, fkMeal
+    /**
+     * Get the number of reservations for the recap
+     * @param string $date Date of the recap
+     * 
+     * @return array
+     */
+    public function getReservationsPerDayPerHourPerMeal($date) {
+        $req = $this->queryPrepareExecute(
+            "SELECT resHour, fkMeal, count(idReservation) AS numberReservations FROM t_reservation WHERE date(resDate) = :varDate GROUP BY resHour, fkMeal ORDER BY resHour, fkMeal",
+            array(
+                array(
+                    "marker" => "varDate",
+                    "var" => $date,
+                    "type" => PDO::PARAM_STR
+                )
+            )
+        );
+        $result = $this->formatData($req);
+        $this->unsetData($req);
+        return $result;
     }
 
     /**

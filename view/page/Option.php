@@ -123,7 +123,7 @@ $week_end = date('d-m-Y', strtotime('+' . (6 - $day) . ' days'));
             </datalist>
         </div>
 
-        <button type="reset" class="btn btn-dark" id="resetBtn">Réinitialiser</button>
+        <button type="reset" class="btn btn-dark" id="resetBtn">Réinitialiser les champs</button>
         <button type="submit" name="submitBtn" class="btn btn-primary">Enregistrer</button>
     </form>
 </div>
