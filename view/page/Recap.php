@@ -9,7 +9,6 @@
         <div id="menuRecap" class="p-5">
             <div class="mb-5 text-center">
                 <h1 class="my-0">Récapitulatif des menus végétariens du</h1>
-                <div class="ligne ligne-admin"></div>
                 <h1 class="my-0"><?= date("d/m/Y") ?></h5>
             </div>
             <div class="textAccueil textAccueil-admin mb-4 p-5">

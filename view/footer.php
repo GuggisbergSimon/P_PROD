@@ -1,4 +1,4 @@
-        <section id="footer" <?php if ($admin) { echo "class='footer-admin'"; } ?>>
+        <section id="footer" <?php if ($_SESSION['adminRight']) { echo "class='footer-admin'"; } ?>>
             <div class="container text-white p-3">
                 <div class="row d-flex justify-content-around">
                     <div class="col-md-6 col-sm-12">
