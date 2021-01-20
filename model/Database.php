@@ -10,6 +10,8 @@ require 'vendor/phpmailer/phpmailer/src/Exception.php';
 require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require 'vendor/phpmailer/phpmailer/src/SMTP.php';
 
+require 'Model.php';
+
 
 /**
  * Authors : Adrian Barreira, Simon Guggisberg & Hugo Ducommun
@@ -21,9 +23,8 @@ include_once 'config.ini.php';
 /**
  * Class Database
  */
-class Database
+class Database extends Model
 {
-    private $connector;
 
     /**
      * Database constructor
@@ -42,50 +43,6 @@ class Database
         } catch (PDOException $e) {
             die('Erreur : ' . $e->getMessage());
         }
-    }
-
-    /**
-     * @param $query
-     * @return false|PDOStatement
-     */
-    private function querySimpleExecute($query)
-    {
-        return $this->connector->query($query);
-    }
-
-        /**
-     * prepare the execution of a query by binding values to prevent injection
-     * @param $query
-     * @param $binds
-     * @return bool|PDOStatement
-     */
-    private function queryPrepareExecute($query, $binds)
-    {
-        $req = $this->connector->prepare($query);
-        foreach($binds as $bind)
-        {
-            $req->bindValue($bind['marker'], $bind['var'], $bind['type']);
-        }
-        $req->execute();
-
-        return $req;
-    }
-
-    /**
-     * @param $req
-     * @return mixed
-     */
-    private function formatData($req)
-    {
-        return $req->fetchALL(PDO::FETCH_ASSOC);
-    }
-
-    /**
-     * @param $req
-     */
-    private function unsetData($req)
-    {
-        $req->closeCursor();
     }
 
     /**
