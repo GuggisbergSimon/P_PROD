@@ -402,7 +402,7 @@ class HomeController extends Controller
                 $commandErrors = array();
 
                 //if (array_key_exists($sResTable, $_POST) && $_POST[$sResTable] > 0 && $_POST[$sResTable] < 19)
-                if (!array_key_exists($sResDate, $_POST) || !preg_match($dDateRegex, $_POST[$sResDate]) || date('Y-m-d') > date('Y-m-d', strtotime($_POST[$sResDate]))) {
+                if (!array_key_exists($sResDate, $_POST) || !preg_match($dDateRegex, $_POST[$sResDate]) || date('Y-m-d') >= date('Y-m-d', strtotime($_POST[$sResDate]))) {
                     $commandErrors[] = "Veuillez entrer une date à partir de demain, dans un format correct.";
                 }
 
