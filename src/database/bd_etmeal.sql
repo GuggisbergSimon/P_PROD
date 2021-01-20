@@ -40,7 +40,7 @@ CREATE TABLE `t_meal` (
 --
 
 INSERT INTO `t_meal` (`idMeal`, `meaName`, `meaPicturePath`, `meaIsCurrentMeal`) VALUES
-(1, 'Menu végétarien', '', 1),
+(1, 'Assiette végétarienne', '', 1),
 (2, 'Burger végétarien', '', 1);
 
 -- --------------------------------------------------------
