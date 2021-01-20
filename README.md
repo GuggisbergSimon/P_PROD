@@ -40,6 +40,7 @@ Bugs connus :
 
 Fonctionnalités légères :
 - dans récapitulatif, uniquement les menu courant sont affichés -> ou tout afficher ou restreindre les choix de menus lors de commande à ce qui est dans deadline (créer champ deadline pour t_meal, à updater lors d'un changement de menus)
+- ne pas pouvoir sélectionner une date dans les vacances scolaires
 - rendre tableau vue admin mieux responsive (pour petites devices)
 - changer de semaine en mode admin (flèches gauche/droite)
 - Mettre plus d'error_log
