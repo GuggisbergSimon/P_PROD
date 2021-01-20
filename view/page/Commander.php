@@ -7,8 +7,13 @@ if (!array_key_exists('username', $_SESSION)) {
 } else {
 
     echo '
+    
+
 <form action="#" method="post">
-    <div class="container">';
+    <div class="container">
+
+    <h3>Commander un plat</h3>
+    <div class="ligne"></div>';
 
     if (isset($commandErrors)) {
         if (count($commandErrors) > 0) {
@@ -30,7 +35,7 @@ if (!array_key_exists('username', $_SESSION)) {
     ?>
     <div class="form-group mt-4">
         <label>Date de la réservation : </label>
-        <input class="form-control" type="date" name="resDate">
+        <input class="form-control" type="date" name="resDate" value="<?php if (isset($_POST['resDate'])) { echo $_POST['resDate']; } else { echo date('Y-m-d', strtotime("+1 days")); } ?>">
     </div>
     <?php
         //<p>
@@ -41,8 +46,8 @@ if (!array_key_exists('username', $_SESSION)) {
         <label>Heure de la réservation</label>
         <select class="form-control" name="resHour">
             <option value="Choose">Choisir</option>
-            <option value="11">11h20-12h</option>
-            <option value="12">12h10-12h50</option>
+            <option value="11" <?php if (isset($_POST['resHour'])) { if ($_POST['resHour'] == "11") { echo "selected"; } }?>>11h20-12h</option>
+            <option value="12" <?php if (isset($_POST['resHour'])) { if ($_POST['resHour'] == "12") { echo "selected"; } }?>>12h10-12h50</option>
         </select>
     </div>
     <div class="form-group">
@@ -53,7 +58,11 @@ if (!array_key_exists('username', $_SESSION)) {
             $meals = $database->getCurrentMeals();
             foreach ($meals as $meal)
             {
-                echo '<option value="' . $meal["idMeal"] . '">' . $meal["meaName"] . '</option>';
+                if ($meal['meaName'] != "-") {
+            ?>
+                    <option value="<?= $meal["idMeal"] ?>" <?php if (isset($_POST['resMeal'])) { if ($_POST['resMeal'] == $meal['idMeal']) { echo "selected"; } }?>><?= $meal["meaName"] ?></option>
+            <?php
+                }
             }
             ?>
         </select>
