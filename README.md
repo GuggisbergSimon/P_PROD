@@ -8,9 +8,14 @@ Le dossier contient également un fichier de configuration contenant les accréd
 ### Fonctionnalités
 Le cahier des charges de ce projet projet était d'abord de permettre aux végétariens de pouvoir s'inscrire à la cafétaria, puis au reste des clients. En spécifiant notamment le numéro de la table souhaitée, le menu, l'heure, le jour et enfin le nom de la personne. Certaines de ces données ont été laissées en commentaire pour le moment, ce site s'adressant aux végétariens uniquement.
 
-Une fois une commande effectuée par un client, un courriel est envoyé à une addresse mail mentionnée dans le fichier de configuration mentionné au point précédent. Les utilisateurs ne peuvent pas accéder à la partie administration et vice-versa. Les deux options spécifiques aux utilisateurs sont de se déconnecter ou de passer une commande. Les deux options des admins sont de se déconnecter et de consulter la liste des commandes passées cette semaine, qui se réactualise automatiquemenet chaque semaine, tout comme le footer copyright, se mettant à jour automatiquement.
+Une fois une commande effectuée par un client, un courriel est envoyé aux addresses mail mentionnées dans le fichier de configuration, voir point précédent pour plus d'informations. Les utilisateurs ne peuvent pas accéder à la partie administration et vice-versa. Les deux options spécifiques aux utilisateurs sont de se déconnecter ou de passer une commande. Les trois options des admins sont :
+- de se déconnecter
+- de consulter un récapitulatif des commandes d'aujourd'hui. note : ne s'applique qu'aux menus actuels, si une commande a été passée avec un menu qui n'est plus à jour. alors cette réservation ne sera pas comptée.
+- de consulter la liste des commandes complètes passées cette semaine, qui se réactualise automatiquemenet chaque semaine, tout comme le footer copyright, se mettant à jour automatiquement.
 
 Idéalement le projet devrait être fini en septembre 2021, avec des tests lors du semestre de printemps.
+ 
+ Ce projet est actuellement hébergé sur le serveur gesteleves et n'est donc qu'accessible via le réseau local. Ultimement il devrait être hébergé sur un serveur externe à l'etml, afin de pouvoir s'y connecter via smartphones et de passer commande plus facilement.
 
 ### Outils utilisés
 - Composer est utilisé pour installer phpmailer afin de gérer l'envoi de mail.
@@ -37,19 +42,27 @@ Les parties du code concernant le choix de tables ou d'autres plats lors d'une c
 
 ## TODO
 Bugs connus :
+- des utilisateurs peuvent commander un plat puis le plat peut être changé sans qu'ils ne le sachent. de plus la vue admin récapitulatif ne comptera que le plat actuel. Plusieurs solutions :
+  - t_meal : ajouter champ deadline, à compléter en vue admin lors de changements de plats, n'accepter commande pour le plat donné que si dans la deadline
+  - vue admin : lorsque changements de menus, prévenir si réservation dans le futur avec ces plats avant d'effectuer le changement
+  - vue admin : lister tous les types de plats dans récapitulatif
+  - vue utilisateur : restreindre commande à semaine courante
 
 Fonctionnalités légères :
-- dans récapitulatif, uniquement les menu courant sont affichés -> ou tout afficher ou restreindre les choix de menus lors de commande à ce qui est dans deadline (créer champ deadline pour t_meal, à updater lors d'un changement de menus)
-- ne pas pouvoir sélectionner une date dans les vacances scolaires
-- rendre tableau vue admin mieux responsive (pour petites devices)
-- changer de semaine en mode admin (flèches gauche/droite)
-- Mettre plus d'error_log
-- critère réservation à ajouter - manger sur place/à l'emporter
-- voir ensemble de commandes passées + en annuler (pas dispo le matin même)
-- ajouter options de gestion de compte (suppression, reset mdp, etc)
+- vue admin : rendre tableau mieux responsive (pour petites devices)
+- vue admin : ajouter options pour promouvoir utilisateur en tant qu'admin
+- vue admin : ajouter changement de semaines pour le tableau (flèches gauche/droite)
+- vue user : voir l'ensemble de commandes passées + en annuler (pas dispo le matin même)
+- vue user : ajouter options de gestion de compte (suppression, reset mdp, etc)
+- vue user : empêcher sélection de dates lors de vacances/fériés scolaires
+- t_reservation : ajouter champ "créé le [date]"
+- t_reservation : ajouter champ "manger sur place/à l'emporter"
+- serveur : créer nouvelle adresse mail (sans "test" dans son nom)
+- serveur : Mettre plus d'error_log pour mieux suivre erreurs serveur
 
 Fonctionnalités complexes :
-- envoyer un email/jour (le minuit à 23h59 par ex) pour les commandes du lendemain/surlendemain
-- identifier personne via carte étudiant/eduvaud
-- pas de vérification de compte
-- mettre image pour plats via vue admin
+- vue admin : générer récapitulatif détaillé pdf puis l'envoyer par mail aux responsables via un bouton
+- vue admin/user : ajouter image pour plats
+- serveur : envoyer un email/jour récapitulatif (à minuit) pour les commandes du lendemain/surlendemain
+- sécurité : identifier personne via carte étudiant/eduvaud (déterminer manière de vérifier)
+- sécurité : vérifier le compte via email

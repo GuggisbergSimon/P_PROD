@@ -36,10 +36,10 @@
         <div id="menuRecap" class="p-5">
             <div class="mb-5 text-center">
                 <h1 class="my-0">Récapitulatif des menus végétariens du</h1>
-                <h1 class="my-0"><?= date("d/m/Y") ?></h5>
+                <h1 class="my-0"><?= date("d/m/Y") ?></h1>
             </div>
             <div class="textAccueil textAccueil-admin mb-4 p-5">
-                <h1 class="text-center mb-3">Tranche de 11h</h1>
+                <h1 class="text-center mb-3">Service de 11h</h1>
                 <div class="d-flex justify-content-around flex-wrap">
                     <div class="text-center my-1">
                         <p class="mb-0">Menu n°1</p>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="textAccueil textAccueil-admin mb-4 p-5">
-                <h1 class="text-center mb-3">Tranche de 12h</h1>
+                <h1 class="text-center mb-3">Service de 12h</h1>
                 <div class="d-flex justify-content-around flex-wrap">
                     <div class="text-center my-1">
                         <p class="mb-0">Menu n°1</p>
