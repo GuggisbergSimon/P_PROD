@@ -53,6 +53,24 @@ class Database
         return $this->connector->query($query);
     }
 
+        /**
+     * prepare the execution of a query by binding values to prevent injection
+     * @param $query
+     * @param $binds
+     * @return bool|PDOStatement
+     */
+    private function queryPrepareExecute($query, $binds)
+    {
+        $req = $this->connector->prepare($query);
+        foreach($binds as $bind)
+        {
+            $req->bindValue($bind['marker'], $bind['var'], $bind['type']);
+        }
+        $req->execute();
+
+        return $req;
+    }
+
     /**
      * @param $req
      * @return mixed
@@ -465,23 +483,4 @@ class Database
             //error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}", 3, "/logs/new");
         }
     }
-
-    /**
-     * prepare the execution of a query by binding values to prevent injection
-     * @param $query
-     * @param $binds
-     * @return bool|PDOStatement
-     */
-    protected function queryPrepareExecute($query, $binds)
-    {
-        $req = $this->connector->prepare($query);
-        foreach($binds as $bind)
-        {
-            $req->bindValue($bind['marker'], $bind['var'], $bind['type']);
-        }
-        $req->execute();
-
-        return $req;
-    }
-
 }
