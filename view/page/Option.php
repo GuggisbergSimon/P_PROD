@@ -10,14 +10,6 @@ include_once "model/Database.php";
 
 $day = date('w');
 
-$meals = [
-    1=> "Menu du jour 1",
-    2=> "Menu du jour 2",
-    3=> "Menu pâtes",
-    4 => "Menu hamburger",
-    5=> "Menu végétarien"
-];
-
 echo '
 <table class="table table-bordered w-100">
     <thead class="thead-dark">
@@ -49,7 +41,7 @@ for ($i = 0; $i < 5; $i++) {
             echo '
                 <p class="mb-0 mt-2">
                     ' . $reservation['resHour'] . 'h <br>
-                    ' . $meals[$reservation['fkMeal']] . ' <br>
+                    ' . $database->getMeal($reservation['fkMeal'])['meaName'] . ' <br>
                     Pour ' . $user['useFirstName'] . ' ' . $user['useLastName'] . '
                 </p>';
         }
