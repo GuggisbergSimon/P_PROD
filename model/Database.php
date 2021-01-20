@@ -116,6 +116,16 @@ class Database
         return $results = $this->formatData($results)[0]['idUser'];
     }
 
+    function getCurrentMeals() {
+        $results = $this->querySimpleExecute("select * from t_meal where meaIsCurrentMeal");
+        return $results = $this->formatData($results);
+    }
+
+    function getMeal($mealId) {
+        $results = $this->querySimpleExecute("select * from t_meal where idMeal=$mealId");
+        return $results = $this->formatData($results)[0];
+    }
+
     /**
      * Returns the user with the corresponding id as an array
      * @param $userId int

@@ -303,12 +303,13 @@ class HomeController extends Controller
      */
     private function CommanderAction()
     {
+        include_once 'model/Database.php';
+        $database = new Database();
+
         // VALIDATION
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if (isset($_POST['submitBtn'])) {
-                include_once 'model/Database.php';
 
-                $database = new Database();
                 $sResDate = 'resDate';
                 //$sResTable = 'resTable';
                 $sResHour = 'resHour';
@@ -327,13 +328,16 @@ class HomeController extends Controller
                     $commandErrors[] = "Veuillez entrer une heure correcte.";
                 }
         
-                if (!array_key_exists($sResMeal, $_POST) || !array_key_exists($_POST[$sResMeal], $meals) ) {
-                    //TODO check that the meal selected is selected in db
+                if (!array_key_exists($sResMeal, $_POST) || !array_key_exists($_POST[$sResMeal], $meals) || !$meals[$_POST[$sResMeal]]) {
                     $commandErrors[] = "Veuillez entrer un type de plat correct.";
                 }
         
                 if (!array_key_exists('username', $_SESSION)) {
                     $commandErrors[] = "Veuillez vous connectez pour ajouter une réservation.";
+                }
+
+                if (!array_key_exists('resMeal', $_POST) || $_POST['resMeal'] == 0) {
+                    $commandErrors[] = "Veuillez entrer un plat valide.";
                 }
         
                 if (count($commandErrors) == 0) {

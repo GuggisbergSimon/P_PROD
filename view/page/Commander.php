@@ -1,6 +1,6 @@
 <?php
 
-//todo choix de tables/menus mis en commentaires pour le moment, à rétablir si besoin est
+//todo choix de tables mis en commentaires pour le moment, à rétablir si besoin est
 if (!array_key_exists('username', $_SESSION)) {
     header("Location: index.php?controller=home&action=Connexion");
     exit();
@@ -27,16 +27,17 @@ if (!array_key_exists('username', $_SESSION)) {
         }
     }
 
-    echo '
+    ?>
     <div class="form-group mt-4">
         <label>Date de la réservation : </label>
         <input class="form-control" type="date" name="resDate">
-    </div>' .
+    </div>
+    <?php
         //<p>
         //<label>Numéro de table</label>
         //<input type="number" name="resTable" min="1" max="18" value="1">
         //</p>
-        '<div class="form-group">
+        ?><div class="form-group">
         <label>Heure de la réservation</label>
         <select class="form-control" name="resHour">
             <option value="Choose">Choisir</option>
@@ -47,18 +48,20 @@ if (!array_key_exists('username', $_SESSION)) {
     <div class="form-group">
         <label>Plat choisi : </label>
         <select class="form-control" name="resMeal">
-            ' . //<option value="0">Choisir</option>
-        //<option value="1">Menu du jour 1</option>
-        //<option value="2">Menu du jour 2</option>
-        //<option value="3">Menu pâtes</option>
-        //<option value="4">Menu burger</option>
-        '<option value="5">Menu végétarien</option>
+            <option value="0">Choisir</option>
+            <?php
+            $meals = $database->getCurrentMeals();
+            foreach ($meals as $meal)
+            {
+                echo '<option value="' . $meal["idMeal"] . '">' . $meal["meaName"] . '</option>';
+            }
+            ?>
         </select>
     </div>
     <input class="btn btn-primary mt-4 mb-4" name="submitBtn" type="submit">
     </div>
 </form>
-    ';
+    <?php
 }
 
 if (array_key_exists('CommandDone', $_SESSION) && $_SESSION['CommandDone']) {
@@ -89,14 +92,7 @@ if (array_key_exists('CommandDone', $_SESSION) && $_SESSION['CommandDone']) {
                     break;
             }
             echo '<br>Plat : ';
-            switch ($_SESSION['CommandTemp']['resMeal']) {
-                case 5:
-                    echo "Plat végétarien";
-                    break;
-                default:
-                    echo 'Plat non reconnu';
-                    break;
-            }
+            echo $database->getMeal($_SESSION['CommandTemp']['resMeal'])['meaName'];
             ?></p>
           </div>
           <div class="modal-footer">
