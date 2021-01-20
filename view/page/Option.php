@@ -41,7 +41,7 @@ for ($i = 0; $i < 5; $i++) {
             echo '
                 <p class="mb-0 mt-2">
                     ' . $reservation['resHour'] . 'h <br>
-                    ' . $meals[$reservation['fkMeal']] . ' <br>
+                    ' . $database->getMeal($reservation['fkMeal'])['meaName'] . ' <br>
                     Pour ' . $user['useFirstName'] . ' ' . $user['useLastName'] . '
                 </p>';
         }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 19 Janvier 2021 à 14:27
+-- Généré le :  Mer 20 Janvier 2021 à 08:20
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
@@ -17,10 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `bd_ETMeaL`
+-- Base de données :  `bd_etmeal`
 --
-CREATE DATABASE IF NOT EXISTS `bd_ETMeaL` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `bd_ETMeaL`;
+CREATE DATABASE IF NOT EXISTS `bd_etmeal` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `bd_etmeal`;
 
 -- --------------------------------------------------------
 
@@ -102,15 +102,20 @@ ALTER TABLE `t_user`
 --
 
 --
+-- AUTO_INCREMENT pour la table `t_meal`
+--
+ALTER TABLE `t_meal`
+  MODIFY `idMeal` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT pour la table `t_reservation`
 --
 ALTER TABLE `t_reservation`
-  MODIFY `idReservation` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idReservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `t_user`
 --
 ALTER TABLE `t_user`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Contraintes pour les tables exportées
 --
