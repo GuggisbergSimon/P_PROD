@@ -2,7 +2,7 @@
 
 $dbLocation = array(
     'host' => 'localhost',
-    'dbname' => 'bdwebprojet',
+    'dbname' => 'change-me',
     'charset' => 'utf8',
     'username' => 'root',
     'password' => 'root'
