@@ -9,6 +9,7 @@
                 <div class="alert alert-success mt-5">
                     Vous êtes bien inscrits !
                     <ul class="mb-0">
+                        <li>Un mail de confirmation vous a été envoyé. Vous avez 24h pour cliquer sur le lien et confirmer votre adresse mail. ATTENTION: l'email peut se trouver dans les spams</li>
                         <li><a href="index.php?controller=home&action=Connexion" style="text-decoration: none;">Connectez-vous !</a></li>
                     </ul>
                 </div>
@@ -17,20 +18,20 @@
             }
         }
 
-        if (isset($registerErrors)) {
-            if (count($registerErrors) > 0) {
-        ?>
+        if (isset($_SESSION['registerErrors'])) {
+            if (count($_SESSION['registerErrors']) > 0) {
+                ?>
                 <div class="alert alert-danger mt-5">
                     Oups ... Nous avons rencontré quelques erreurs :<br>
                     <ul class="mb-0">
-        <?php
-                    foreach ($registerErrors as $error) {
+                    <?php
+                    foreach ($_SESSION['registerErrors'] as $error) {
                         echo "<li>$error</li>";
                     }
-        ?>
+                    ?>
                     </ul>
                 </div>
-        <?php
+                <?php
             }
         }
 

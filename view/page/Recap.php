@@ -1,78 +1,97 @@
 <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 
-<?php
-    $mealHour11Number1 = "0";
-    $mealHour11Number2 = "0";
-    $mealHour12Number1 = "0";
-    $mealHour12Number2 = "0";
-
-    if (isset($reservations)) {
-        if (!empty($reservations)) {
-            foreach ($reservations as $reservation) {
-                if ($reservation['resHour'] == "11") {
-                    if ($reservation['fkMeal'] == $currentMeals[0]['idMeal']) {
-                        $mealHour11Number1 = $reservation['numberReservations'];
-                    } else if ($reservation['fkMeal'] == $currentMeals[1]['idMeal']) {
-                        $mealHour11Number2 = $reservation['numberReservations'];
-                    }
-                } else if ($reservation['resHour'] == "12") {
-                    if ($reservation['fkMeal'] == $currentMeals[0]['idMeal']) {
-                        $mealHour12Number1 = $reservation['numberReservations'];
-                    } else if ($reservation['fkMeal'] == $currentMeals[1]['idMeal']) {
-                        $mealHour12Number2 = $reservation['numberReservations'];
-                    }
-                }
-            }
-        }
-    }
-?>
-
 <div class="container">
     <div class="my-4">
         <div class="text-center">
-            <button id="printRecap" type="button" class="btn btn-primary btn-lg"><i class="fas fa-download"></i> Télécharger le récapitulatif</button>
+            <button id="printRecap" type="button" class="btn btn-primary btn-lg"><i class="fas fa-download"></i>Télécharger le récapitulatif</button>
         </div>
-        <div id="menuRecap" class="p-5">
-            <div class="mb-5 text-center">
-                <h1 class="my-0">Récapitulatif des menus végétariens du</h1>
-                <h1 class="my-0"><?= date("d/m/Y") ?></h1>
-            </div>
-            <div class="textAccueil textAccueil-admin mb-4 p-5">
-                <h1 class="text-center mb-3">Service de 11h</h1>
-                <div class="d-flex justify-content-around flex-wrap">
-                    <div class="text-center my-1">
-                        <p class="mb-0">Menu n°1</p>
-                        <h3 class="py-0"><?= $currentMeals[0]['meaName'] ?></h3>
-                        <h1 class="display-1">
-                            <?= $mealHour11Number1 ?>x
-                        </h1>
-                    </div>
-                    <div class="text-center my-1">
-                        <p class="mb-0">Menu n°2</p>
-                        <h3 class="py-0"><?= $currentMeals[1]['meaName'] ?></h3>
-                        <h1 class="display-1">
-                            <?= $mealHour11Number2 ?>x
-                        </h1>
+        <div id="menuRecap" style="padding-bottom: 50;">
+            <div class="p-5">
+                <div class="mb-5 text-center">
+                    <h1 class="my-0">Récapitulatif des menus végétariens du</h1>
+                    <h1 class="my-0"><?= date("d/m/Y") ?></h1>
+                </div>
+                <div class="textAccueil textAccueil-admin mb-4 p-5">
+                    <h1 class="text-center mb-3">Service de 11h</h1>
+                    <div class="container">
+                        <div class="row justify-content-around mb-3">
+                        <?php
+                        if(count($_SESSION['nbrOfMeal']) != 0){
+                            for($a=0; $a < count($_SESSION['nbrOfMeal']); $a++){
+                                if($a%2 == 0 && $a != 0){
+                                    ?>
+                                    </div>
+                                    <div class="row justify-content-around">
+                                    <?php
+                                }
+                            ?>
+                                <div class="text-center my-1">
+                                    <p class="mb-0">Menu n°<?= $a + 1 ?></p>
+                                    <h3 class="py-0"><?= $_SESSION['nbrOfMeal'][$a]['meaName'] ?></h3>
+                                    <h1 class="display-1">
+                                        <?= $_SESSION['nbrOfMeal'][$a]['reserved11'] ?>x
+                                    </h1>
+                                    <?php
+                                    for($b=0; $b < count($_SESSION['allReservation']); $b++){
+                                        if($_SESSION['allReservation'][$b]['resHour'] == 11 && $_SESSION['allReservation'][$b]['meaName'] == $_SESSION['nbrOfMeal'][$a]['meaName']){
+                                            echo("<h7>". $_SESSION['allReservation'][$b]['useFirstName'] ." ". $_SESSION['allReservation'][$b]['useLastName'] ."</h7>");
+                                            echo("</br>");
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            <?php
+                            }
+                        }
+                        else{
+                            ?>
+                            <h3>Aucun plat n'a été commandé</h3>
+                            <?php
+                        }
+                        ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="textAccueil textAccueil-admin mb-4 p-5">
-                <h1 class="text-center mb-3">Service de 12h</h1>
-                <div class="d-flex justify-content-around flex-wrap">
-                    <div class="text-center my-1">
-                        <p class="mb-0">Menu n°1</p>
-                        <h3 class="py-0"><?= $currentMeals[0]['meaName'] ?></h3>
-                        <h1 class="display-1">
-                            <?= $mealHour12Number1 ?>x
-                        </h1>
-                    </div>
-                    <div class="text-center my-1">
-                        <p class="mb-0">Menu n°2</p>
-                        <h3 class="py-0"><?= $currentMeals[1]['meaName'] ?></h3>
-                        <h1 class="display-1">
-                            <?= $mealHour12Number2 ?>x
-                        </h1>
+                <div class="textAccueil textAccueil-admin mb-4 p-5">
+                    <h1 class="text-center mb-3">Service de 12h</h1>
+                    <div class="container">
+                        <div class="row justify-content-around mb-3">
+                        <?php
+                        if(count($_SESSION['nbrOfMeal']) != 0){
+                            for($a=0; $a < count($_SESSION['nbrOfMeal']); $a++){
+                                if($a%2 == 0 && $a != 0){
+                                    ?>
+                                    </div>
+                                    <div class="row justify-content-around">
+                                    <?php
+                                }
+                            ?>
+                                <div class="text-center my-1">
+                                    <p class="mb-0">Menu n°<?= $a + 1 ?></p>
+                                    <h3 class="py-0"><?= $_SESSION['nbrOfMeal'][$a]['meaName'] ?></h3>
+                                    <h1 class="display-1">
+                                        <?= $_SESSION['nbrOfMeal'][$a]['reserved12'] ?>x
+                                    </h1>
+                                    <?php
+                                    for($b=0; $b < count($_SESSION['allReservation']); $b++){
+                                        if($_SESSION['allReservation'][$b]['resHour'] == 12 && $_SESSION['allReservation'][$b]['meaName'] == $_SESSION['nbrOfMeal'][$a]['meaName']){
+                                            echo("<h7>". $_SESSION['allReservation'][$b]['useFirstName'] ." ". $_SESSION['allReservation'][$b]['useLastName'] ."</h7>");
+                                            echo("</br>");
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            <?php
+                            }
+                        }
+                        else{
+                            ?>
+                            <h3>Aucun plat n'a été commandé</h3>
+                            <?php
+                        }
+                        ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,6 +100,7 @@
 </div>
 
 <script>
+    //Permet de générer un PDF
     $('#printRecap').click(function () {
         var HTML_Width = $("#menuRecap").width();
         var HTML_Height = $("#menuRecap").height();

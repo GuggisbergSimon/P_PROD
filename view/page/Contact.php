@@ -44,7 +44,7 @@
     <div class="map w-100">
         <div style="width: 100%">
             <iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                    src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=Rue%20s%C3%A9beillon%2012+(ETML)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=Rue%20s%C3%A9beillon%2012+(ETML)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
             <a href="https://www.maps.ie/route-planner.htm"></a></div>
     </div>
 
@@ -58,8 +58,10 @@
         </p>
     </div>
 
+    <?php /* ?>
+    // désactivation du formulaire car, il n'était pas utilisé a de bonne fin (spam, messages inutils).
     <!-- formulaire de contact-->
-
+    
     <h3>Formulaire de contact</h3>
     <div class="ligne <?php if ($_SESSION['adminRight']) { echo "ligne-admin"; } ?>"></div>
 
@@ -88,5 +90,5 @@
         </div>
 
     </form>
-
+  <?php  */ ?>
 </div>

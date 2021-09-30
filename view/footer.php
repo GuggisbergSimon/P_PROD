@@ -26,6 +26,13 @@
                                     <li>Hugo Ducommun</li>
                                 </ul>
                             </div>
+                            <div class="col">
+                                <ul class="list-unstyled quick-links">
+                                    <li>Quentin Berdoz</li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
                         </div>
 
                     </div>

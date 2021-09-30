@@ -33,7 +33,7 @@ class MainController {
             $_GET['action'] = 'index';
         }
 
-
+        //if(!isset($_GET['']))
         $currentLink = $this->menuSelected($_GET['controller']);
         $this->viewBuild($currentLink);
     }
@@ -65,18 +65,12 @@ class MainController {
      */
     protected function viewBuild($currentPage) {
 
-            $_SESSION['adminRight'] = false;
+        $content = $currentPage->display();
 
-            if(array_key_exists('role', $_SESSION) && $_SESSION['role'] >= 50){
-                $_SESSION['adminRight'] = true;
-            }
-
-            $content = $currentPage->display();
-
-            include(dirname(__FILE__) . '/view/head.php');
-            include(dirname(__FILE__) . '/view/header.php');
-            echo $content;
-            include(dirname(__FILE__) . '/view/footer.php');
+        include(dirname(__FILE__) . '/view/head.php');
+        include(dirname(__FILE__) . '/view/header.php');
+        echo $content;
+        include(dirname(__FILE__) . '/view/footer.php');
             
     }
 }

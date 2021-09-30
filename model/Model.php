@@ -45,7 +45,12 @@ abstract class Model {
      */
     protected function formatData($req)
     {
-        return $req->fetchALL(PDO::FETCH_ASSOC);
+        if($req){
+            return $req->fetchALL(PDO::FETCH_ASSOC);
+        }
+        else{
+            return NULL;
+        }
     }
 
     /**

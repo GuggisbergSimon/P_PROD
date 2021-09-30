@@ -19,17 +19,26 @@
                 <?php
                 // Connecté
                 if(array_key_exists('role', $_SESSION)) {
-                    // Utilisateur
-                    if ($_SESSION['role'] == 0) {
-                ?>
-                        <a class="nav-item nav-link link <?php if ($_GET['action'] == 'Commander') { echo 'active'; } ?>" href="index.php?controller=home&action=Commander"><i class="fas fa-shopping-cart"></i> Commander</a>
+                    if($_SESSION['emailVerif'] == 1){
+                        // Utilisateur
+                        if ($_SESSION['role'] == 0) {
+                    ?>
+                            <a class="nav-item nav-link link <?php if ($_GET['action'] == 'Commander') { echo 'active'; } ?>" href="index.php?controller=home&action=Commander"><i class="fas fa-shopping-cart"></i> Commander</a>
                 <?php
-                    // Administrateur
-                    } else if ($_SESSION['role'] >= 50) {
-                ?>
-                        <a class="nav-item nav-link link <?php if ($_GET['action'] == 'Option') { echo 'active'; } ?>" href="index.php?controller=home&action=Option"><i class="fas fa-cog"></i> Administration</a>
-                        <a class="nav-item nav-link link <?php if ($_GET['action'] == 'Recap') { echo 'active'; } ?>" href="index.php?controller=home&action=Recap"><i class="fas fa-file-alt"></i> Récapitulatif</a>
+                        // Administrateur
+                        } else if ($_SESSION['role'] >= 50) {
+                    ?>
+                            <a class="nav-item nav-link link <?php if ($_GET['action'] == 'Option') { echo 'active'; } ?>" href="index.php?controller=home&action=Option"><i class="fas fa-cog"></i> Administration</a>
+                            <a class="nav-item nav-link link <?php if ($_GET['action'] == 'Recap') { echo 'active'; } ?>" href="index.php?controller=home&action=Recap"><i class="fas fa-file-alt"></i> Récapitulatif</a>
                 <?php
+                        }
+                    }
+                    else{
+                        ?>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Votre adresse mail n'est pas vérifié. Aller dans Mon compte pour vérifier votre adresse mail.">
+                            <a class="nav-item nav-link disabled"><i class="fas fa-shopping-cart"></i> Commander</a>
+                        </span>
+                    <?php
                     }
                 } else {
                 ?>
@@ -49,7 +58,7 @@
             <?php 
             if(array_key_exists('username', $_SESSION)){
             ?>
-                <p class="my-auto text-white">Bonjour <?= $_SESSION['username'] ?></p><a href="index.php?controller=home&action=Disconnect" class="btn btn-danger">Déconnexion</a>
+                <a href="index.php?controller=home&action=Compte" type="button" class="btn btn-light mx-1" style="color: black;">Mon compte</a><a href="index.php?controller=home&action=Disconnect" class="btn btn-danger mx-1">Déconnexion</a>
             <?php
             }
             else {

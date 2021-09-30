@@ -7,3 +7,20 @@
 [16:07:09 2021-01-18]Message could not be sent. Mailer Error: Message body empty
 [16:07:39 2021-01-18]Message could not be sent. Mailer Error: Message body empty
 [11:15:25 2021-01-20]Message could not be sent. Mailer Error: Invalid address:  (From): MAIL_FROMADDRESS
+[10:07:12 2021-01-27]Message could not be sent. Mailer Error: Invalid address:  (From): MAIL_FROMADDRESS
+[10:09:16 2021-01-27]Message could not be sent. Mailer Error: Invalid address:  (From): MAIL_FROMADDRESS
+[10:22:31 2021-02-19]Message could not be sent. Mailer Error: Invalid address:  (From): MAIL_FROMADDRESS
+[10:46:30 2021-02-19]Message could not be sent. Mailer Error: Invalid address:  (From): MAIL_FROMADDRESS
+[10:47:55 2021-02-19]Message could not be sent. Mailer Error: Invalid address:  (From): MAIL_FROMADDRESS
+[10:51:00 2021-02-19]Message could not be sent. Mailer Error: Invalid address:  (From): MAIL_FROMADDRESS
+[08:13:07 2021-03-08]Message could not be sent. Mailer Error: SMTP Error: data not accepted.SMTP server error: DATA END command failed Detail: STOREDRV.Submission.Exception:OutboundSpamException; Failed to process message due to a permanent exception with message WASCL UserAction verdict is not None. Actual verdict is Suspend, ShowTierUpgrade. OutboundSpamException: WASCL UserAction verdict is not None. Actual verdict is Suspend, ShowTierUpgrade. [Hostname=AS8PR09MB4949.eurprd09.prod.outlook.com]
+ SMTP code: 554 Additional SMTP info: 5.2.0
+[08:31:06 2021-03-08]Message could not be sent. Mailer Error: SMTP Error: data not accepted.SMTP server error: DATA END command failed Detail: STOREDRV.Submission.Exception:OutboundSpamException; Failed to process message due to a permanent exception with message WASCL UserAction verdict is not None. Actual verdict is Suspend, ShowTierUpgrade. OutboundSpamException: WASCL UserAction verdict is not None. Actual verdict is Suspend, ShowTierUpgrade. [Hostname=AS8PR09MB4949.eurprd09.prod.outlook.com]
+ SMTP code: 554 Additional SMTP info: 5.2.0
+[10:56:31 2021-03-08]Message could not be sent. Mailer Error: SMTP Error: data not accepted.SMTP server error: DATA END command failed Detail: STOREDRV.Submission.Exception:OutboundSpamException; Failed to process message due to a permanent exception with message WASCL UserAction verdict is not None. Actual verdict is Suspend, ShowTierUpgrade. OutboundSpamException: WASCL UserAction verdict is not None. Actual verdict is Suspend, ShowTierUpgrade. [Hostname=AS8PR09MB4949.eurprd09.prod.outlook.com]
+ SMTP code: 554 Additional SMTP info: 5.2.0
+[10:59:53 2021-03-08]Message could not be sent. Mailer Error: SMTP Error: data not accepted.SMTP server error: DATA END command failed Detail: STOREDRV.Submission.Exception:OutboundSpamException; Failed to process message due to a permanent exception with message WASCL UserAction verdict is not None. Actual verdict is Suspend, ShowTierUpgrade. OutboundSpamException: WASCL UserAction verdict is not None. Actual verdict is Suspend, ShowTierUpgrade. [Hostname=AS8PR09MB4949.eurprd09.prod.outlook.com]
+ SMTP code: 554 Additional SMTP info: 5.2.0
+ Quentin Berdoz : Erreur dû à l'email qui a été bloqué par microsoft. Tout est OK maintenant.
+[17:26:57 2021-09-28]Message could not be sent. Mailer Error: SMTP Error: Could not authenticate.
+[18:03:12 2021-09-28]Message could not be sent. Mailer Error: SMTP Error: Could not authenticate.
